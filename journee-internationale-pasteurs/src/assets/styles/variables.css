@@ -1,0 +1,47 @@
+:root {
+  /* JIP Brand Colors */
+  --color-primary: #6B3FB5;
+  --color-secondary: #D4AF37;
+  --color-white: #FFFFFF;
+  --color-text: #1F1F1F;
+  --color-bg: #F5F5F0;
+
+  /* Typography */
+  --font-serif: 'Playfair Display', serif;
+  --font-sans: 'Montserrat', sans-serif;
+
+  /* Spacing Scale */
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 32px;
+  --space-xl: 40px;
+  --space-2xl: 48px;
+  --space-3xl: 56px;
+  --space-4xl: 64px;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(0,0,0,0.08);
+  --shadow-md: 0 8px 16px rgba(0,0,0,0.12);
+  --shadow-lg: 0 16px 32px rgba(0,0,0,0.16);
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+
+  /* Z-index layers */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+}

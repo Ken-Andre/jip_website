@@ -1,0 +1,215 @@
+---
+// Get current locale from URL
+const currentLocale = Astro.url.pathname.startsWith('/en') ? 'en' : 'fr';
+const isEnglish = currentLocale === 'en';
+
+// Translations
+const t = (key: string) => {
+  const translations = {
+    fr: {
+      'footer.about': 'À propos',
+      'footer.vision': 'Notre Vision',
+      'footer.founder': 'Fondateur',
+      'footer.program': 'Programme',
+      'footer.participation': 'Participation',
+      'footer.resources': 'Ressources',
+      'footer.contact': 'Contact',
+      'footer.support': 'Support',
+      'footer.faq': 'FAQ',
+      'footer.contactForm': 'Formulaire de contact',
+      'footer.email': 'Email',
+      'footer.follow': 'Suivez-nous',
+      'footer.donate': 'Faire un don',
+      'footer.privacy': 'Politique de confidentialité',
+      'footer.terms': 'Conditions d\'utilisation',
+      'footer.copyright': '© 2025 Journée Internationale des Pasteurs. Tous droits réservés.',
+      'footer.madeWith': 'Fait avec ❤️ pour la communauté chrétienne africaine'
+    },
+    en: {
+      'footer.about': 'About',
+      'footer.vision': 'Our Vision',
+      'footer.founder': 'Founder',
+      'footer.program': 'Program',
+      'footer.participation': 'Participation',
+      'footer.resources': 'Resources',
+      'footer.contact': 'Contact',
+      'footer.support': 'Support',
+      'footer.faq': 'FAQ',
+      'footer.contactForm': 'Contact Form',
+      'footer.email': 'Email',
+      'footer.follow': 'Follow us',
+      'footer.donate': 'Donate',
+      'footer.privacy': 'Privacy Policy',
+      'footer.terms': 'Terms of Use',
+      'footer.copyright': '© 2025 International Day of Pastors. All rights reserved.',
+      'footer.madeWith': 'Made with ❤️ for the African Christian community'
+    }
+  };
+  return translations[currentLocale][key] || key;
+};
+
+// Footer links
+const footerLinks = {
+  about: [
+    { href: '/vision', label: t('footer.vision') },
+    { href: '/fondateur', label: t('footer.founder') },
+    { href: '/programme', label: t('footer.program') }
+  ],
+  participation: [
+    { href: '/participation', label: t('footer.participation') },
+    { href: '/ressources', label: t('footer.resources') },
+    { href: '/dons', label: t('footer.donate') }
+  ],
+  support: [
+    { href: '/contact', label: t('footer.contactForm') },
+    { href: '/faq', label: t('footer.faq') },
+    { href: 'mailto:contact@jip-official.com', label: t('footer.email') }
+  ]
+};
+
+// Social media links (placeholder)
+const socialLinks = [
+  { name: 'Facebook', href: '#', icon: 'facebook' },
+  { name: 'Instagram', href: '#', icon: 'instagram' },
+  { name: 'TikTok', href: '#', icon: 'tiktok' },
+  { name: 'WhatsApp', href: '#', icon: 'whatsapp' }
+];
+---
+
+<footer class="bg-gray-900 text-white">
+  <div class="container mx-auto px-4 py-12">
+    <!-- Main footer content -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <!-- Organization Info -->
+      <div class="lg:col-span-2">
+        <div class="flex items-center space-x-3 mb-4">
+          <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+            <span class="text-white font-serif font-bold text-lg">JIP</span>
+          </div>
+          <div>
+            <h3 class="text-lg font-serif font-bold text-white">
+              {isEnglish ? 'International Day of Pastors' : 'Journée Internationale des Pasteurs'}
+            </h3>
+            <p class="text-sm text-gray-400">
+              {isEnglish ? 'Honoring those who watch over our souls' : 'Honorer ceux qui veillent sur nos âmes'}
+            </p>
+          </div>
+        </div>
+        <p class="text-gray-300 mb-6 max-w-md">
+          {isEnglish
+            ? 'A celebration of pastoral ministry across Africa, bringing together spiritual leaders to honor their dedication and service to God\'s people.'
+            : 'Une célébration du ministère pastoral à travers l\'Afrique, rassemblant les leaders spirituels pour honorer leur dévouement et leur service au peuple de Dieu.'
+          }
+        </p>
+
+        <!-- Social Media Links -->
+        <div class="flex space-x-4">
+          {socialLinks.map(link => (
+            <a
+              href={link.href}
+              class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary transition-colors group"
+              aria-label={`Follow us on ${link.name}`}
+            >
+              <!-- Placeholder icons - to be replaced with actual social icons -->
+              <span class="text-gray-400 group-hover:text-white text-sm font-bold">
+                {link.icon.charAt(0).toUpperCase()}
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- About Links -->
+      <div>
+        <h4 class="text-lg font-semibold mb-4 text-white">{t('footer.about')}</h4>
+        <ul class="space-y-2">
+          {footerLinks.about.map(link => (
+            <li>
+              <a
+                href={isEnglish ? `/en${link.href}` : link.href}
+                class="text-gray-300 hover:text-primary transition-colors"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Support Links -->
+      <div>
+        <h4 class="text-lg font-semibold mb-4 text-white">{t('footer.support')}</h4>
+        <ul class="space-y-2">
+          {footerLinks.support.map(link => (
+            <li>
+              <a
+                href={link.href.startsWith('mailto:') ? link.href : (isEnglish ? `/en${link.href}` : link.href)}
+                class="text-gray-300 hover:text-primary transition-colors"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <!-- Newsletter Signup (Optional) -->
+    <div class="mt-12 pt-8 border-t border-gray-800">
+      <div class="max-w-md mx-auto text-center">
+        <h4 class="text-lg font-semibold mb-2 text-white">
+          {isEnglish ? 'Stay Connected' : 'Restez Connecté'}
+        </h4>
+        <p class="text-gray-300 mb-4">
+          {isEnglish
+            ? 'Get updates about the event and spiritual encouragement.'
+            : 'Recevez des mises à jour sur l\'événement et des encouragements spirituels.'
+          }
+        </p>
+        <form class="flex flex-col sm:flex-row gap-2" action="#" method="post">
+          <input
+            type="email"
+            placeholder={isEnglish ? 'Enter your email' : 'Entrez votre email'}
+            class="flex-1 px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary"
+            required
+          />
+          <button
+            type="submit"
+            class="px-6 py-2 bg-primary hover:bg-primary-600 text-white rounded-lg transition-colors font-medium"
+          >
+            {isEnglish ? 'Subscribe' : 'S\'abonner'}
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="bg-gray-950 py-6">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+        <!-- Copyright -->
+        <p class="text-gray-400 text-sm">
+          {t('footer.copyright')}
+        </p>
+
+        <!-- Legal Links -->
+        <div class="flex space-x-6">
+          <a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm">
+            {t('footer.privacy')}
+          </a>
+          <a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm">
+            {t('footer.terms')}
+          </a>
+        </div>
+      </div>
+
+      <!-- Made with love -->
+      <div class="mt-4 text-center">
+        <p class="text-gray-500 text-xs">
+          {t('footer.madeWith')}
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,250 @@
+/* Starlight Customization for JIP */
+
+:root {
+  --sl-color-primary: var(--color-primary, #6B3FB5);
+  --sl-color-secondary: var(--color-secondary, #D4AF37);
+  --sl-color-accent: var(--color-white, #FFFFFF);
+  --sl-color-text: var(--color-text, #1F1F1F);
+  --sl-color-bg: var(--color-bg, #F5F5F0);
+
+  /* Typography */
+  --sl-font-serif: var(--font-serif, 'Playfair Display', serif);
+  --sl-font-sans: var(--font-sans, 'Montserrat', sans-serif);
+
+  /* Custom spacing */
+  --sl-space-xs: var(--space-xs, 8px);
+  --sl-space-sm: var(--space-sm, 16px);
+  --sl-space-md: var(--space-md, 24px);
+  --sl-space-lg: var(--space-lg, 32px);
+  --sl-space-xl: var(--space-xl, 40px);
+  --sl-space-2xl: var(--space-2xl, 48px);
+  --sl-space-3xl: var(--space-3xl, 56px);
+
+  /* Custom shadows */
+  --sl-shadow-sm: var(--shadow-sm);
+  --sl-shadow-md: var(--shadow-md);
+  --sl-shadow-lg: var(--shadow-lg);
+}
+
+/* Override Starlight defaults with JIP branding */
+[data-theme="light"] {
+  --sl-color-palette-primary: var(--sl-color-primary);
+  --sl-color-palette-secondary: var(--sl-color-secondary);
+  --sl-color-palette-accent: var(--sl-color-accent);
+  --sl-color-text: var(--sl-color-text);
+  --sl-color-bg: var(--sl-color-bg);
+}
+
+/* Custom fonts */
+[data-theme="light"] .sl-heading {
+  font-family: var(--sl-font-serif);
+}
+
+/* Button styling */
+.sl-button {
+  font-family: var(--sl-font-sans) !important;
+  font-weight: 500;
+}
+
+/* Hero section countdown timer */
+.countdown-timer {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  font-family: var(--sl-font-sans);
+}
+
+.countdown-timer .countdown-display {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.countdown-timer .countdown-unit {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.countdown-timer .countdown-number {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: white;
+}
+
+.countdown-timer .countdown-label {
+  font-size: 0.875rem;
+  opacity: 0.8;
+  color: white;
+}
+
+/* Testimonial cards */
+.testimonial-card {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+}
+
+.testimonial-avatar {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background-color: var(--sl-color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 1.125rem;
+}
+
+.testimonial-quote {
+  font-style: italic;
+  line-height: 1.6;
+}
+
+/* Program cards */
+.program-card {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.program-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+}
+
+.program-number {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--sl-color-primary), var(--sl-color-secondary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin: 0 auto 1.5rem;
+}
+
+/* Founder section */
+.founder-section {
+  background: linear-gradient(135deg, var(--sl-color-bg), rgba(107, 63, 181, 0.05));
+  border-radius: 24px;
+  padding: 3rem;
+  position: relative;
+}
+
+.founder-image {
+  background: linear-gradient(135deg, var(--sl-color-primary), var(--sl-color-secondary));
+  border-radius: 24px;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 4rem;
+  font-weight: bold;
+  font-family: var(--sl-font-serif);
+  aspect-ratio: 1/1;
+}
+
+/* Call to action sections */
+.cta-primary {
+  background: linear-gradient(135deg, var(--sl-color-primary), var(--sl-color-secondary));
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: inline-block;
+}
+
+.cta-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(107, 63, 181, 0.3);
+}
+
+.cta-secondary {
+  background: transparent;
+  color: var(--sl-color-primary);
+  border: 2px solid var(--sl-color-primary);
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  display: inline-block;
+}
+
+.cta-secondary:hover {
+  background: var(--sl-color-primary);
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Countdown timer styling */
+.countdown-timer strong {
+  color: var(--sl-color-secondary);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .countdown-timer .countdown-display {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .countdown-timer .countdown-unit {
+    padding: 0.75rem;
+  }
+
+  .countdown-timer .countdown-number {
+    font-size: 2rem;
+  }
+
+  .program-card,
+  .testimonial-card {
+    padding: 1.5rem;
+  }
+
+  .founder-section {
+    padding: 2rem;
+  }
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--sl-color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--sl-color-primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--sl-color-secondary);
+}

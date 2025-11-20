@@ -1,0 +1,39 @@
+{
+  "common": {
+    "home": "Home",
+    "vision": "Vision",
+    "founder": "Founder",
+    "program": "Program",
+    "participation": "Participation",
+    "resources": "Resources",
+    "gallery": "Gallery",
+    "donations": "Donations",
+    "contact": "Contact",
+    "faq": "FAQ",
+    "language": "Language",
+    "french": "French",
+    "english": "English",
+    "readMore": "Read More",
+    "register": "Register",
+    "donate": "Donate"
+  },
+  "hero": {
+    "title": "International Day of Pastors",
+    "subtitle": "Honoring those who watch over our souls",
+    "ctaPrimary": "Register for the event",
+    "ctaSecondary": "Learn More",
+    "countdown": {
+      "days": "days",
+      "hours": "hours",
+      "minutes": "minutes",
+      "seconds": "seconds",
+      "until": "until JIP"
+    }
+  },
+  "footer": {
+    "copyright": "© 2025 International Day of Pastors. All rights reserved.",
+    "social": "Follow us",
+    "contact": "Contact",
+    "links": "Useful links"
+  }
+}

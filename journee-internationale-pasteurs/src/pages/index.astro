@@ -1,0 +1,384 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+
+// Get current locale from URL
+const currentLocale = Astro.url.pathname.startsWith('/en') ? 'en' : 'fr';
+const isEnglish = currentLocale === 'en';
+
+// Translations for homepage
+const t = (key: string) => {
+  const translations = {
+    fr: {
+      'hero.title': 'Journée Internationale des Pasteurs',
+      'hero.subtitle': 'Honorer ceux qui veillent sur nos âmes',
+      'hero.cta.primary': 'S\'inscrire à l\'événement',
+      'hero.cta.secondary': 'En savoir plus',
+      'hero.countdown.days': 'jours',
+      'hero.countdown.hours': 'heures',
+      'hero.countdown.minutes': 'minutes',
+      'hero.countdown.seconds': 'secondes',
+      'hero.countdown.until': 'jusqu\'à la JIP',
+      'hero.countdown.eventStarted': 'C\'est le jour ! Rejoignez-nous',
+      'program.title': 'Découvrez le Programme',
+      'program.subtitle': '6 jours de célébration et de formation pastorale',
+      'program.cta': 'Voir le programme complet',
+      'testimonials.title': 'Témoignages',
+      'testimonials.subtitle': 'Ce que disent les participants',
+      'founder.title': 'Rencontrez le Fondateur',
+      'founder.subtitle': 'Pasteur Patrick et sa vision pour l\'Afrique',
+      'founder.cta': 'En savoir plus sur le fondateur',
+      'cta.donate': 'Faire un don',
+      'cta.contact': 'Nous contacter'
+    },
+    en: {
+      'hero.title': 'International Day of Pastors',
+      'hero.subtitle': 'Honoring those who watch over our souls',
+      'hero.cta.primary': 'Register for the event',
+      'hero.cta.secondary': 'Learn more',
+      'hero.countdown.days': 'days',
+      'hero.countdown.hours': 'hours',
+      'hero.countdown.minutes': 'minutes',
+      'hero.countdown.seconds': 'seconds',
+      'hero.countdown.until': 'until JIP',
+      'hero.countdown.eventStarted': 'It\'s the day! Join us',
+      'program.title': 'Discover the Program',
+      'program.subtitle': '6 days of pastoral celebration and training',
+      'program.cta': 'View full program',
+      'testimonials.title': 'Testimonials',
+      'testimonials.subtitle': 'What participants say',
+      'founder.title': 'Meet the Founder',
+      'founder.subtitle': 'Pastor Patrick and his vision for Africa',
+      'founder.cta': 'Learn more about the founder',
+      'cta.donate': 'Donate',
+      'cta.contact': 'Contact us'
+    }
+  };
+  return translations[currentLocale][key] || key;
+};
+---
+
+<PageLayout
+  title={t('hero.title')}
+  description={`${t('hero.subtitle')} - ${t('hero.title')}`}
+>
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-br from-primary via-primary-600 to-primary-800 text-white overflow-hidden">
+    <!-- Background Image Overlay -->
+    <div class="absolute inset-0 bg-black bg-opacity-30"></div>
+    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('/src/assets/images/hero-banner.jpg');"></div>
+
+    <div class="relative container mx-auto px-4 py-20 lg:py-32">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl lg:text-6xl font-serif font-bold mb-6 leading-tight">
+          {t('hero.title')}
+        </h1>
+        <p class="text-xl lg:text-2xl mb-12 opacity-90 font-light">
+          {t('hero.subtitle')}
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+          <a
+            href={isEnglish ? '/en/participation' : '/participation'}
+            class="inline-flex items-center justify-center px-8 py-4 bg-secondary hover:bg-secondary-600 text-black font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
+          >
+            {t('hero.cta.primary')}
+          </a>
+          <a
+            href="#program"
+            class="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white hover:bg-white hover:text-primary font-semibold rounded-lg transition-all duration-300"
+          >
+            {t('hero.cta.secondary')}
+          </a>
+        </div>
+
+        <!-- Countdown Timer -->
+        <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-2xl p-8 max-w-2xl mx-auto">
+          <h2 class="text-2xl font-semibold mb-6">
+            {isEnglish ? 'Event starts in:' : 'L\'événement commence dans :'}
+          </h2>
+          <div id="countdown" class="grid grid-cols-4 gap-4 text-center">
+            <!-- Countdown will be populated by JavaScript -->
+            <div class="bg-white bg-opacity-20 rounded-lg p-4">
+              <div class="text-3xl font-bold" id="days">--</div>
+              <div class="text-sm opacity-80">{t('hero.countdown.days')}</div>
+            </div>
+            <div class="bg-white bg-opacity-20 rounded-lg p-4">
+              <div class="text-3xl font-bold" id="hours">--</div>
+              <div class="text-sm opacity-80">{t('hero.countdown.hours')}</div>
+            </div>
+            <div class="bg-white bg-opacity-20 rounded-lg p-4">
+              <div class="text-3xl font-bold" id="minutes">--</div>
+              <div class="text-sm opacity-80">{t('hero.countdown.minutes')}</div>
+            </div>
+            <div class="bg-white bg-opacity-20 rounded-lg p-4">
+              <div class="text-3xl font-bold" id="seconds">--</div>
+              <div class="text-sm opacity-80">{t('hero.countdown.seconds')}</div>
+            </div>
+          </div>
+          <p class="text-center mt-4 opacity-80">
+            {t('hero.countdown.until')}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Program Preview Section -->
+  <section id="program" class="py-20 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-serif font-bold text-primary mb-4">
+          {t('program.title')}
+        </h2>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+          {t('program.subtitle')}
+        </p>
+      </div>
+
+      <!-- Program Preview Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <!-- Day 1 -->
+        <div class="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+          <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-6">
+            <span class="text-white font-bold text-xl">1</span>
+          </div>
+          <h3 class="text-xl font-semibold mb-4">Ouverture Officielle</h3>
+          <p class="text-gray-600 mb-6">
+            {isEnglish ? 'Official opening ceremony with worship and welcome' : 'Cérémonie d\'ouverture officielle avec culte et accueil'}
+          </p>
+          <span class="text-sm text-primary font-medium">
+            {isEnglish ? 'June 15, 2025' : '15 Juin 2025'}
+          </span>
+        </div>
+
+        <!-- Day 2-3 -->
+        <div class="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+          <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mx-auto mb-6">
+            <span class="text-white font-bold text-xl">2-3</span>
+          </div>
+          <h3 class="text-xl font-semibold mb-4">
+            {isEnglish ? 'Formation & Ateliers' : 'Formation & Ateliers'}
+          </h3>
+          <p class="text-gray-600 mb-6">
+            {isEnglish ? 'Pastoral training sessions and workshops' : 'Sessions de formation pastorale et ateliers'}
+          </p>
+          <span class="text-sm text-primary font-medium">
+            {isEnglish ? 'June 16-17, 2025' : '16-17 Juin 2025'}
+          </span>
+        </div>
+
+        <!-- Day 4-6 -->
+        <div class="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+          <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-6">
+            <span class="text-white font-bold text-xl">4-6</span>
+          </div>
+          <h3 class="text-xl font-semibold mb-4">
+            {isEnglish ? 'Mission & Celebration' : 'Mission & Célébration'}
+          </h3>
+          <p class="text-gray-600 mb-6">
+            {isEnglish ? 'Community outreach and final celebration' : 'Rayonnement communautaire et célébration finale'}
+          </p>
+          <span class="text-sm text-primary font-medium">
+            {isEnglish ? 'June 18-20, 2025' : '18-20 Juin 2025'}
+          </span>
+        </div>
+      </div>
+
+      <div class="text-center mt-12">
+        <a
+          href={isEnglish ? '/en/programme' : '/programme'}
+          class="inline-flex items-center justify-center px-8 py-4 bg-primary hover:bg-primary-600 text-white font-semibold rounded-lg transition-colors"
+        >
+          {t('program.cta')}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-serif font-bold text-primary mb-4">
+          {t('testimonials.title')}
+        </h2>
+        <p class="text-xl text-gray-600">
+          {t('testimonials.subtitle')}
+        </p>
+      </div>
+
+      <!-- Testimonials Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <!-- Testimonial 1 -->
+        <div class="bg-gray-50 rounded-xl p-8 shadow-sm">
+          <div class="flex items-center mb-6">
+            <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center mr-4">
+              <span class="text-white font-bold">P</span>
+            </div>
+            <div>
+              <h4 class="font-semibold">Pasteur Jean</h4>
+              <p class="text-sm text-gray-600">Église Baptiste, Cameroun</p>
+            </div>
+          </div>
+          <blockquote class="text-gray-700 italic">
+            "{isEnglish
+              ? 'This event has transformed my understanding of pastoral ministry. The fellowship and teachings were truly inspiring.'
+              : 'Cet événement a transformé ma compréhension du ministère pastoral. La communion et les enseignements étaient vraiment inspirants.'
+            }"
+          </blockquote>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="bg-gray-50 rounded-xl p-8 shadow-sm">
+          <div class="flex items-center mb-6">
+            <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mr-4">
+              <span class="text-black font-bold">M</span>
+            </div>
+            <div>
+              <h4 class="font-semibold">Mère Marie</h4>
+              <p class="text-sm text-gray-600">Communauté Catholique, Gabon</p>
+            </div>
+          </div>
+          <blockquote class="text-gray-700 italic">
+            "{isEnglish
+              ? 'The unity among African pastors is beautiful. This gathering strengthens our collective mission.'
+              : 'L\'unité parmi les pasteurs africains est belle. Ce rassemblement renforce notre mission collective.'
+            }"
+          </blockquote>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="bg-gray-50 rounded-xl p-8 shadow-sm">
+          <div class="flex items-center mb-6">
+            <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center mr-4">
+              <span class="text-white font-bold">A</span>
+            </div>
+            <div>
+              <h4 class="font-semibold">Apôtre André</h4>
+              <p class="text-sm text-gray-600">Ministère Apostolique, Sénégal</p>
+            </div>
+          </div>
+          <blockquote class="text-gray-700 italic">
+            "{isEnglish
+              ? 'God is doing something special through this initiative. Lives are being changed and ministries strengthened.'
+              : 'Dieu fait quelque chose de spécial à travers cette initiative. Des vies sont changées et des ministères sont renforcés.'
+            }"
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Founder Preview Section -->
+  <section class="py-20 bg-gradient-to-r from-primary-50 to-secondary-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <!-- Founder Image -->
+          <div class="relative">
+            <div class="aspect-square bg-gray-200 rounded-2xl overflow-hidden shadow-xl">
+              <!-- Placeholder for founder image -->
+              <div class="w-full h-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+                <span class="text-white text-6xl font-serif font-bold">
+                  {isEnglish ? 'PP' : 'PP'}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Founder Content -->
+          <div>
+            <h2 class="text-4xl font-serif font-bold text-primary mb-6">
+              {t('founder.title')}
+            </h2>
+            <h3 class="text-2xl font-semibold mb-4">
+              {isEnglish ? 'Pastor Patrick' : 'Pasteur Patrick'}
+            </h3>
+            <p class="text-lg text-gray-700 mb-6">
+              {t('founder.subtitle')}
+            </p>
+            <blockquote class="text-xl italic text-gray-600 mb-8 border-l-4 border-primary pl-6">
+              "{isEnglish
+                ? 'God has called us to honor those who watch over souls. This is not just an event, but a movement of unity and spiritual growth across Africa.'
+                : 'Dieu nous a appelés à honorer ceux qui veillent sur les âmes. Ce n\'est pas seulement un événement, mais un mouvement d\'unité et de croissance spirituelle à travers l\'Afrique.'
+              }"
+            </blockquote>
+            <a
+              href={isEnglish ? '/en/fondateur' : '/fondateur'}
+              class="inline-flex items-center justify-center px-8 py-4 bg-primary hover:bg-primary-600 text-white font-semibold rounded-lg transition-colors"
+            >
+              {t('founder.cta')}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action Section -->
+  <section class="py-20 bg-primary text-white">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-4xl font-serif font-bold mb-6">
+        {isEnglish ? 'Join the Movement' : 'Rejoignez le Mouvement'}
+      </h2>
+      <p class="text-xl mb-12 opacity-90 max-w-2xl mx-auto">
+        {isEnglish
+          ? 'Be part of this historic gathering of African spiritual leaders. Together, we honor those who serve God\'s people.'
+          : 'Faites partie de ce rassemblement historique de leaders spirituels africains. Ensemble, nous honorons ceux qui servent le peuple de Dieu.'
+        }
+      </p>
+      <div class="flex flex-col sm:flex-row gap-6 justify-center">
+        <a
+          href={isEnglish ? '/en/participation' : '/participation'}
+          class="inline-flex items-center justify-center px-8 py-4 bg-secondary hover:bg-secondary-600 text-black font-semibold rounded-lg transition-colors"
+        >
+          {isEnglish ? 'Register Now' : 'S\'inscrire Maintenant'}
+        </a>
+        <a
+          href={isEnglish ? '/en/dons' : '/dons'}
+          class="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white hover:bg-white hover:text-primary font-semibold rounded-lg transition-colors"
+        >
+          {t('cta.donate')}
+        </a>
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+<script>
+  // Countdown Timer Logic (GMT+1 timezone for Cameroon)
+  function updateCountdown() {
+    const targetDate = new Date('2025-06-15T00:00:00+01:00'); // June 15, 2025, 00:00 GMT+1
+    const now = new Date();
+
+    // Calculate difference in milliseconds
+    const difference = targetDate - now;
+
+    if (difference <= 0) {
+      // Event has started
+      document.getElementById('countdown').innerHTML = `
+        <div class="col-span-4 bg-green-500 bg-opacity-20 rounded-lg p-8 text-center">
+          <div class="text-4xl font-bold text-green-400">${document.querySelector('[data-lang="eventStarted"]')?.textContent || "C'est le jour ! Rejoignez-nous"}</div>
+        </div>
+      `;
+      return;
+    }
+
+    // Calculate time units
+    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+    // Update DOM
+    document.getElementById('days').textContent = days.toString().padStart(2, '0');
+    document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+    document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+    document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+  }
+
+  // Initialize countdown
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>

@@ -1,0 +1,208 @@
+---
+// Get current locale from URL
+const currentLocale = Astro.url.pathname.startsWith('/en') ? 'en' : 'fr';
+const isEnglish = currentLocale === 'en';
+
+// Translations
+const t = (key: string) => {
+  const translations = {
+    fr: {
+      'nav.home': 'Accueil',
+      'nav.vision': 'Vision',
+      'nav.founder': 'Fondateur',
+      'nav.program': 'Programme',
+      'nav.participation': 'Participation',
+      'nav.resources': 'Ressources',
+      'nav.gallery': 'Galerie',
+      'nav.donations': 'Dons',
+      'nav.contact': 'Contact',
+      'nav.faq': 'FAQ',
+      'lang.fr': 'FR',
+      'lang.en': 'EN',
+      'menu.toggle': 'Basculer le menu de navigation'
+    },
+    en: {
+      'nav.home': 'Home',
+      'nav.vision': 'Vision',
+      'nav.founder': 'Founder',
+      'nav.program': 'Program',
+      'nav.participation': 'Participation',
+      'nav.resources': 'Resources',
+      'nav.gallery': 'Gallery',
+      'nav.donations': 'Donations',
+      'nav.contact': 'Contact',
+      'nav.faq': 'FAQ',
+      'lang.fr': 'FR',
+      'lang.en': 'EN',
+      'menu.toggle': 'Toggle navigation menu'
+    }
+  };
+  return translations[currentLocale][key] || key;
+};
+
+// Navigation items
+const navItems = [
+  { href: '/', label: t('nav.home'), active: Astro.url.pathname === '/' || Astro.url.pathname === '/en' },
+  { href: '/vision', label: t('nav.vision'), active: Astro.url.pathname.includes('/vision') },
+  { href: '/fondateur', label: t('nav.founder'), active: Astro.url.pathname.includes('/fondateur') },
+  { href: '/programme', label: t('nav.program'), active: Astro.url.pathname.includes('/programme') },
+  { href: '/participation', label: t('nav.participation'), active: Astro.url.pathname.includes('/participation') },
+  { href: '/ressources', label: t('nav.resources'), active: Astro.url.pathname.includes('/ressources') },
+  { href: '/galerie', label: t('nav.gallery'), active: Astro.url.pathname.includes('/galerie') },
+  { href: '/dons', label: t('nav.donations'), active: Astro.url.pathname.includes('/dons') },
+  { href: '/contact', label: t('nav.contact'), active: Astro.url.pathname.includes('/contact') },
+  { href: '/faq', label: t('nav.faq'), active: Astro.url.pathname.includes('/faq') }
+];
+
+// Language switcher
+const switchToFrench = isEnglish ? Astro.url.pathname.replace('/en', '') || '/' : null;
+const switchToEnglish = isEnglish ? null : `/en${Astro.url.pathname}`;
+---
+
+<header class="bg-white shadow-sm sticky top-0 z-40">
+  <div class="container mx-auto px-4 py-4">
+    <div class="flex items-center justify-between">
+      <!-- Logo -->
+      <div class="flex items-center">
+        <a href={isEnglish ? '/en' : '/'} class="flex items-center space-x-3 group">
+          <!-- Placeholder logo - to be replaced with actual logo -->
+          <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center group-hover:bg-primary-600 transition-colors">
+            <span class="text-white font-serif font-bold text-lg">JIP</span>
+          </div>
+          <div class="hidden sm:block">
+            <h1 class="text-xl font-serif font-bold text-primary group-hover:text-primary-600 transition-colors">
+              {isEnglish ? 'International Day of Pastors' : 'Journée Internationale des Pasteurs'}
+            </h1>
+            <p class="text-sm text-gray-600">
+              {isEnglish ? 'Honoring those who watch over our souls' : 'Honorer ceux qui veillent sur nos âmes'}
+            </p>
+          </div>
+        </a>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden lg:flex items-center space-x-8" role="navigation" aria-label="Main navigation">
+        {navItems.map(item => (
+          <a
+            href={isEnglish ? `/en${item.href}` : item.href}
+            class={`font-medium transition-colors hover:text-primary ${
+              item.active ? 'text-primary' : 'text-gray-700'
+            }`}
+            aria-current={item.active ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        ))}
+      </nav>
+
+      <!-- Language Switcher & Mobile Menu -->
+      <div class="flex items-center space-x-4">
+        <!-- Language Switcher -->
+        <div class="hidden sm:flex items-center space-x-2">
+          {switchToFrench && (
+            <a
+              href={switchToFrench}
+              class={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
+                !isEnglish ? 'bg-primary text-white' : 'text-gray-700 hover:bg-gray-100'
+              }`}
+              aria-label="Switch to French"
+            >
+              {t('lang.fr')}
+            </a>
+          )}
+          {switchToEnglish && (
+            <a
+              href={switchToEnglish}
+              class={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
+                isEnglish ? 'bg-primary text-white' : 'text-gray-700 hover:bg-gray-100'
+              }`}
+              aria-label="Switch to English"
+            >
+              {t('lang.en')}
+            </a>
+          )}
+        </div>
+
+        <!-- Mobile menu button -->
+        <button
+          class="lg:hidden p-2 rounded-md text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary"
+          aria-expanded="false"
+          aria-label={t('menu.toggle')}
+          id="mobile-menu-button"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Menu -->
+    <div class="lg:hidden mt-4 pt-4 border-t border-gray-200 hidden" id="mobile-menu" role="navigation" aria-label="Mobile navigation">
+      <nav class="flex flex-col space-y-4">
+        {navItems.map(item => (
+          <a
+            href={isEnglish ? `/en${item.href}` : item.href}
+            class={`font-medium transition-colors hover:text-primary py-2 ${
+              item.active ? 'text-primary' : 'text-gray-700'
+            }`}
+            aria-current={item.active ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        ))}
+
+        <!-- Mobile Language Switcher -->
+        <div class="flex items-center space-x-4 pt-4 border-t border-gray-200">
+          <span class="text-sm text-gray-600">{isEnglish ? 'Language:' : 'Langue :'}</span>
+          <div class="flex space-x-2">
+            {switchToFrench && (
+              <a
+                href={switchToFrench}
+                class={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
+                  !isEnglish ? 'bg-primary text-white' : 'text-gray-700 hover:bg-gray-100'
+                }`}
+              >
+                FR
+              </a>
+            )}
+            {switchToEnglish && (
+              <a
+                href={switchToEnglish}
+                class={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
+                  isEnglish ? 'bg-primary text-white' : 'text-gray-700 hover:bg-gray-100'
+                }`}
+              >
+                EN
+              </a>
+            )}
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Mobile menu toggle functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const menuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (menuButton && mobileMenu) {
+      menuButton.addEventListener('click', () => {
+        const isExpanded = menuButton.getAttribute('aria-expanded') === 'true';
+        menuButton.setAttribute('aria-expanded', !isExpanded);
+        mobileMenu.classList.toggle('hidden');
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener('click', (event) => {
+        if (!menuButton.contains(event.target) && !mobileMenu.contains(event.target)) {
+          menuButton.setAttribute('aria-expanded', 'false');
+          mobileMenu.classList.add('hidden');
+        }
+      });
+    }
+  });
+</script>

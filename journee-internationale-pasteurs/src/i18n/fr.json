@@ -1,0 +1,39 @@
+{
+  "common": {
+    "home": "Accueil",
+    "vision": "Vision",
+    "founder": "Fondateur",
+    "program": "Programme",
+    "participation": "Participation",
+    "resources": "Ressources",
+    "gallery": "Galerie",
+    "donations": "Dons",
+    "contact": "Contact",
+    "faq": "FAQ",
+    "language": "Langue",
+    "french": "Français",
+    "english": "Anglais",
+    "readMore": "En savoir plus",
+    "register": "S'inscrire",
+    "donate": "Faire un don"
+  },
+  "hero": {
+    "title": "Journée Internationale des Pasteurs",
+    "subtitle": "Honorer ceux qui veillent sur nos âmes",
+    "ctaPrimary": "S'inscrire à l'événement",
+    "ctaSecondary": "En savoir plus",
+    "countdown": {
+      "days": "jours",
+      "hours": "heures",
+      "minutes": "minutes",
+      "seconds": "secondes",
+      "until": "jusqu'à la JIP"
+    }
+  },
+  "footer": {
+    "copyright": "© 2025 Journée Internationale des Pasteurs. Tous droits réservés.",
+    "social": "Suivez-nous",
+    "contact": "Contact",
+    "links": "Liens utiles"
+  }
+}
