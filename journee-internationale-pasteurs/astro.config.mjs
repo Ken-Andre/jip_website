@@ -4,13 +4,6 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
   site: 'https://journee-internationale-pasteurs.netlify.app',
 
-  // Internationalization
-  i18n: {
-    defaultLocale: "fr",
-    locales: ["fr", "en"],
-    routing: { prefixDefaultLocale: true }
-  },
-
   integrations: [
     starlight({
       title: 'Journée Internationale des Pasteurs',
@@ -26,6 +19,13 @@ export default defineConfig({
         './src/assets/styles/variables.css',
         './src/assets/styles/starlight.css'
       ],
+
+      // Internationalization
+      defaultLocale: 'fr',
+      locales: {
+        fr: { label: 'Français' },
+        en: { label: 'English' }
+      },
 
       // Navigation et sidebar
       sidebar: [
@@ -113,11 +113,7 @@ export default defineConfig({
         }
       ],
 
-      // Métadonnées par défaut
-      defaultLocale: 'fr',
-
       // Configuration SEO
-      // Note: Starlight gère automatiquement les méta tags, mais nous pouvons ajouter des personnalisations ici si nécessaire
     })
   ],
 
