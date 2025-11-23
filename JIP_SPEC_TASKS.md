@@ -15,7 +15,7 @@
   - git init: Yes
 - [ ] Install additional packages:
   ```bash
-  npm install astro-i18n decap-cms
+  npm install astro-i18n
   npm install -D tailwindcss autoprefixer
   ```
 - [ ] Initialize Tailwind config
@@ -35,17 +35,23 @@
 - [ ] Test: Push change → verify auto-deploy
 - **Deliverable**: Skeleton site live on Netlify with auto-deploy working
 
-### Task 1.3: Setup Decap CMS
-- [ ] Create `/public/admin/index.html` (Decap entry point)
-- [ ] Create `decap-config.yml` in root with:
-  - GitHub backend config
-  - Collections (pages, founder, social, faq, programme)
-  - Media folder: `/src/assets/images/`
-  - Publishing mode: editorial_workflow (Draft/Review/Publish)
-- [ ] Generate GitHub Personal Access Token (scope: public_repo)
-- [ ] Setup Netlify Identity (optional, for team management)
-- [ ] Test: Access `/admin` → login with GitHub
-- **Deliverable**: CMS accessible at `/admin` with login working
+### Task 1.3: Configure Starlight
+- [ ] Install Starlight integration: `npx astro add starlight`
+- [ ] Configure `astro.config.mjs` with Starlight integration:
+  - Site title: 'Journée Internationale des Pasteurs'
+  - Sidebar navigation structure
+  - i18n locales (fr, en)
+  - Custom CSS paths
+  - Social links (Facebook, YouTube)
+- [ ] Create content structure in `src/content/docs/`:
+  - `src/content/docs/fr/` (contenu français)
+  - `src/content/docs/en/` (contenu anglais)
+- [ ] Create example pages with frontmatter:
+  - `src/content/docs/fr/index.md` (homepage)
+  - `src/content/docs/fr/vision.md`
+  - Other pages as per structure
+- [ ] Test: Navigate to localhost → Starlight theme renders correctly
+- **Deliverable**: Starlight configured with basic content structure
 
 ### Task 1.4: Configure i18n Routing
 - [ ] Install `astro-i18n`
@@ -348,46 +354,50 @@
 - [ ] Store in `/src/content/` markdown files
 - **Deliverable**: All content files ready for CMS
 
-### Task 4.2: Setup CMS Collections
-- [ ] Update `decap-config.yml` with collections:
-  - **pages**: Generic pages (vision, program, etc.)
-  - **founder**: Pasteur Patrick specific
-  - **social**: Social media links + contact email
-  - **faq**: FAQ items
-  - **testimonials**: Testimonials array
-  - **resources**: Media kit files
-- [ ] Configure each collection with fields:
-  - Text inputs, text areas
-  - Markdown editors
-  - Image upload
-  - List/array inputs for repeated fields
-  - Selector inputs for enums
-- [ ] Test CMS interface:
-  - Can add/edit entries
-  - Preview looks correct
-  - Publish to branch works
-- [ ] Create sample entries in each collection
-- **Deliverable**: CMS fully configured and tested
-
-### Task 4.3: Integrate Content into Pages
-- [ ] Update all `.astro` pages to import from `content/`:
-  ```astro
-  import { getCollection } from 'astro:content';
-  const visionData = await getCollection('vision');
+### Task 4.2: Organiser Structure de Contenu Markdown
+- [ ] Créer structure de dossiers dans `src/content/docs/`:
+  - `/fr/` : pages françaises
+  - `/en/` : pages anglaises
+- [ ] Créer fichiers Markdown pour chaque page avec frontmatter:
+  - `fr/index.md` : Page d'accueil
+  - `fr/vision.md` : Vision
+  - `fr/fondateur.md` : Pasteur Patrick
+  - `fr/programme.md` : Programme
+  - `fr/participation.md` : Participation/inscription
+  - `fr/ressources.md` : Ressources et kit média
+  - `fr/galerie.md` : Galerie photos/vidéos
+  - `fr/dons.md` : Dons et Mobile Money
+  - `fr/contact.md` : Contact
+  - `fr/faq.md` : FAQ
+- [ ] Dupliquer structure pour `/en/` (versions anglaises)
+- [ ] Définir frontmatter standard pour chaque type de page:
+  ```yaml
+  ---
+  title: "Titre de la page"
+  description: "Description pour SEO"
+  ---
   ```
-- [ ] Map content fields to page sections:
-  - Homepage: intro, program preview, testimonials
-  - Vision: full text + mission/values
-  - Founder: biography, photo, video link, quote
-  - Program: schedule, activities
-  - FAQ: items list
-  - Resources: file listings
-  - Dons: account numbers, descriptions
-  - Social: links and email
-- [ ] Add fallback content (if CMS entry missing)
-- [ ] Test: Content displays correctly on all pages
-- [ ] Verify: CMS edits propagate to site after redeploy
-- **Deliverable**: Content fully integrated with CMS
+- [ ] Tester: Contenu Markdown s'affiche correctement dans Starlight
+- **Deliverable**: Structure complète de contenu Markdown organisée
+
+### Task 4.3: Intégrer Contenu Markdown dans Starlight
+- [ ] Vérifier que Starlight charge automatiquement les fichiers .md de `src/content/docs/`
+- [ ] Personnaliser les pages si nécessaire avec composants Astro:
+  - Composants réutilisables pour sections spéciales
+  - Intégration de composants interactifs (countdown, forms)
+- [ ] Mapper le contenu Markdown aux sections:
+  - Homepage: hero, programme aperçu, témoignages
+  - Vision: texte complet + mission/valeurs
+  - Fondateur: biographie, photo, vidéo, citation
+  - Programme: planning, activités
+  - FAQ: liste questions/réponses
+  - Ressources: listings fichiers
+  - Dons: numéros comptes, descriptions
+  - Social: liens et email
+- [ ] Ajouter contenu de fallback si fichier Markdown manquant
+- [ ] Test: Contenu s'affiche correctement sur toutes pages
+- [ ] Vérifier: Modifications Markdown (Git push) → site redéployé automatiquement
+- **Deliverable**: Contenu Markdown entièrement intégré dans Starlight
 
 ### Task 4.4: Upload Media Assets
 - [ ] Prepare hero image (1920x600px, optimized):
@@ -542,13 +552,14 @@
 
 ### Task 6.1: Create Maintenance Documentation
 - [ ] Create `MAINTENANCE.md` file with:
-  - How to update content via CMS
-  - Screenshots of CMS interface
-  - Step-by-step: "How to update the homepage"
-  - "How to add a new page"
-  - "How to add testimonials"
-  - Common CMS issues + solutions
-  - Emergency contacts
+  - Comment éditer contenu via fichiers Markdown
+  - Guide syntaxe Markdown de base
+  - Step-by-step: "Comment mettre à jour la page d'accueil"
+  - "Comment ajouter une nouvelle page"
+  - "Comment ajouter des témoignages via frontmatter"
+  - Workflow Git : clone, edit, commit, push
+  - Problèmes courants Markdown + solutions
+  - Contacts d'urgence
 - [ ] Create `README.md` with:
   - Project overview
   - Tech stack summary
@@ -576,12 +587,13 @@
 ### Task 6.2: Team Training Session
 - [ ] Schedule 1-2 hour training with team members
 - [ ] Cover during training:
-  - Demo: Accessing CMS (/admin)
-  - Demo: Editing content (vision, founder, FAQ)
-  - Demo: Publishing changes
-  - Demo: Checking live site updates
-  - Hands-on: Each person edits something
-  - Q&A: Address concerns
+  - Demo: Accéder aux fichiers Markdown (GitHub ou local)
+  - Demo: Éditer contenu (vision, fondateur, FAQ) via Markdown
+  - Demo: Syntaxe Markdown de base (titres, listes, liens, images)
+  - Demo: Commit et push via Git/GitHub
+  - Demo: Vérifier déploiement automatique sur Netlify
+  - Hands-on: Chaque personne édite un fichier .md
+  - Q&A: Répondre aux préoccupations
 - [ ] Provide documentation handouts/links
 - [ ] Share contact info for ongoing support
 - [ ] Record training session (if possible) for reference
@@ -687,7 +699,7 @@
 2. ✅ Lighthouse score ≥ 90 (mobile + desktop)
 3. ✅ Zero accessibility violations (WCAG AA)
 4. ✅ All forms working (submissions received)
-5. ✅ CMS operational and team trained
+5. ✅ Structure Markdown organisée et équipe formée
 6. ✅ Multilingue (FR + EN) fully functional
 7. ✅ SEO optimized (pages indexed by Google)
 8. ✅ Team confident in maintenance

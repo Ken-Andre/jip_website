@@ -12,15 +12,16 @@ Ce document décrit l'architecture technique complète du site vitrine **Journé
 - Présenter la vision et le programme de la JIP
 - Valoriser Pasteur Patrick et son impact ministériel
 - Faciliter inscriptions, dons, et participation
-- Maintenance autonome via CMS intuitif (Decap CMS)
+- Maintenance autonome via édition Markdown directe dans Starlight
 - Scalabilité progressive sans frais additionnels
 
 ### Scope
 - **Framework**: Astro 4.x (SSG statique)
-- **CMS**: Decap CMS (GitHub-based)
+- **Docs**: Starlight (thème de documentation Astro avec édition Markdown native)
+- **Gestion contenu**: Fichiers Markdown (.md) dans src/content/docs/ (pas de CMS externe)
 - **Hébergement**: Netlify (gratuit)
 - **Domaine**: .netlify.site (gratuit Phase 1)
-- **Multilingue**: Français + Anglais
+- **Multilingue**: Français + Anglais (structure /fr/ et /en/)
 - **Budget**: 0€ Année 1, max 15€/an futur
 
 ---
@@ -47,29 +48,20 @@ Ce document décrit l'architecture technique complète du site vitrine **Journé
 ┌─────────────────────────────────────────────────────────────┐
 │                    GitHub Repo                              │
 ├─────────────────────────────────────────────────────────────┤
-│  Source code versionning                                    │
-│  Decap CMS backend (GitHub OAuth)                           │
-│  CI/CD integration                                          │
-└─────────────────────────────────────────────────────────────┘
-                          ↓
-┌─────────────────────────────────────────────────────────────┐
-│                  Decap CMS Admin                            │
-├─────────────────────────────────────────────────────────────┤
-│  /admin interface (drag-drop content editing)               │
-│  WYSIWYG editor for markdown                                │
-│  Image upload to GitHub                                     │
-│  Workflow: Draft → Review → Publish                         │
+│  Source code + Markdown content versionning                 │
+│  Starlight theme (built-in docs interface)                  │
+│  i18n support intégré                                       │
 └─────────────────────────────────────────────────────────────┘
 ```
 
 ### Data Flow
 
 ```
-Content Editor (Team) 
+Content Editor (Team)
         ↓
-Decap CMS Admin Interface (/admin)
+Markdown Files (src/content/docs/)
         ↓
-GitHub Commit (auto-push)
+Git Commit + Push (GitHub)
         ↓
 GitHub Actions (optional CI/CD)
         ↓
@@ -133,14 +125,20 @@ journee-internationale-pasteurs/
 │   │       ├── inscription.js   # POST /api/inscription
 │   │       └── newsletter.js    # POST /api/newsletter (optionnel)
 │   │
-│   ├── content/                 # Contenu editable via CMS
-│   │   ├── vision.md
-│   │   ├── fondateur.md
-│   │   ├── programme.md
-│   │   ├── ressources.yml
-│   │   ├── temoignages.yml
-│   │   ├── partenaires.yml
-│   │   └── faq.yml
+│   ├── content/                 # Contenu Markdown (Starlight)
+│   │   └── docs/                # Contenu documentation Starlight
+│   │       ├── fr/              # Version française
+│   │       │   ├── index.md     # Page d'accueil
+│   │       │   ├── vision.md    # Vision
+│   │       │   ├── fondateur.md
+│   │       │   ├── programme.md
+│   │       │   └── ... (autres pages)
+│   │       └── en/              # Version anglaise
+│   │           ├── index.md     # Home page
+│   │           ├── vision.md    # Vision
+│   │           ├── founder.md
+│   │           ├── program.md
+│   │           └── ... (other pages)
 │   │
 │   ├── assets/
 │   │   ├── styles/
@@ -180,8 +178,7 @@ journee-internationale-pasteurs/
 │   └── sitemap.xml (auto-generated)
 │
 ├── config/
-│   ├── astro.config.mjs         # Astro config
-│   └── decap-config.yml         # CMS config
+│   └── astro.config.mjs         # Astro + Starlight config
 │
 ├── .github/
 │   └── workflows/
@@ -255,7 +252,7 @@ Spacing Grid:
 - Founder preview (with link to full page)
 - Call-to-actions
 
-**Content editable via CMS:**
+**Contenu éditable via Markdown (frontmatter):**
 - Slogan/tagline
 - Hero image URL
 - Program highlights (top 3)
@@ -385,56 +382,71 @@ Spacing Grid:
 - Related questions links
 
 **Content editable:**
-- QA list (via CMS)
+- QA list (via fichiers Markdown avec frontmatter)
 - Categories
 
 ---
 
-## CMS Configuration (Decap)
+## Configuration Starlight
 
-### Collection: Pages
+### Configuration générale (`astro.config.mjs`)
 
-```yaml
-- name: "pages"
-  label: "Pages"
-  folder: "src/content"
-  create: true
-  slug: "{{title}}"
-  fields:
-    - {label: "Page Title", name: "title", widget: "string"}
-    - {label: "Description", name: "description", widget: "text"}
-    - {label: "Content", name: "body", widget: "markdown"}
-    - {label: "Featured Image", name: "image", widget: "image"}
+```javascript
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+  site: 'https://journee-internationale-pasteurs.netlify.app',
+  integrations: [
+    starlight({
+      title: 'Journée Internationale des Pasteurs',
+      customCss: [
+        './src/assets/styles/variables.css',
+        './src/assets/styles/starlight.css'
+      ],
+      sidebar: [
+        { label: 'Accueil', link: '/fr/' },
+        { label: 'À propos', items: [
+          { label: 'Notre Vision', link: '/fr/vision' },
+          { label: 'Fondateur', link: '/fr/fondateur' },
+          { label: 'Programme', link: '/fr/programme' }
+        ]},
+        { label: 'Participation', link: '/fr/participation' },
+        { label: 'Ressources', link: '/fr/ressources' },
+        { label: 'Galerie', link: '/fr/galerie' },
+        { label: 'Faire un don', link: '/fr/dons' },
+        { label: 'Contact', link: '/fr/contact' },
+        { label: 'FAQ', link: '/fr/faq' }
+      ],
+      social: [
+        { label: 'Facebook', href: 'https://facebook.com/...', icon: 'facebook' },
+        { label: 'YouTube', href: 'https://youtube.com/...', icon: 'youtube' }
+      ],
+      defaultLocale: 'fr',
+      locales: {
+        fr: { label: 'Français', lang: 'fr' },
+        en: { label: 'English', lang: 'en' }
+      }
+    })
+  ]
+});
 ```
 
-### Collection: Founder
+### Structure de Contenu Markdown
 
-```yaml
-- name: "founder"
-  label: "Founder — Pasteur Patrick"
-  file: "src/content/fondateur.md"
-  fields:
-    - {label: "Name", name: "name", widget: "string", default: "Pasteur Patrick"}
-    - {label: "Biography", name: "biography", widget: "markdown"}
-    - {label: "Portrait", name: "portrait", widget: "image"}
-    - {label: "Quote", name: "quote", widget: "text"}
-    - {label: "Video URL", name: "video_url", widget: "string"}
-    - {label: "Ministry Focus", name: "ministry_focus", widget: "text"}
-```
-
-### Collection: Social Links
-
-```yaml
-- name: "social"
-  label: "Social Media & Contact"
-  file: "src/content/social.yml"
-  fields:
-    - {label: "Facebook URL", name: "facebook", widget: "string"}
-    - {label: "Instagram URL", name: "instagram", widget: "string"}
-    - {label: "TikTok URL", name: "tiktok", widget: "string"}
-    - {label: "Email", name: "email", widget: "string"}
-    - {label: "Phone (optional)", name: "phone", widget: "string"}
-```
+**Fichiers de contenu** dans `src/content/docs/` :
+- Chaque page = fichier `.md` avec frontmatter YAML
+- Structure i18n via dossiers `/fr/` et `/en/`
+- Navigation automatique via sidebar config dans astro.config.mjs
+- Édition directe des fichiers .md (pas de CMS externe)
+- Frontmatter exemple:
+  ```yaml
+  ---
+  title: "Notre Vision"
+  description: "Découvrez la vision de la Journée Internationale des Pasteurs"
+  ---
+  ```
+- Personnalisation via frontmatter et composants MDX optionnels
 
 ---
 
@@ -515,28 +527,28 @@ Spacing Grid:
 
 ### Step 1: Setup (Day 1)
 1. Create GitHub repo
-2. Initialize Astro project
+2. Initialize Astro project with Starlight
 3. Setup Netlify integration
-4. Configure Decap CMS
-5. Deploy initial skeleton
+4. Configure Starlight theme and navigation
+5. Deploy initial skeleton avec contenu de base
 
 ### Step 2: Content Structure (Day 1-2)
-1. Create page templates
-2. Setup content collections
-3. Implement i18n routing
+1. Create page templates Markdown (.md)
+2. Setup content structure i18n (/fr/ et /en/)
+3. Implement sidebar navigation Starlight
 4. Create form endpoints
 
 ### Step 3: Design & Styling (Day 2-3)
 1. Implement design system
-2. Build core components
+2. Customize theme Starlight avec variables JIP
 3. Responsive testing
 4. Animation/transition polish
 
 ### Step 4: Content Integration (Day 3)
-1. Populate pages with LLM-generated content
+1. Populate pages with LLM-generated content Markdown
 2. Upload media assets
-3. Configure Decap CMS workflows
-4. User training docs
+3. Configure navigation et métadonnées Starlight
+4. User training docs (édition Markdown)
 
 ### Step 5: Testing & Launch (Day 4)
 1. Cross-browser testing
@@ -547,9 +559,54 @@ Spacing Grid:
 
 ### Step 6: Handover (Day 5)
 1. Team documentation
-2. CMS training
+2. Formation édition Markdown
 3. Maintenance procedures
 4. Support setup
+
+---
+
+## Édition et Gestion du Contenu
+
+### Workflow d'Édition Markdown
+
+**Pour mettre à jour le contenu du site :**
+
+1. **Cloner le repository Git** localement ou éditer directement sur GitHub
+2. **Naviguer vers** `src/content/docs/fr/` (français) ou `src/content/docs/en/` (anglais)
+3. **Éditer les fichiers .md** avec n'importe quel éditeur de texte :
+   - VSCode (recommandé, avec extension Markdown)
+   - GitHub web editor
+   - Obsidian, Typora, ou autre éditeur Markdown
+4. **Commiter et pusher** les modifications sur GitHub
+5. **Netlify déploie automatiquement** le site mis à jour (2-3 minutes)
+
+**Exemple de modification :**
+
+```markdown
+---
+title: "Notre Vision"
+description: "La vision de la JIP"
+---
+
+# Notre Vision
+
+Honorer ceux qui veillent sur nos âmes...
+
+## Mission
+
+- Former les pasteurs
+- Encourager les leaders
+- ...
+```
+
+### Avantages de l'Édition Markdown
+
+- ✅ **Simplicité** : Syntaxe Markdown intuitive et facile à apprendre
+- ✅ **Versioning** : Historique complet dans Git (retour arrière facile)
+- ✅ **Pas de dépendance** : Pas besoin de CMS externe ou interface admin
+- ✅ **Flexibilité** : N'importe quel éditeur de texte peut être utilisé
+- ✅ **Performance** : Pas de couche CMS supplémentaire
+- ✅ **Collaboratif** : Workflow Git natif (branches, pull requests, reviews)
 
 ---
 
@@ -562,10 +619,11 @@ Spacing Grid:
 - Performance verification
 
 ### Ongoing Maintenance (Monthly)
-- Content updates via Decap CMS
+- Content updates via édition Markdown (src/content/docs/)
 - Social media link updates
 - Dependency updates (npm)
 - Analytics review
+- Validation des traductions i18n (/fr/ et /en/)
 
 ### Annual Tasks
 - Domain renewal (if switching from .netlify.site)
@@ -584,4 +642,3 @@ Spacing Grid:
 5. **Partner Directory**: Searchable partner listings
 6. **Newsletter Archive**: Email archive accessible
 7. **Analytics Dashboard**: Custom dashboard for admins
-

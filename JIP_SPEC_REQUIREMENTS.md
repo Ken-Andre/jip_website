@@ -93,14 +93,14 @@ Ce document présente les exigences complètes (fonctionnelles et non-fonctionne
 5. WHEN la page affiche citation THEN mise en avant visuelle (font large, couleur accentuée)
 6. WHEN disponible THEN embed vidéo YouTube de présentation Pasteur Patrick
 7. WHEN l'utilisateur clique photo THEN peut agrandir dans lightbox (si galerie)
-8. WHEN contenu édité via CMS THEN mises à jour immédiate du site
+8. WHEN contenu édité via Markdown THEN mises à jour immédiate du site
 
 ### Technical Requirements
 
 - Images: JPEG/WebP optimisées, lazy-loaded
 - Vidéo: YouTube embed (iframe responsive)
 - Texte: Markdown + formatage HTML
-- CMS: Section dédiée dans Decap avec éditeur WYSIWYG
+- CMS: Contenu géré via fichiers Markdown dans Starlight (édition directe)
 - SEO: Meta title/description optimisés
 
 ---
@@ -140,14 +140,14 @@ Ce document présente les exigences complètes (fonctionnelles et non-fonctionne
 5. WHEN disponible THEN mentionne intervenant/prédicateur avec bio courte
 6. WHEN utilisateur cherche info spécifique THEN peut télécharger programme PDF
 7. WHEN le programme affiche THEN incluant: Ouverture, Formation, Ateliers, Mission, Communion, Célébration
-8. WHEN contenu édité THEN CMS permet modification facile sans refonte design
+8. WHEN contenu édité THEN fichiers Markdown permettent modification facile sans refonte design
 
 ### Technical Requirements
 
 - Data: structured in content/programme.yml ou .md
 - Timeline: CSS-based ou JavaScript Astro component
 - PDF: static file in /public/files/
-- Editable: via CMS Decap
+- Editable: via fichiers Markdown dans src/content/docs/
 
 ---
 
@@ -162,7 +162,7 @@ Ce document présente les exigences complètes (fonctionnelles et non-fonctionne
 3. WHEN utilisateur clique download THEN télécharge fichier depuis /public/files/
 4. WHEN ressource disponible THEN formats: SVG (logos), PNG (images), PDF (brochures)
 5. WHEN utilisateur visite THEN comprend droits d'utilisation (creative commons, usage libre)
-6. WHEN admin ajoute ressource THEN CMS permet upload + description
+6. WHEN admin ajoute ressource THEN fichier Markdown avec frontmatter description
 7. WHEN fichier téléchargé THEN analytics track le téléchargement
 
 ### Technical Requirements
@@ -171,7 +171,7 @@ Ce document présente les exigences complètes (fonctionnelles et non-fonctionne
 - Formats: SVG, PNG, PDF, XLSX
 - Size: chaque fichier < 10MB
 - Download: direct link (navigateur default download)
-- CMS: listing with descriptions
+- CMS: listing avec descriptions dans fichiers Markdown
 
 ---
 
@@ -188,7 +188,7 @@ Ce document présente les exigences complètes (fonctionnelles et non-fonctionne
 5. WHEN grille charge THEN images lazy-loaded pour performance
 6. WHEN filter tabs présents THEN permet trier par catégorie (Photos / Vidéos)
 7. WHEN photo inclus THEN caption/légende affichée en bas
-8. WHEN utilisateur ajoute via CMS THEN URL image/vidéo + caption éditables
+8. WHEN utilisateur ajoute via Markdown THEN URL image/vidéo + caption éditables
 
 ### Technical Requirements
 
@@ -197,7 +197,7 @@ Ce document présente les exigences complètes (fonctionnelles et non-fonctionne
 - Lazy load: native <img loading="lazy">
 - Lightbox: Astro component + CSS animations
 - Videos: YouTube iframe (responsive container)
-- CMS: array input for gallery items
+- CMS: gallery items définis dans frontmatter Markdown
 
 ---
 
@@ -214,14 +214,14 @@ Ce document présente les exigences complètes (fonctionnelles et non-fonctionne
 5. WHEN page affiche THEN incluant infos où vont les fonds
 6. WHEN donation texte inclus THEN transparent sur allocation budget
 7. WHEN utilisateur contribue THEN peut s'enregistrer noms donateurs (recognition, optionnel)
-8. WHEN contenu édité THEN CMS permet mise à jour numéros/noms facilement
+8. WHEN contenu édité THEN fichiers Markdown permettent mise à jour numéros/noms facilement
 
 ### Technical Requirements
 
 - Data: numéros stockés dans content/donations.yml
 - Display: plain text (pas d'API paiement)
 - QR codes: optionnel (généré offline ou image statique)
-- CMS: editable contact fields
+- CMS: contact fields éditables via Markdown
 - No backend payment: texte uniquement
 
 ---
@@ -330,27 +330,27 @@ Ce document présente les exigences complètes (fonctionnelles et non-fonctionne
 
 ## Requirement 14: CMS Usability & Maintenance
 
-**User Story:** En tant que community manager JIP, je veux pouvoir mettre à jour contenu via interface simple, afin de gérer le site sans connaissances techniques.
+**User Story:** En tant que community manager JIP, je veux pouvoir mettre à jour contenu via édition Markdown simple, afin de gérer le site sans connaissances techniques avancées.
 
 ### Acceptance Criteria
 
-1. WHEN utilisateur accède /admin THEN login GitHub OAuth (facile, gratuit)
-2. WHEN dans CMS THEN interface intuitive (drag-drop, WYSIWYG)
-3. WHEN éditeur modifie texte THEN changement live-preview avant publish
-4. WHEN image uploadée THEN auto-resized, optimisée, versionnée dans Git
-5. WHEN contenu publié THEN site deployed automatiquement (Netlify webhook)
-6. WHEN workflow enabled THEN Draft → Review → Publish workflow
-7. WHEN utilisateur inexpérimenté THEN documentation fournie avec screenshots
-8. WHEN formation terminée THEN équipe autonome pour mises à jour mensuelles
+1. WHEN utilisateur édite fichier Markdown THEN modifications sont versionées dans Git
+2. WHEN éditeur modifie contenu THEN peut utiliser éditeur de texte simple ou IDE avec preview
+3. WHEN éditeur modifie texte THEN syntaxe Markdown reste simple et intuitive
+4. WHEN image uploadée THEN placée dans dossier assets et référencée via chemin relatif
+5. WHEN contenu publié (push Git) THEN site deployed automatiquement (Netlify webhook)
+6. WHEN workflow enabled THEN branches Git utilisées pour Draft/Review/Publish
+7. WHEN utilisateur inexpérimenté THEN documentation fournie avec exemples Markdown
+8. WHEN formation terminée THEN équipe autonome pour éditions mensuelles fichiers Markdown
 
 ### Technical Requirements
 
-- CMS: Decap (open-source, GitHub backend)
-- Config: decap-config.yml
-- Collections: Pages, Fondateur, Social, FAQ, Programme, etc.
-- Auth: GitHub OAuth
-- Workflow: Editorial (Draft/Review/Publish)
-- Deploy: Netlify webhook
+- CMS: Starlight (framework documentation Astro, édition Markdown native)
+- Config: astro.config.mjs avec intégration Starlight
+- Contenu: Fichiers .md dans src/content/docs/ (structure i18n: /fr/, /en/)
+- Auth: Accès Git via GitHub (permissions repository)
+- Workflow: Branches Git (main, develop) pour workflow éditorial
+- Deploy: Netlify webhook sur push Git
 
 ---
 
@@ -397,6 +397,6 @@ Ce document présente les exigences complètes (fonctionnelles et non-fonctionne
 
 ### Scalability
 - **Future**: Can add 10,000+ simultaneous users without scaling issues (Netlify auto-scale)
-- **Content**: Can add unlimited pages via CMS
+- **Content**: Can add unlimited pages via fichiers Markdown
 - **Growth**: Upgrade to Supabase/PostgRES if database needed later
 
