@@ -1,0 +1,430 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+
+// Get current locale from URL
+const currentLocale = 'fr';
+const isEnglish = false;
+
+// Translations for homepage
+const t = (key: string) => {
+  const translations = {
+    fr: {
+      'hero.title': 'Journée Internationale des Pasteurs',
+      'hero.subtitle': 'Honorer ceux qui veillent sur nos âmes',
+      'hero.cta.primary': 'S\'inscrire à l\'événement',
+      'hero.cta.secondary': 'En savoir plus',
+      'hero.countdown.days': 'jours',
+      'hero.countdown.hours': 'heures',
+      'hero.countdown.minutes': 'minutes',
+      'hero.countdown.seconds': 'secondes',
+      'hero.countdown.until': 'jusqu\'à la JIP',
+      'hero.countdown.eventStarted': 'C\'est le jour ! Rejoignez-nous',
+      'program.title': 'Découvrez le Programme',
+      'program.subtitle': '6 jours de célébration et de formation pastorale',
+      'program.cta': 'Voir le programme complet',
+      'testimonials.title': 'Témoignages',
+      'testimonials.subtitle': 'Ce que disent les participants',
+      'founder.title': 'Rencontrez le Fondateur',
+      'founder.subtitle': 'Pasteur Patrick et sa vision pour l\'Afrique',
+      'founder.cta': 'En savoir plus sur le fondateur',
+      'cta.donate': 'Faire un don',
+      'cta.contact': 'Nous contacter'
+    }
+  };
+  return translations[currentLocale][key] || key;
+};
+---
+
+<PageLayout
+  title={t('hero.title')}
+  description={`${t('hero.subtitle')} - ${t('hero.title')}`}
+>
+  <!-- Hero Section -->
+  <section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gray-900 text-white">
+    <!-- Background Image with Parallax Effect -->
+    <div class="absolute inset-0 z-0">
+      <div class="absolute inset-0 bg-gradient-to-b from-black/90 via-primary-950/80 to-primary-900/95 z-10"></div>
+      <img 
+        src="/src/assets/images/hero-banner.jpg" 
+        alt="JIP Hero Banner" 
+        class="w-full h-full object-cover object-center scale-105 animate-pulse-slow"
+      />
+    </div>
+
+    <!-- Decorative Elements -->
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
+      <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-primary-500/20 rounded-full blur-3xl animate-float"></div>
+      <div class="absolute bottom-1/3 right-1/4 w-96 h-96 bg-secondary-500/10 rounded-full blur-3xl animate-float" style="animation-delay: 2s;"></div>
+    </div>
+
+    <div class="relative container mx-auto px-4 z-10 pt-24">
+      <div class="max-w-5xl mx-auto text-center">
+        <!-- Date/Location Badge -->
+        <div class="inline-flex items-center gap-2 py-2 px-4 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-sm font-medium mb-8 animate-fade-in shadow-lg">
+          <span class="w-2 h-2 rounded-full bg-secondary-500 animate-pulse"></span>
+          <span class="tracking-wide uppercase text-white/90">15 - 20 Juin 2025 • Cameroun</span>
+        </div>
+        
+        <h1 class="text-5xl md:text-7xl lg:text-8xl font-serif font-bold mb-6 leading-tight animate-slide-up drop-shadow-2xl">
+          <span class="block text-white">
+            {t('hero.title')}
+          </span>
+        </h1>
+        
+        <p class="text-xl md:text-2xl mb-10 text-gray-100 font-light max-w-3xl mx-auto animate-slide-up animate-delay-200 leading-relaxed drop-shadow-md">
+          {t('hero.subtitle')}
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-slide-up animate-delay-300">
+          <a
+            href="/fr/participation"
+            class="group relative inline-flex items-center justify-center px-8 py-4 bg-secondary-500 text-white font-bold rounded-full overflow-hidden transition-all duration-300 hover:bg-secondary-400 hover:scale-105 hover:shadow-[0_0_30px_rgba(212,175,55,0.4)]"
+          >
+            <span class="relative flex items-center gap-2">
+              {t('hero.cta.primary')}
+              <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+            </span>
+          </a>
+          <a
+            href="#program"
+            class="group inline-flex items-center justify-center px-8 py-4 bg-white/5 backdrop-blur-sm border border-white/30 text-white hover:bg-white/10 font-semibold rounded-full transition-all duration-300 hover:border-white/50"
+          >
+            {t('hero.cta.secondary')}
+          </a>
+        </div>
+
+        <!-- Countdown Timer -->
+        <div class="glass-panel rounded-2xl p-6 md:p-8 max-w-4xl mx-auto animate-slide-up animate-delay-500 border border-white/10 bg-black/20 backdrop-blur-xl">
+          <h2 class="text-lg md:text-xl font-serif mb-6 text-white/90 tracking-wide">
+            {isEnglish ? 'Event starts in:' : 'L\'événement commence dans :'}
+          </h2>
+          <div id="countdown" class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+            <!-- Countdown Items -->
+            <div class="flex flex-col items-center p-4 rounded-xl bg-white/5 border border-white/5">
+              <div class="text-3xl md:text-5xl font-bold text-white mb-1 font-serif" id="days">--</div>
+              <div class="text-xs uppercase tracking-widest text-gray-400 font-medium">{t('hero.countdown.days')}</div>
+            </div>
+            <div class="flex flex-col items-center p-4 rounded-xl bg-white/5 border border-white/5">
+              <div class="text-3xl md:text-5xl font-bold text-white mb-1 font-serif" id="hours">--</div>
+              <div class="text-xs uppercase tracking-widest text-gray-400 font-medium">{t('hero.countdown.hours')}</div>
+            </div>
+            <div class="flex flex-col items-center p-4 rounded-xl bg-white/5 border border-white/5">
+              <div class="text-3xl md:text-5xl font-bold text-white mb-1 font-serif" id="minutes">--</div>
+              <div class="text-xs uppercase tracking-widest text-gray-400 font-medium">{t('hero.countdown.minutes')}</div>
+            </div>
+            <div class="flex flex-col items-center p-4 rounded-xl bg-white/5 border border-white/5">
+              <div class="text-3xl md:text-5xl font-bold text-secondary-400 mb-1 font-serif" id="seconds">--</div>
+              <div class="text-xs uppercase tracking-widest text-gray-400 font-medium">{t('hero.countdown.seconds')}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce text-white/30 hover:text-white/80 transition-colors cursor-pointer">
+      <a href="#program" aria-label="Scroll down">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- Program Preview Section -->
+  <section id="program" class="py-24 bg-gray-50 relative overflow-hidden">
+    <div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-primary-50 to-transparent pointer-events-none"></div>
+    
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="text-center mb-16">
+        <span class="text-secondary-600 font-bold tracking-wider uppercase text-sm mb-2 block">Agenda</span>
+        <h2 class="text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-6">
+          {t('program.title')}
+        </h2>
+        <div class="w-24 h-1 bg-secondary-500 mx-auto rounded-full mb-6"></div>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+          {t('program.subtitle')}
+        </p>
+      </div>
+
+      <!-- Program Preview Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-7xl mx-auto">
+        <!-- Day 1 -->
+        <div class="group bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-24 h-24 bg-primary-50 rounded-bl-full -mr-6 -mt-6 transition-transform group-hover:scale-110"></div>
+          
+          <div class="relative z-10">
+            <div class="w-14 h-14 bg-primary-100 text-primary-600 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary-600 group-hover:text-white transition-colors duration-300">
+              <span class="font-bold text-xl">1</span>
+            </div>
+            <span class="block text-xs font-bold text-secondary-500 mb-2 uppercase tracking-wide">
+              15 Juin 2025
+            </span>
+            <h3 class="text-xl font-serif font-bold mb-3 text-gray-900 group-hover:text-primary-600 transition-colors">Ouverture Officielle</h3>
+            <p class="text-gray-600 mb-6 text-sm leading-relaxed">
+              Cérémonie d'ouverture officielle avec culte et accueil
+            </p>
+            <a href="/fr/programme" class="inline-flex items-center text-sm text-primary-600 font-bold group-hover:translate-x-2 transition-transform">
+              Détails <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Day 2-3 -->
+        <div class="group bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-24 h-24 bg-secondary-50 rounded-bl-full -mr-6 -mt-6 transition-transform group-hover:scale-110"></div>
+          
+          <div class="relative z-10">
+            <div class="w-14 h-14 bg-secondary-100 text-secondary-600 rounded-xl flex items-center justify-center mb-6 group-hover:bg-secondary-500 group-hover:text-white transition-colors duration-300">
+              <span class="font-bold text-lg">2-3</span>
+            </div>
+            <span class="block text-xs font-bold text-secondary-500 mb-2 uppercase tracking-wide">
+              16-17 Juin 2025
+            </span>
+            <h3 class="text-xl font-serif font-bold mb-3 text-gray-900 group-hover:text-secondary-600 transition-colors">
+              Formation & Ateliers
+            </h3>
+            <p class="text-gray-600 mb-6 text-sm leading-relaxed">
+              Sessions de formation pastorale et ateliers
+            </p>
+            <a href="/fr/programme" class="inline-flex items-center text-sm text-secondary-600 font-bold group-hover:translate-x-2 transition-transform">
+              Détails <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Day 4-6 -->
+        <div class="group bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-24 h-24 bg-primary-50 rounded-bl-full -mr-6 -mt-6 transition-transform group-hover:scale-110"></div>
+          
+          <div class="relative z-10">
+            <div class="w-14 h-14 bg-primary-100 text-primary-600 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary-600 group-hover:text-white transition-colors duration-300">
+              <span class="font-bold text-lg">4-6</span>
+            </div>
+            <span class="block text-xs font-bold text-secondary-500 mb-2 uppercase tracking-wide">
+              18-20 Juin 2025
+            </span>
+            <h3 class="text-xl font-serif font-bold mb-3 text-gray-900 group-hover:text-primary-600 transition-colors">
+              Mission & Célébration
+            </h3>
+            <p class="text-gray-600 mb-6 text-sm leading-relaxed">
+              Rayonnement communautaire et célébration finale
+            </p>
+            <a href="/fr/programme" class="inline-flex items-center text-sm text-primary-600 font-bold group-hover:translate-x-2 transition-transform">
+              Détails <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-12">
+        <a
+          href="/fr/programme"
+          class="inline-flex items-center justify-center px-8 py-3 bg-white border border-gray-200 text-gray-700 hover:text-primary-600 hover:border-primary-200 font-semibold rounded-full transition-all duration-300 shadow-sm hover:shadow-md"
+        >
+          {t('program.cta')}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="py-24 bg-white relative">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <span class="text-primary-600 font-bold tracking-wider uppercase text-sm mb-2 block">Communauté</span>
+        <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-6">
+          {t('testimonials.title')}
+        </h2>
+        <div class="w-24 h-1 bg-primary-500 mx-auto rounded-full mb-6"></div>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+          {t('testimonials.subtitle')}
+        </p>
+      </div>
+
+      <!-- Testimonials Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <!-- Testimonial 1 -->
+        <div class="bg-gray-50 rounded-2xl p-8 relative hover:shadow-lg transition-shadow duration-300">
+          <div class="absolute -top-4 left-8 text-6xl text-primary-200 font-serif opacity-50">"</div>
+          <div class="relative z-10">
+            <p class="text-gray-700 mb-8 text-base leading-relaxed font-medium">
+              "Cet événement a transformé ma compréhension du ministère pastoral. La communion et les enseignements étaient vraiment inspirants."
+            </p>
+            <div class="flex items-center border-t border-gray-200 pt-6">
+              <div class="w-10 h-10 bg-gradient-to-br from-primary-400 to-primary-600 rounded-full flex items-center justify-center mr-3 text-white font-bold shadow-sm text-sm">
+                PJ
+              </div>
+              <div>
+                <h4 class="font-bold text-gray-900 text-sm">Pasteur Jean</h4>
+                <p class="text-xs text-primary-600 font-medium">Église Baptiste, Cameroun</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="bg-white rounded-2xl p-8 relative shadow-xl border border-gray-100 transform md:-translate-y-4">
+          <div class="absolute -top-4 left-8 text-6xl text-secondary-200 font-serif opacity-50">"</div>
+          <div class="relative z-10">
+            <p class="text-gray-700 mb-8 text-base leading-relaxed font-medium">
+              "L'unité parmi les pasteurs africains est belle. Ce rassemblement renforce notre mission collective."
+            </p>
+            <div class="flex items-center border-t border-gray-100 pt-6">
+              <div class="w-10 h-10 bg-gradient-to-br from-secondary-400 to-secondary-600 rounded-full flex items-center justify-center mr-3 text-white font-bold shadow-sm text-sm">
+                MM
+              </div>
+              <div>
+                <h4 class="font-bold text-gray-900 text-sm">Mère Marie</h4>
+                <p class="text-xs text-secondary-600 font-medium">Communauté Catholique, Gabon</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="bg-gray-50 rounded-2xl p-8 relative hover:shadow-lg transition-shadow duration-300">
+          <div class="absolute -top-4 left-8 text-6xl text-primary-200 font-serif opacity-50">"</div>
+          <div class="relative z-10">
+            <p class="text-gray-700 mb-8 text-base leading-relaxed font-medium">
+              "Dieu fait quelque chose de spécial à travers cette initiative. Des vies sont changées et des ministères sont renforcés."
+            </p>
+            <div class="flex items-center border-t border-gray-200 pt-6">
+              <div class="w-10 h-10 bg-gradient-to-br from-primary-400 to-primary-600 rounded-full flex items-center justify-center mr-3 text-white font-bold shadow-sm text-sm">
+                AA
+              </div>
+              <div>
+                <h4 class="font-bold text-gray-900 text-sm">Apôtre André</h4>
+                <p class="text-xs text-primary-600 font-medium">Ministère Apostolique, Sénégal</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Founder Preview Section -->
+  <section class="py-24 bg-gray-900 text-white relative overflow-hidden">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-5" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 30px 30px;"></div>
+    <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary-900/50 to-transparent"></div>
+    
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <!-- Founder Image -->
+          <div class="relative group order-2 lg:order-1">
+            <div class="absolute inset-0 bg-secondary-500 rounded-2xl transform rotate-3 group-hover:rotate-6 transition-transform duration-500"></div>
+            <div class="absolute inset-0 bg-primary-600 rounded-2xl transform -rotate-3 group-hover:-rotate-6 transition-transform duration-500 opacity-60"></div>
+            <div class="relative aspect-[4/5] bg-gray-800 rounded-2xl overflow-hidden shadow-2xl border border-gray-700">
+              <!-- Placeholder for founder image -->
+              <div class="w-full h-full bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center group-hover:scale-105 transition-transform duration-700">
+                <span class="text-white/10 text-9xl font-serif font-bold">PP</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Founder Content -->
+          <div class="order-1 lg:order-2">
+            <span class="text-secondary-400 font-bold tracking-wider uppercase text-sm mb-4 block">Visionnaire</span>
+            <h2 class="text-4xl md:text-5xl font-serif font-bold text-white mb-4 leading-tight">
+              {t('founder.title')}
+            </h2>
+            <h3 class="text-2xl font-medium text-primary-300 mb-8">
+              Pasteur Patrick
+            </h3>
+            <p class="text-lg text-gray-300 mb-8 leading-relaxed font-light">
+              {t('founder.subtitle')}
+            </p>
+            <blockquote class="text-xl italic text-white/90 mb-10 border-l-4 border-secondary-500 pl-6 py-2 bg-white/5 rounded-r-lg">
+              "Dieu nous a appelés à honorer ceux qui veillent sur les âmes. Ce n'est pas seulement un événement, mais un mouvement d'unité et de croissance spirituelle à travers l'Afrique."
+            </blockquote>
+            <a
+              href="/fr/fondateur"
+              class="inline-flex items-center justify-center px-8 py-3 bg-primary-600 hover:bg-primary-500 text-white font-semibold rounded-full transition-all duration-300 shadow-lg hover:shadow-primary-500/30"
+            >
+              {t('founder.cta')}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action Section -->
+  <section class="py-24 bg-white relative overflow-hidden">
+    <div class="container mx-auto px-4 text-center relative z-10">
+      <div class="max-w-4xl mx-auto bg-gradient-to-r from-primary-600 to-primary-800 rounded-3xl p-12 md:p-20 shadow-2xl text-white relative overflow-hidden">
+        <!-- Decorative circles -->
+        <div class="absolute top-0 left-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+        <div class="absolute bottom-0 right-0 w-64 h-64 bg-secondary-500/20 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
+        
+        <h2 class="text-4xl md:text-5xl font-serif font-bold mb-6 relative z-10">
+          Rejoignez le Mouvement
+        </h2>
+        <p class="text-xl mb-12 opacity-90 max-w-2xl mx-auto relative z-10">
+          Faites partie de ce rassemblement historique de leaders spirituels africains. Ensemble, nous honorons ceux qui servent le peuple de Dieu.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-6 justify-center relative z-10">
+          <a
+            href="/fr/participation"
+            class="inline-flex items-center justify-center px-8 py-4 bg-secondary-500 hover:bg-secondary-400 text-white font-bold rounded-full transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+          >
+            S'inscrire Maintenant
+          </a>
+          <a
+            href="/fr/dons"
+            class="inline-flex items-center justify-center px-8 py-4 bg-transparent border-2 border-white text-white hover:bg-white hover:text-primary-700 font-bold rounded-full transition-all duration-300"
+          >
+            {t('cta.donate')}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+<script>
+  // Countdown Timer Logic (GMT+1 timezone for Cameroon)
+  function updateCountdown() {
+    const targetDate = new Date('2026-06-15T00:00:00+01:00'); // June 15, 2026, 00:00 GMT+1
+    const now = new Date();
+
+    // Calculate difference in milliseconds
+    const difference = targetDate.getTime() - now.getTime();
+
+    if (difference <= 0) {
+      // Event has started
+      const countdownEl = document.getElementById('countdown');
+      if (countdownEl) {
+        countdownEl.innerHTML = `
+          <div class="col-span-4 bg-green-500 bg-opacity-20 rounded-lg p-8 text-center">
+            <div class="text-4xl font-bold text-green-400">${document.querySelector('[data-lang="eventStarted"]')?.textContent || "C'est le jour ! Rejoignez-nous"}</div>
+          </div>
+        `;
+      }
+      return;
+    }
+
+    // Calculate time units
+    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+    // Update DOM
+    const daysEl = document.getElementById('days');
+    const hoursEl = document.getElementById('hours');
+    const minutesEl = document.getElementById('minutes');
+    const secondsEl = document.getElementById('seconds');
+
+    if (daysEl) daysEl.textContent = days.toString().padStart(2, '0');
+    if (hoursEl) hoursEl.textContent = hours.toString().padStart(2, '0');
+    if (minutesEl) minutesEl.textContent = minutes.toString().padStart(2, '0');
+    if (secondsEl) secondsEl.textContent = seconds.toString().padStart(2, '0');
+  }
+
+  // Initialize countdown
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>

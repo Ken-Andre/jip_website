@@ -1,0 +1,29 @@
+---
+import { getCollection, renderEntry } from 'astro:content';
+import MarketingLayout from '../../layouts/MarketingLayout.astro';
+
+export async function getStaticPaths() {
+  return [
+    { params: { lang: 'fr' } },
+    { params: { lang: 'en' } },
+  ];
+}
+
+const { lang } = Astro.params;
+
+// Fetch homepage content for the current language
+const pages = await getCollection('pages');
+const page = pages.find((p) => p.id === `${lang}/index`);
+
+if (!page) {
+  return Astro.redirect('/404');
+}
+
+const { Content } = await renderEntry(page);
+---
+
+<MarketingLayout title={page.data.title} description={page.data.description} lang={lang}>
+  <div class="prose dark:prose-invert max-w-none">
+    <Content />
+  </div>
+</MarketingLayout>

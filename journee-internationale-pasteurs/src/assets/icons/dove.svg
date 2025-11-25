@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#6B3FB5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12 2l3 3-3 3 3 3-3 3 3 3-3 3"></path>
+  <path d="M2 12h20"></path>
+  <!-- Stylized dove representation -->
+  <path d="M18 4c2 0 4 2 4 4s-2 4-4 4-4-2-4-4 2-4 4-4z"></path>
+  <path d="M14 8c-4 0-8 4-8 8s4 8 8 8"></path>
+</svg>

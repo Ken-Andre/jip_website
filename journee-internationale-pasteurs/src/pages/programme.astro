@@ -1,0 +1,140 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+
+const pageTitle = "Programme de l'Événement";
+const pageDescription = "Découvrez le programme détaillé de la Journée Internationale des Pasteurs : 6 jours de célébration et de formation.";
+
+const schedule = [
+  {
+    day: "Jour 1",
+    date: "15 Juin 2025",
+    title: "Cérémonie d'Ouverture",
+    description: "Accueil des délégations, louange et culte d'ouverture officielle.",
+    activities: [
+      { time: "14:00 - 16:00", name: "Accueil et Enregistrement" },
+      { time: "18:00 - 21:00", name: "Grande Soirée de Louange & Culte d'Ouverture" }
+    ]
+  },
+  {
+    day: "Jour 2",
+    date: "16 Juin 2025",
+    title: "Formation Pastorale - Session 1",
+    description: "Ateliers sur le leadership et la gestion de l'église.",
+    activities: [
+      { time: "09:00 - 12:00", name: "Plénière : Le Pasteur et son intégrité" },
+      { time: "14:00 - 17:00", name: "Ateliers : Gestion administrative et financière" }
+    ]
+  },
+  {
+    day: "Jour 3",
+    date: "17 Juin 2025",
+    title: "Formation Pastorale - Session 2",
+    description: "Focus sur la famille du pasteur et l'équilibre vie-ministère.",
+    activities: [
+      { time: "09:00 - 12:00", name: "Plénière : L'équilibre Famille-Ministère" },
+      { time: "14:00 - 17:00", name: "Panel de discussion : Défis contemporains" }
+    ]
+  },
+  {
+    day: "Jour 4",
+    date: "18 Juin 2025",
+    title: "Mission & Impact",
+    description: "Stratégies pour l'évangélisation et l'impact social.",
+    activities: [
+      { time: "09:00 - 12:00", name: "Plénière : L'Église hors les murs" },
+      { time: "14:00 - 17:00", name: "Actions sociales dans la ville" }
+    ]
+  },
+  {
+    day: "Jour 5",
+    date: "19 Juin 2025",
+    title: "Consécration & Onction",
+    description: "Temps de prière intense et de ministère prophétique.",
+    activities: [
+      { time: "09:00 - 13:00", name: "Service de Guérison et Délivrance" },
+      { time: "19:00 - 22:00", name: "Nuit de l'Onction" }
+    ]
+  },
+  {
+    day: "Jour 6",
+    date: "20 Juin 2025",
+    title: "Célébration Finale",
+    description: "Culte de clôture et banquet d'honneur.",
+    activities: [
+      { time: "10:00 - 13:00", name: "Culte d'Action de Grâce" },
+      { time: "13:30 - 16:00", name: "Banquet des Pasteurs (Sur invitation)" }
+    ]
+  }
+];
+---
+
+<PageLayout title={pageTitle} description={pageDescription}>
+  <!-- Hero Section -->
+  <section class="relative py-24 flex items-center justify-center overflow-hidden bg-gray-900 text-white min-h-[40vh]">
+    <div class="absolute inset-0 z-0">
+      <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-primary-950/70 to-primary-900/90 z-10"></div>
+      <img 
+        src="/src/assets/images/hero-banner.jpg" 
+        alt="Program Hero" 
+        class="w-full h-full object-cover object-center scale-105 animate-pulse-slow"
+      />
+    </div>
+
+    <div class="relative container mx-auto px-4 z-10 text-center">
+      <span class="text-secondary-400 font-bold tracking-wider uppercase text-sm mb-4 block animate-fade-in">Agenda 2025</span>
+      <h1 class="text-5xl md:text-7xl font-serif font-bold mb-6 leading-tight animate-slide-up drop-shadow-2xl">
+        Programme Officiel
+      </h1>
+      <div class="w-24 h-1 bg-secondary-500 mx-auto rounded-full mb-8 animate-slide-up animate-delay-100"></div>
+    </div>
+  </section>
+
+  <!-- Schedule Section -->
+  <section class="py-24 bg-gray-50 relative">
+    <div class="container mx-auto px-4 max-w-5xl">
+      
+      <div class="space-y-12">
+        {schedule.map((item, index) => (
+          <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+            <div class="flex flex-col md:flex-row">
+              <!-- Date Column -->
+              <div class="bg-primary-600 text-white p-8 md:w-1/4 flex flex-col justify-center items-center text-center relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-primary-500 to-primary-800 opacity-50"></div>
+                <div class="relative z-10">
+                  <span class="text-secondary-400 font-bold uppercase tracking-wider text-sm mb-2 block">{item.day}</span>
+                  <span class="text-3xl font-serif font-bold block">{item.date.split(' ')[0]}</span>
+                  <span class="text-lg font-medium block">{item.date.split(' ')[1]} {item.date.split(' ')[2]}</span>
+                </div>
+              </div>
+
+              <!-- Content Column -->
+              <div class="p-8 md:w-3/4">
+                <h3 class="text-2xl font-serif font-bold text-gray-900 mb-2">{item.title}</h3>
+                <p class="text-gray-600 mb-6">{item.description}</p>
+                
+                <div class="space-y-4">
+                  {item.activities.map((activity) => (
+                    <div class="flex items-start border-l-2 border-secondary-200 pl-4 py-1">
+                      <span class="text-primary-600 font-bold w-32 shrink-0 text-sm">{activity.time}</span>
+                      <span class="text-gray-800 font-medium">{activity.name}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-16 text-center">
+        <p class="text-gray-600 mb-6 italic">
+          * Le programme est sujet à de légères modifications. Veuillez consulter cette page pour les mises à jour.
+        </p>
+        <a href="/participation" class="inline-flex items-center justify-center px-8 py-4 bg-secondary-500 hover:bg-secondary-400 text-white font-bold rounded-full transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+          S'inscrire Maintenant
+        </a>
+      </div>
+
+    </div>
+  </section>
+</PageLayout>

@@ -33,6 +33,11 @@
         "founder": "Le Fondateur"
     },
     "program": {
+        "hero": {
+            "title": "Programme Officiel",
+            "date": "12 Décembre 2025",
+            "subtitle": "Une journée riche en enseignements et célébrations"
+        },
         "welcome": "Accueil et Inscription",
         "session1": "Session Plénière - Enseignement",
         "lunch": "Pause Déjeuner",
@@ -161,6 +166,13 @@
         "hero": {
             "title": "Galerie Photos",
             "subtitle": "Revivez les moments forts des éditions précédentes"
+        },
+        "category": {
+            "all": "Tout",
+            "ceremonies": "Cérémonies",
+            "worship": "Louange",
+            "fellowship": "Communion",
+            "speakers": "Orateurs"
         }
     },
     "donations": {

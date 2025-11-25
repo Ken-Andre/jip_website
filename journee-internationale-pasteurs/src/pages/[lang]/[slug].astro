@@ -1,0 +1,31 @@
+---
+import { getCollection, renderEntry } from 'astro:content';
+import MarketingLayout from '../../layouts/MarketingLayout.astro';
+
+export async function getStaticPaths() {
+  const pages = await getCollection('pages');
+  
+  // Filter out index pages as they are handled by index.astro
+  const contentPages = pages.filter(page => !page.id.endsWith('/index'));
+
+  return contentPages.map((page) => {
+    const [lang, ...slugParts] = page.id.split('/');
+    const slug = slugParts.join('/').replace('.md', '');
+    return {
+      params: { lang, slug },
+      props: { page },
+    };
+  });
+}
+
+const { page } = Astro.props;
+const { lang } = Astro.params;
+const { Content } = await renderEntry(page);
+---
+
+<MarketingLayout title={page.data.title} description={page.data.description} lang={lang}>
+  <article class="max-w-4xl mx-auto px-4 py-12 prose dark:prose-invert lg:prose-xl">
+    <h1>{page.data.title}</h1>
+    <Content />
+  </article>
+</MarketingLayout>

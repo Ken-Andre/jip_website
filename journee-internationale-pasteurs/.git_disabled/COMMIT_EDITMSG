@@ -1,1 +1,23 @@
-Initial Astro setup
+feat: Migrate from Decap CMS to Astro Starlight
+
+This commit migrates the project's content management and documentation from Decap CMS to the Astro Starlight documentation theme.
+
+- **Remove Decap CMS:**
+  - Deleted the `decap-config.yml` configuration file.
+  - Removed `decap-cms` from `package.json` dependencies.
+
+- **Integrate Astro Starlight:**
+  - Added `@astrojs/starlight` as a new dependency.
+  - Configured Starlight in `astro.config.mjs` with JIP branding, a custom logo, and theme styling.
+  - Implemented a new bilingual (fr/en) sidebar navigation structure.
+  - Set up social media links for GitHub and Twitter.
+
+- **Update Project Configuration:**
+  - Added `"type": "module"` to `package.json` and updated scripts for Astro development (`dev`, `build`, `preview`).
+  - Updated `postcss.config.js` and `tailwind.config.js` to use ESM syntax.
+  - Added `.idea`, `.qodo`, and `dist` directories to `.gitignore`.
+
+- **Refactor Tailwind CSS:**
+  - Updated the color palette with more vibrant primary and secondary brand colors.
+  - Added new animations (`fade-in`, `slide-up`, `float`) and corresponding keyframes.
+  - Updated font family declarations to include quotes for font names with spaces.

@@ -1,0 +1,96 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+
+const pageTitle = "Le Fondateur";
+const pageDescription = "Rencontrez le Pasteur Patrick, visionnaire de la Journée Internationale des Pasteurs.";
+---
+
+<PageLayout title={pageTitle} description={pageDescription}>
+  <!-- Hero Section -->
+  <section class="relative py-24 flex items-center justify-center overflow-hidden bg-gray-900 text-white min-h-[40vh]">
+    <div class="absolute inset-0 z-0">
+      <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-primary-950/70 to-primary-900/90 z-10"></div>
+      <img 
+        src="/src/assets/images/hero-banner.jpg" 
+        alt="Founder Hero" 
+        class="w-full h-full object-cover object-center scale-105 animate-pulse-slow"
+      />
+    </div>
+
+    <div class="relative container mx-auto px-4 z-10 text-center">
+      <span class="text-secondary-400 font-bold tracking-wider uppercase text-sm mb-4 block animate-fade-in">Visionnaire</span>
+      <h1 class="text-5xl md:text-7xl font-serif font-bold mb-6 leading-tight animate-slide-up drop-shadow-2xl">
+        Le Fondateur
+      </h1>
+      <div class="w-24 h-1 bg-secondary-500 mx-auto rounded-full mb-8 animate-slide-up animate-delay-100"></div>
+    </div>
+  </section>
+
+  <!-- Biography Section -->
+  <section class="py-24 bg-white relative overflow-hidden">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        
+        <!-- Founder Image Column (4 cols) -->
+        <div class="lg:col-span-5 relative group">
+          <div class="absolute inset-0 bg-secondary-500 rounded-2xl transform rotate-3 group-hover:rotate-6 transition-transform duration-500"></div>
+          <div class="absolute inset-0 bg-primary-600 rounded-2xl transform -rotate-3 group-hover:-rotate-6 transition-transform duration-500 opacity-60"></div>
+          <div class="relative aspect-[3/4] bg-gray-800 rounded-2xl overflow-hidden shadow-2xl border border-gray-700">
+            <!-- Placeholder for founder image -->
+            <div class="w-full h-full bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center">
+              <span class="text-white/10 text-9xl font-serif font-bold">PP</span>
+            </div>
+          </div>
+          
+          <!-- Social Links -->
+          <div class="flex justify-center gap-4 mt-8">
+            <a href="#" class="w-10 h-10 bg-primary-100 text-primary-600 rounded-full flex items-center justify-center hover:bg-primary-600 hover:text-white transition-all duration-300">
+              <span class="sr-only">Facebook</span>
+              <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            </a>
+            <a href="#" class="w-10 h-10 bg-primary-100 text-primary-600 rounded-full flex items-center justify-center hover:bg-primary-600 hover:text-white transition-all duration-300">
+              <span class="sr-only">Twitter</span>
+              <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg>
+            </a>
+            <a href="#" class="w-10 h-10 bg-primary-100 text-primary-600 rounded-full flex items-center justify-center hover:bg-primary-600 hover:text-white transition-all duration-300">
+              <span class="sr-only">Instagram</span>
+              <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01M7.5 21h9a3 3 0 003-3V6a3 3 0 00-3-3h-9a3 3 0 00-3 3v12a3 3 0 003 3z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Content Column (7 cols) -->
+        <div class="lg:col-span-7">
+          <h2 class="text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-2">Pasteur Patrick</h2>
+          <h3 class="text-xl text-primary-600 font-medium mb-8 uppercase tracking-wide">Visionnaire & Serviteur</h3>
+          
+          <div class="prose prose-lg text-gray-600 leading-relaxed mb-10">
+            <p class="mb-6">
+              Le Pasteur Patrick est un leader spirituel passionné, dévoué à l'édification du corps du Christ en Afrique. Avec plus de 20 ans de ministère, il a vu de première main les défis et les triomphes auxquels sont confrontés les pasteurs sur le continent.
+            </p>
+            <p class="mb-6">
+              Sa vision pour la <strong>Journée Internationale des Pasteurs</strong> est née d'un désir profond de voir les hommes et les femmes de Dieu honorés pour leur sacrifice inlassable. Il croit fermement que des pasteurs fortifiés et encouragés conduisent à des églises saines et à des communautés transformées.
+            </p>
+            <p>
+              Au-delà de l'événement, le Pasteur Patrick s'engage à créer un réseau de soutien durable, offrant mentorat, ressources et communion fraternelle aux leaders spirituels de toutes dénominations.
+            </p>
+          </div>
+
+          <blockquote class="border-l-4 border-secondary-500 pl-6 py-4 bg-gray-50 rounded-r-xl italic text-gray-800 text-xl font-serif mb-10 shadow-sm">
+            "Mon rêve est de voir une génération de pasteurs africains qui se sentent aimés, valorisés et équipés pour accomplir la grande mission avec excellence et intégrité."
+          </blockquote>
+
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="/contact" class="inline-flex items-center justify-center px-8 py-3 bg-primary-600 hover:bg-primary-500 text-white font-bold rounded-full transition-all duration-300 shadow-lg hover:shadow-primary-500/30">
+              Inviter le Pasteur
+            </a>
+            <a href="/vision" class="inline-flex items-center justify-center px-8 py-3 bg-white border border-gray-200 text-gray-700 hover:text-primary-600 hover:border-primary-200 font-bold rounded-full transition-all duration-300 shadow-sm hover:shadow-md">
+              Découvrir la Vision
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</PageLayout>

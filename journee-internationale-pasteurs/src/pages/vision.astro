@@ -1,0 +1,132 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+
+const pageTitle = "Notre Vision";
+const pageDescription = "Découvrez la vision et les valeurs de la Journée Internationale des Pasteurs.";
+---
+
+<PageLayout title={pageTitle} description={pageDescription}>
+  <!-- Hero Section -->
+  <section class="relative py-24 flex items-center justify-center overflow-hidden bg-gray-900 text-white min-h-[50vh]">
+    <div class="absolute inset-0 z-0">
+      <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-primary-950/70 to-primary-900/90 z-10"></div>
+      <img 
+        src="/src/assets/images/hero-banner.jpg" 
+        alt="Vision Hero" 
+        class="w-full h-full object-cover object-center scale-105 animate-pulse-slow"
+      />
+    </div>
+
+    <div class="relative container mx-auto px-4 z-10 text-center">
+      <span class="text-secondary-400 font-bold tracking-wider uppercase text-sm mb-4 block animate-fade-in">À propos de nous</span>
+      <h1 class="text-5xl md:text-7xl font-serif font-bold mb-6 leading-tight animate-slide-up drop-shadow-2xl">
+        Notre Vision
+      </h1>
+      <div class="w-24 h-1 bg-secondary-500 mx-auto rounded-full mb-8 animate-slide-up animate-delay-100"></div>
+      <p class="text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto font-light leading-relaxed animate-slide-up animate-delay-200">
+        Honorer, équiper et unir les pasteurs pour un impact transformateur en Afrique.
+      </p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="py-20 bg-white relative overflow-hidden">
+    <div class="absolute top-0 left-0 w-64 h-64 bg-primary-500/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+    
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <!-- Text Content -->
+        <div class="order-2 lg:order-1">
+          <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-6">
+            Une Célébration de l'Appel Divin
+          </h2>
+          <p class="text-gray-600 mb-6 text-lg leading-relaxed">
+            La Journée Internationale des Pasteurs (JIP) est née d'une conviction profonde : ceux qui veillent sur nos âmes méritent d'être honorés, soutenus et encouragés.
+          </p>
+          <p class="text-gray-600 mb-6 text-lg leading-relaxed">
+            Dans un monde en constante évolution, le rôle du pasteur est plus crucial que jamais. Ils sont des guides, des enseignants, des conseillers et des piliers pour nos communautés. La JIP est un moment privilégié pour reconnaître leur dévouement sacrificiel.
+          </p>
+          <blockquote class="border-l-4 border-secondary-500 pl-6 py-2 italic text-gray-700 text-xl bg-gray-50 rounded-r-lg my-8">
+            "Nous ne célébrons pas seulement des individus, mais l'onction et la grâce qui reposent sur eux pour bénir le corps du Christ."
+          </blockquote>
+        </div>
+
+        <!-- Image/Visual -->
+        <div class="order-1 lg:order-2 relative">
+          <div class="absolute inset-0 bg-gradient-to-tr from-primary-600 to-secondary-500 rounded-2xl transform rotate-3 opacity-20"></div>
+          <div class="relative bg-gray-900 rounded-2xl overflow-hidden shadow-2xl aspect-[4/3] group">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+            <!-- Placeholder for Vision Image -->
+            <div class="w-full h-full bg-gray-800 flex items-center justify-center">
+               <span class="text-white/20 text-6xl font-serif">Vision</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values Section -->
+  <section class="py-20 bg-gray-50 relative">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-6">Nos Valeurs Fondamentales</h2>
+        <div class="w-24 h-1 bg-primary-500 mx-auto rounded-full"></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Value 1 -->
+        <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-t-4 border-primary-500">
+          <div class="w-16 h-16 bg-primary-100 text-primary-600 rounded-full flex items-center justify-center mb-6 text-2xl">
+            🤝
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-4">Unité</h3>
+          <p class="text-gray-600">
+            Rassembler les leaders de différentes dénominations pour témoigner de l'unité du corps du Christ.
+          </p>
+        </div>
+
+        <!-- Value 2 -->
+        <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-t-4 border-secondary-500">
+          <div class="w-16 h-16 bg-secondary-100 text-secondary-600 rounded-full flex items-center justify-center mb-6 text-2xl">
+            ✨
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-4">Excellence</h3>
+          <p class="text-gray-600">
+            Promouvoir l'excellence dans le ministère pastoral à travers la formation et le mentorat.
+          </p>
+        </div>
+
+        <!-- Value 3 -->
+        <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-t-4 border-primary-500">
+          <div class="w-16 h-16 bg-primary-100 text-primary-600 rounded-full flex items-center justify-center mb-6 text-2xl">
+            🙏
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-4">Honneur</h3>
+          <p class="text-gray-600">
+            Restaurer la culture de l'honneur envers ceux qui servent Dieu avec intégrité.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 bg-primary-900 text-white text-center relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 30px 30px;"></div>
+    <div class="container mx-auto px-4 relative z-10">
+      <h2 class="text-3xl md:text-4xl font-serif font-bold mb-8">Rejoignez cette vision</h2>
+      <p class="text-xl text-primary-100 mb-10 max-w-2xl mx-auto">
+        Votre participation et votre soutien sont essentiels pour faire de cette vision une réalité.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/participation" class="px-8 py-4 bg-secondary-500 hover:bg-secondary-400 text-white font-bold rounded-full transition-all duration-300 shadow-lg">
+          Participer à l'événement
+        </a>
+        <a href="/contact" class="px-8 py-4 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/30 text-white font-bold rounded-full transition-all duration-300">
+          Nous contacter
+        </a>
+      </div>
+    </div>
+  </section>
+</PageLayout>
