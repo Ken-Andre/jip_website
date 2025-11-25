@@ -1,33 +1,40 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import keystatic from '@keystatic/astro';
+import react from '@astrojs/react';
+import netlify from '@astrojs/netlify';
 
 export default defineConfig({
+  output: 'server',
+  // adapter: netlify(), // Uncomment for production build
   site: 'https://journee-internationale-pasteurs.netlify.app',
 
   integrations: [
+    react(),
+    keystatic(),
     starlight({
       title: 'Journée Internationale des Pasteurs',
 
       // Configuration JIP - Branding
       logo: {
-        src: '/src/assets/images/logo-jip.svg',
-        replacesTitle: true
+        src: './src/assets/images/logo-jip.svg',
+        replacesTitle: true,
       },
 
-      // Personnalisation du thème
+      // Personnalisation du thème JIP
       customCss: [
         './src/assets/styles/variables.css',
         './src/assets/styles/starlight.css'
       ],
 
-      // Internationalization
+      // Internationalization Starlight native
       defaultLocale: 'fr',
       locales: {
-        fr: { label: 'Français' },
-        en: { label: 'English' }
+        fr: { label: 'Français', lang: 'fr' },
+        en: { label: 'English', lang: 'en' }
       },
 
-      // Navigation et sidebar
+      // Navigation et sidebar Starlight
       sidebar: [
         {
           label: 'Accueil',
@@ -52,15 +59,15 @@ export default defineConfig({
               translations: {
                 en: 'Founder'
               }
+            },
+            {
+              label: 'Programme',
+              link: '/programme',
+              translations: {
+                en: 'Program'
+              }
             }
           ]
-        },
-        {
-          label: 'Programme',
-          link: '/programme',
-          translations: {
-            en: 'Program'
-          }
         },
         {
           label: 'Participation',
@@ -84,10 +91,10 @@ export default defineConfig({
           }
         },
         {
-          label: 'Dons',
+          label: 'Faire un don',
           link: '/dons',
           translations: {
-            en: 'Donations'
+            en: 'Make a Donation'
           }
         },
         {
@@ -96,24 +103,29 @@ export default defineConfig({
           translations: {
             en: 'Contact'
           }
-        }
-      ],
-
-      // Configuration sociale et métadonnées
-      social: [
-        {
-          label: 'GitHub',
-          href: 'https://github.com/journee-internationale-pasteurs',
-          icon: 'github'
         },
         {
-          label: 'Twitter',
-          href: 'https://twitter.com/JIP_official',
-          icon: 'twitter'
+          label: 'FAQ',
+          link: '/faq',
+          translations: {
+            en: 'FAQ'
+          }
         }
       ],
 
-      // Configuration SEO
+      // Configuration sociale JIP
+      social: [
+        {
+          label: 'Facebook',
+          icon: 'facebook',
+          href: 'https://facebook.com/JIP_official',
+        },
+        {
+          label: 'YouTube',
+          icon: 'youtube',
+          href: 'https://youtube.com/JIP_official',
+        }
+      ]
     })
   ],
 

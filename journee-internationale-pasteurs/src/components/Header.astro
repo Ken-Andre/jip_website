@@ -1,182 +1,172 @@
 ---
-// Get current locale from URL
-const currentLocale = Astro.url.pathname.startsWith('/en') ? 'en' : 'fr';
+// Use Starlight's built-in i18n instead of custom implementation
+const { t } = Astro.locals;
+const currentLocale = Astro.locals.locale || 'fr';
 const isEnglish = currentLocale === 'en';
 
-// Translations
-const t = (key: string) => {
-  const translations = {
-    fr: {
-      'nav.home': 'Accueil',
-      'nav.vision': 'Vision',
-      'nav.founder': 'Fondateur',
-      'nav.program': 'Programme',
-      'nav.participation': 'Participation',
-      'nav.resources': 'Ressources',
-      'nav.gallery': 'Galerie',
-      'nav.donations': 'Dons',
-      'nav.contact': 'Contact',
-      'nav.faq': 'FAQ',
-      'lang.fr': 'FR',
-      'lang.en': 'EN',
-      'menu.toggle': 'Basculer le menu de navigation'
-    },
-    en: {
-      'nav.home': 'Home',
-      'nav.vision': 'Vision',
-      'nav.founder': 'Founder',
-      'nav.program': 'Program',
-      'nav.participation': 'Participation',
-      'nav.resources': 'Resources',
-      'nav.gallery': 'Gallery',
-      'nav.donations': 'Donations',
-      'nav.contact': 'Contact',
-      'nav.faq': 'FAQ',
-      'lang.fr': 'FR',
-      'lang.en': 'EN',
-      'menu.toggle': 'Toggle navigation menu'
-    }
-  };
-  return translations[currentLocale][key] || key;
-};
-
-// Navigation items
+// Simplified Navigation items
 const navItems = [
-  { href: '/', label: t('nav.home'), active: Astro.url.pathname === '/' || Astro.url.pathname === '/en' },
-  { href: '/vision', label: t('nav.vision'), active: Astro.url.pathname.includes('/vision') },
-  { href: '/fondateur', label: t('nav.founder'), active: Astro.url.pathname.includes('/fondateur') },
-  { href: '/programme', label: t('nav.program'), active: Astro.url.pathname.includes('/programme') },
-  { href: '/participation', label: t('nav.participation'), active: Astro.url.pathname.includes('/participation') },
-  { href: '/ressources', label: t('nav.resources'), active: Astro.url.pathname.includes('/ressources') },
-  { href: '/galerie', label: t('nav.gallery'), active: Astro.url.pathname.includes('/galerie') },
-  { href: '/dons', label: t('nav.donations'), active: Astro.url.pathname.includes('/dons') },
-  { href: '/contact', label: t('nav.contact'), active: Astro.url.pathname.includes('/contact') },
-  { href: '/faq', label: t('nav.faq'), active: Astro.url.pathname.includes('/faq') }
+  { href: '/', labelKey: 'nav.home', active: Astro.url.pathname === '/' || Astro.url.pathname === '/en' || Astro.url.pathname === '/fr' },
+  { href: '/vision', labelKey: 'nav.vision', active: Astro.url.pathname.includes('/vision') },
+  { href: '/fondateur', labelKey: 'nav.founder', active: Astro.url.pathname.includes('/fondateur') },
+  { href: '/programme', labelKey: 'nav.program', active: Astro.url.pathname.includes('/programme') },
+  { href: '/participation', labelKey: 'nav.participation', active: Astro.url.pathname.includes('/participation') },
+  { href: '/contact', labelKey: 'nav.contact', active: Astro.url.pathname.includes('/contact') },
 ];
 
-// Language switcher
-const switchToFrench = isEnglish ? Astro.url.pathname.replace('/en', '') || '/' : null;
-const switchToEnglish = isEnglish ? null : `/en${Astro.url.pathname}`;
+// Language switcher URLs
+const switchToFrench = isEnglish ? Astro.url.pathname.replace(/^\/en/, '/fr') : null;
+const switchToEnglish = isEnglish ? null : Astro.url.pathname.replace(/^\/fr/, '/en');
 ---
 
-<header class="bg-white shadow-sm sticky top-0 z-40">
-  <div class="container mx-auto px-4 py-4">
-    <div class="flex items-center justify-between">
+<header id="main-header" class="fixed top-0 w-full z-50 transition-all duration-300 bg-transparent py-4">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      
       <!-- Logo -->
-      <div class="flex items-center">
-        <a href={isEnglish ? '/en' : '/'} class="flex items-center space-x-3 group">
-          <!-- Placeholder logo - to be replaced with actual logo -->
-          <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center group-hover:bg-primary-600 transition-colors">
-            <span class="text-white font-serif font-bold text-lg">JIP</span>
+      <div class="flex-shrink-0 flex items-center">
+        <a href={`/${currentLocale}`} class="flex items-center gap-3 group">
+          <div class="w-10 h-10 bg-gradient-to-br from-primary-600 to-primary-800 rounded-lg flex items-center justify-center shadow-lg group-hover:shadow-primary-500/30 transition-all duration-300">
+            <span class="text-white font-serif font-bold text-xl tracking-wider">JIP</span>
           </div>
-          <div class="hidden sm:block">
-            <h1 class="text-xl font-serif font-bold text-primary group-hover:text-primary-600 transition-colors">
-              {isEnglish ? 'International Day of Pastors' : 'Journée Internationale des Pasteurs'}
-            </h1>
-            <p class="text-sm text-gray-600">
-              {isEnglish ? 'Honoring those who watch over our souls' : 'Honorer ceux qui veillent sur nos âmes'}
-            </p>
+          <div class="hidden md:flex flex-col">
+            <span class="text-lg font-serif font-bold text-gray-900 leading-tight group-hover:text-primary-700 transition-colors">
+              Journée Internationale
+            </span>
+            <span class="text-sm font-medium text-primary-600 tracking-wide uppercase">
+              des Pasteurs
+            </span>
           </div>
         </a>
       </div>
 
       <!-- Desktop Navigation -->
-      <nav class="hidden lg:flex items-center space-x-8" role="navigation" aria-label="Main navigation">
+      <nav class="hidden lg:flex items-center space-x-1">
         {navItems.map(item => (
           <a
-            href={isEnglish ? `/en${item.href}` : item.href}
-            class={`font-medium transition-colors hover:text-primary ${
-              item.active ? 'text-primary' : 'text-gray-700'
+            href={`/${currentLocale}${item.href === '/' ? '' : item.href}`}
+            class={`relative px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 group ${
+              item.active 
+                ? 'text-primary-700 bg-primary-50' 
+                : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50'
             }`}
             aria-current={item.active ? 'page' : undefined}
           >
-            {item.label}
+            {t(item.labelKey)}
+            {item.active && (
+              <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-primary-600 rounded-full mb-1"></span>
+            )}
           </a>
         ))}
       </nav>
 
-      <!-- Language Switcher & Mobile Menu -->
-      <div class="flex items-center space-x-4">
+      <!-- Right Side Actions -->
+      <div class="hidden lg:flex items-center space-x-4">
         <!-- Language Switcher -->
-        <div class="hidden sm:flex items-center space-x-2">
-          {switchToFrench && (
-            <a
-              href={switchToFrench}
-              class={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
-                !isEnglish ? 'bg-primary text-white' : 'text-gray-700 hover:bg-gray-100'
-              }`}
-              aria-label="Switch to French"
-            >
-              {t('lang.fr')}
-            </a>
-          )}
-          {switchToEnglish && (
-            <a
-              href={switchToEnglish}
-              class={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
-                isEnglish ? 'bg-primary text-white' : 'text-gray-700 hover:bg-gray-100'
-              }`}
-              aria-label="Switch to English"
-            >
-              {t('lang.en')}
-            </a>
-          )}
+        <div class="relative group">
+          <button class="flex items-center space-x-1 text-gray-600 hover:text-primary-600 transition-colors focus:outline-none">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <span class="text-sm font-medium uppercase">{currentLocale}</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <!-- Dropdown -->
+          <div class="absolute right-0 mt-2 w-24 bg-white rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top-right z-50 border border-gray-100">
+            <div class="py-1">
+              {switchToFrench && (
+                <a href={switchToFrench} class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600">Français</a>
+              )}
+              {switchToEnglish && (
+                <a href={switchToEnglish} class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600">English</a>
+              )}
+            </div>
+          </div>
         </div>
 
-        <!-- Mobile menu button -->
-        <button
-          class="lg:hidden p-2 rounded-md text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary"
-          aria-expanded="false"
-          aria-label={t('menu.toggle')}
-          id="mobile-menu-button"
+        <!-- CTA Button -->
+        <a
+          href={`/${currentLocale}/participation`}
+          class="inline-flex items-center px-5 py-2.5 border border-transparent text-sm font-bold rounded-full text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200"
         >
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          {t('nav.register')}
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <div class="flex lg:hidden items-center space-x-4">
+        <!-- Mobile Lang Switcher (Simplified) -->
+        <a 
+          href={isEnglish ? switchToFrench : switchToEnglish} 
+          class="text-sm font-bold text-gray-600 hover:text-primary-600 uppercase"
+        >
+          {isEnglish ? 'FR' : 'EN'}
+        </a>
+
+        <button
+          id="mobile-menu-button"
+          class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-primary-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500 transition-colors"
+          aria-expanded="false"
+        >
+          <span class="sr-only">{t('nav.menuToggle')}</span>
+          <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </button>
       </div>
     </div>
+  </div>
 
-    <!-- Mobile Navigation Menu -->
-    <div class="lg:hidden mt-4 pt-4 border-t border-gray-200 hidden" id="mobile-menu" role="navigation" aria-label="Mobile navigation">
-      <nav class="flex flex-col space-y-4">
+  <!-- Mobile Navigation Menu -->
+  <div class="lg:hidden fixed inset-0 z-50 pointer-events-none" id="mobile-menu-container">
+    <!-- Backdrop -->
+    <div class="absolute inset-0 bg-gray-900/50 backdrop-blur-sm opacity-0 transition-opacity duration-300" id="mobile-menu-backdrop"></div>
+    
+    <!-- Menu Content -->
+    <div class="absolute right-0 top-0 h-full w-80 bg-white shadow-2xl transform translate-x-full transition-transform duration-300 pointer-events-auto flex flex-col" id="mobile-menu-content">
+      <div class="px-5 pt-5 pb-6 flex items-center justify-between border-b border-gray-100">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 bg-primary-600 rounded-md flex items-center justify-center">
+            <span class="text-white font-serif font-bold text-lg">JIP</span>
+          </div>
+          <span class="font-serif font-bold text-gray-900">Menu</span>
+        </div>
+        <button id="close-menu-button" class="p-2 -mr-2 text-gray-500 hover:text-gray-700 rounded-md hover:bg-gray-100 transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      
+      <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
         {navItems.map(item => (
           <a
-            href={isEnglish ? `/en${item.href}` : item.href}
-            class={`font-medium transition-colors hover:text-primary py-2 ${
-              item.active ? 'text-primary' : 'text-gray-700'
+            href={`/${currentLocale}${item.href === '/' ? '' : item.href}`}
+            class={`block px-4 py-3 rounded-lg text-base font-medium transition-all ${
+              item.active 
+                ? 'bg-primary-50 text-primary-700' 
+                : 'text-gray-700 hover:bg-gray-50 hover:text-primary-600'
             }`}
-            aria-current={item.active ? 'page' : undefined}
           >
-            {item.label}
+            {t(item.labelKey)}
           </a>
         ))}
-
-        <!-- Mobile Language Switcher -->
-        <div class="flex items-center space-x-4 pt-4 border-t border-gray-200">
-          <span class="text-sm text-gray-600">{isEnglish ? 'Language:' : 'Langue :'}</span>
-          <div class="flex space-x-2">
-            {switchToFrench && (
-              <a
-                href={switchToFrench}
-                class={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
-                  !isEnglish ? 'bg-primary text-white' : 'text-gray-700 hover:bg-gray-100'
-                }`}
-              >
-                FR
-              </a>
-            )}
-            {switchToEnglish && (
-              <a
-                href={switchToEnglish}
-                class={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
-                  isEnglish ? 'bg-primary text-white' : 'text-gray-700 hover:bg-gray-100'
-                }`}
-              >
-                EN
-              </a>
-            )}
-          </div>
+        
+        <div class="mt-8 pt-8 border-t border-gray-100">
+          <a
+            href={`/${currentLocale}/participation`}
+            class="block w-full text-center px-6 py-3 border border-transparent text-base font-bold rounded-full text-white bg-primary-600 hover:bg-primary-700 shadow-md transition-colors"
+          >
+            {t('nav.register')}
+          </a>
+          <a
+            href={`/${currentLocale}/dons`}
+            class="block w-full text-center mt-4 px-6 py-3 border-2 border-primary-100 text-base font-bold rounded-full text-primary-700 hover:bg-primary-50 transition-colors"
+          >
+            {t('nav.donate')}
+          </a>
         </div>
       </nav>
     </div>
@@ -184,25 +174,49 @@ const switchToEnglish = isEnglish ? null : `/en${Astro.url.pathname}`;
 </header>
 
 <script>
+  // Header Scroll Effect
+  const header = document.getElementById('main-header');
+  
+  const updateHeader = () => {
+    if (window.scrollY > 10) {
+      header?.classList.add('bg-white/95', 'backdrop-blur-md', 'shadow-sm', 'py-2');
+      header?.classList.remove('bg-transparent', 'py-4');
+    } else {
+      header?.classList.remove('bg-white/95', 'backdrop-blur-md', 'shadow-sm', 'py-2');
+      header?.classList.add('bg-transparent', 'py-4');
+    }
+  };
+
+  window.addEventListener('scroll', updateHeader);
+  // Initial check
+  updateHeader();
+
   // Mobile menu toggle functionality
   document.addEventListener('DOMContentLoaded', () => {
     const menuButton = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
+    const closeButton = document.getElementById('close-menu-button');
+    const menuContainer = document.getElementById('mobile-menu-container');
+    const menuContent = document.getElementById('mobile-menu-content');
+    const backdrop = document.getElementById('mobile-menu-backdrop');
 
-    if (menuButton && mobileMenu) {
-      menuButton.addEventListener('click', () => {
-        const isExpanded = menuButton.getAttribute('aria-expanded') === 'true';
-        menuButton.setAttribute('aria-expanded', !isExpanded);
-        mobileMenu.classList.toggle('hidden');
-      });
-
-      // Close menu when clicking outside
-      document.addEventListener('click', (event) => {
-        if (!menuButton.contains(event.target) && !mobileMenu.contains(event.target)) {
-          menuButton.setAttribute('aria-expanded', 'false');
-          mobileMenu.classList.add('hidden');
-        }
-      });
+    function openMenu() {
+      menuContainer?.classList.remove('pointer-events-none');
+      backdrop?.classList.remove('opacity-0');
+      menuContent?.classList.remove('translate-x-full');
+      document.body.style.overflow = 'hidden';
     }
+
+    function closeMenu() {
+      backdrop?.classList.add('opacity-0');
+      menuContent?.classList.add('translate-x-full');
+      setTimeout(() => {
+        menuContainer?.classList.add('pointer-events-none');
+        document.body.style.overflow = '';
+      }, 300);
+    }
+
+    menuButton?.addEventListener('click', openMenu);
+    closeButton?.addEventListener('click', closeMenu);
+    backdrop?.addEventListener('click', closeMenu);
   });
 </script>

@@ -1,214 +1,145 @@
 ---
-// Get current locale from URL
-const currentLocale = Astro.url.pathname.startsWith('/en') ? 'en' : 'fr';
-const isEnglish = currentLocale === 'en';
-
-// Translations
-const t = (key: string) => {
-  const translations = {
-    fr: {
-      'footer.about': 'À propos',
-      'footer.vision': 'Notre Vision',
-      'footer.founder': 'Fondateur',
-      'footer.program': 'Programme',
-      'footer.participation': 'Participation',
-      'footer.resources': 'Ressources',
-      'footer.contact': 'Contact',
-      'footer.support': 'Support',
-      'footer.faq': 'FAQ',
-      'footer.contactForm': 'Formulaire de contact',
-      'footer.email': 'Email',
-      'footer.follow': 'Suivez-nous',
-      'footer.donate': 'Faire un don',
-      'footer.privacy': 'Politique de confidentialité',
-      'footer.terms': 'Conditions d\'utilisation',
-      'footer.copyright': '© 2025 Journée Internationale des Pasteurs. Tous droits réservés.',
-      'footer.madeWith': 'Fait avec ❤️ pour la communauté chrétienne africaine'
-    },
-    en: {
-      'footer.about': 'About',
-      'footer.vision': 'Our Vision',
-      'footer.founder': 'Founder',
-      'footer.program': 'Program',
-      'footer.participation': 'Participation',
-      'footer.resources': 'Resources',
-      'footer.contact': 'Contact',
-      'footer.support': 'Support',
-      'footer.faq': 'FAQ',
-      'footer.contactForm': 'Contact Form',
-      'footer.email': 'Email',
-      'footer.follow': 'Follow us',
-      'footer.donate': 'Donate',
-      'footer.privacy': 'Privacy Policy',
-      'footer.terms': 'Terms of Use',
-      'footer.copyright': '© 2025 International Day of Pastors. All rights reserved.',
-      'footer.madeWith': 'Made with ❤️ for the African Christian community'
-    }
-  };
-  return translations[currentLocale][key] || key;
-};
+// Use Starlight's built-in i18n instead of custom implementation
+const { t } = Astro.locals;
+const currentLocale = Astro.locals.locale || 'fr';
 
 // Footer links
 const footerLinks = {
   about: [
-    { href: '/vision', label: t('footer.vision') },
-    { href: '/fondateur', label: t('footer.founder') },
-    { href: '/programme', label: t('footer.program') }
+    { href: '/vision', labelKey: 'footer.vision' },
+    { href: '/fondateur', labelKey: 'footer.founder' },
+    { href: '/programme', labelKey: 'footer.program' }
   ],
   participation: [
-    { href: '/participation', label: t('footer.participation') },
-    { href: '/ressources', label: t('footer.resources') },
-    { href: '/dons', label: t('footer.donate') }
-  ],
-  support: [
-    { href: '/contact', label: t('footer.contactForm') },
-    { href: '/faq', label: t('footer.faq') },
-    { href: 'mailto:contact@jip-official.com', label: t('footer.email') }
+    { href: '/participation', labelKey: 'footer.participation' },
+    { href: '/dons', labelKey: 'footer.donate' },
+    { href: '/contact', labelKey: 'footer.contact' }
   ]
 };
 
-// Social media links (placeholder)
+// Social media links
 const socialLinks = [
-  { name: 'Facebook', href: '#', icon: 'facebook' },
-  { name: 'Instagram', href: '#', icon: 'instagram' },
-  { name: 'TikTok', href: '#', icon: 'tiktok' },
-  { name: 'WhatsApp', href: '#', icon: 'whatsapp' }
+  { name: 'Facebook', href: '#', icon: 'M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z' },
+  { name: 'Instagram', href: '#', icon: 'M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01M7.5 21h9a3 3 0 003-3V6a3 3 0 00-3-3h-9a3 3 0 00-3 3v12a3 3 0 003 3z' },
+  { name: 'YouTube', href: '#', icon: 'M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.33 29 29 0 00-.46-5.33zM9.75 15.02l5.75-3.27-5.75-3.27v6.54z' }
 ];
 ---
 
-<footer class="bg-gray-900 text-white">
-  <div class="container mx-auto px-4 py-12">
-    <!-- Main footer content -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-      <!-- Organization Info -->
-      <div class="lg:col-span-2">
-        <div class="flex items-center space-x-3 mb-4">
-          <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-            <span class="text-white font-serif font-bold text-lg">JIP</span>
+<footer class="bg-gray-900 text-white relative overflow-hidden border-t border-white/10">
+  <!-- Decorative background elements -->
+  <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary-600 via-secondary-500 to-primary-600"></div>
+  <div class="absolute -top-24 -right-24 w-96 h-96 bg-primary-900/30 rounded-full blur-3xl pointer-events-none"></div>
+  <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-secondary-900/20 rounded-full blur-3xl pointer-events-none"></div>
+
+  <div class="container mx-auto px-4 py-16 relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      
+      <!-- Brand & Description (4 cols) -->
+      <div class="lg:col-span-4 space-y-6">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 bg-gradient-to-br from-primary-600 to-primary-800 rounded-xl flex items-center justify-center shadow-lg">
+            <span class="text-white font-serif font-bold text-xl">JIP</span>
           </div>
           <div>
-            <h3 class="text-lg font-serif font-bold text-white">
-              {isEnglish ? 'International Day of Pastors' : 'Journée Internationale des Pasteurs'}
+            <h3 class="text-lg font-serif font-bold text-white tracking-wide leading-tight">
+              {currentLocale === 'en' ? 'International Day' : 'Journée Internationale'}
+              <span class="block text-primary-400">{currentLocale === 'en' ? 'of Pastors' : 'des Pasteurs'}</span>
             </h3>
-            <p class="text-sm text-gray-400">
-              {isEnglish ? 'Honoring those who watch over our souls' : 'Honorer ceux qui veillent sur nos âmes'}
-            </p>
           </div>
         </div>
-        <p class="text-gray-300 mb-6 max-w-md">
-          {isEnglish
+        <p class="text-gray-400 leading-relaxed text-sm">
+          {currentLocale === 'en'
             ? 'A celebration of pastoral ministry across Africa, bringing together spiritual leaders to honor their dedication and service to God\'s people.'
             : 'Une célébration du ministère pastoral à travers l\'Afrique, rassemblant les leaders spirituels pour honorer leur dévouement et leur service au peuple de Dieu.'
           }
         </p>
-
-        <!-- Social Media Links -->
-        <div class="flex space-x-4">
+        
+        <!-- Social Icons -->
+        <div class="flex gap-4 pt-2">
           {socialLinks.map(link => (
             <a
               href={link.href}
-              class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary transition-colors group"
+              class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-primary-600 hover:text-white text-gray-400 transition-all duration-300 group"
               aria-label={`Follow us on ${link.name}`}
             >
-              <!-- Placeholder icons - to be replaced with actual social icons -->
-              <span class="text-gray-400 group-hover:text-white text-sm font-bold">
-                {link.icon.charAt(0).toUpperCase()}
-              </span>
+              <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                <path d={link.icon} />
+              </svg>
             </a>
           ))}
         </div>
       </div>
 
-      <!-- About Links -->
-      <div>
-        <h4 class="text-lg font-semibold mb-4 text-white">{t('footer.about')}</h4>
-        <ul class="space-y-2">
+      <!-- Links (2 cols each) -->
+      <div class="lg:col-span-2">
+        <h4 class="text-white font-bold mb-6 relative inline-block">
+          {t('footer.about')}
+          <span class="absolute -bottom-2 left-0 w-8 h-1 bg-primary-500 rounded-full"></span>
+        </h4>
+        <ul class="space-y-3 text-sm">
           {footerLinks.about.map(link => (
             <li>
-              <a
-                href={isEnglish ? `/en${link.href}` : link.href}
-                class="text-gray-300 hover:text-primary transition-colors"
-              >
-                {link.label}
+              <a href={`/${currentLocale}${link.href}`} class="text-gray-400 hover:text-primary-400 transition-colors flex items-center gap-2 group">
+                <span class="w-1 h-1 bg-primary-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                {t(link.labelKey)}
               </a>
             </li>
           ))}
         </ul>
       </div>
 
-      <!-- Support Links -->
-      <div>
-        <h4 class="text-lg font-semibold mb-4 text-white">{t('footer.support')}</h4>
-        <ul class="space-y-2">
-          {footerLinks.support.map(link => (
-            <li>
-              <a
-                href={link.href.startsWith('mailto:') ? link.href : (isEnglish ? `/en${link.href}` : link.href)}
-                class="text-gray-300 hover:text-primary transition-colors"
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
-
-    <!-- Newsletter Signup (Optional) -->
-    <div class="mt-12 pt-8 border-t border-gray-800">
-      <div class="max-w-md mx-auto text-center">
-        <h4 class="text-lg font-semibold mb-2 text-white">
-          {isEnglish ? 'Stay Connected' : 'Restez Connecté'}
+      <div class="lg:col-span-2">
+        <h4 class="text-white font-bold mb-6 relative inline-block">
+          {t('footer.participation')}
         </h4>
-        <p class="text-gray-300 mb-4">
-          {isEnglish
-            ? 'Get updates about the event and spiritual encouragement.'
-            : 'Recevez des mises à jour sur l\'événement et des encouragements spirituels.'
-          }
-        </p>
-        <form class="flex flex-col sm:flex-row gap-2" action="#" method="post">
-          <input
-            type="email"
-            placeholder={isEnglish ? 'Enter your email' : 'Entrez votre email'}
-            class="flex-1 px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary"
-            required
-          />
-          <button
-            type="submit"
-            class="px-6 py-2 bg-primary hover:bg-primary-600 text-white rounded-lg transition-colors font-medium"
-          >
-            {isEnglish ? 'Subscribe' : 'S\'abonner'}
-          </button>
-        </form>
+        <ul class="space-y-3 text-sm">
+          {footerLinks.participation.map(link => (
+            <li>
+              <a href={`/${currentLocale}${link.href}`} class="text-gray-400 hover:text-primary-400 transition-colors flex items-center gap-2 group">
+                <span class="w-1 h-1 bg-primary-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                {t(link.labelKey)}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Additional Links -->
+      <div class="lg:col-span-4">
+        <h4 class="text-white font-bold mb-6 relative inline-block">
+          {t('footer.links')}
+          <span class="absolute -bottom-2 left-0 w-8 h-1 bg-primary-500 rounded-full"></span>
+        </h4>
+        <div class="grid grid-cols-2 gap-6">
+          <div>
+            <h5 class="text-gray-300 font-medium mb-3 text-sm uppercase tracking-wider">{t('footer.social')}</h5>
+            <ul class="space-y-2 text-sm">
+              <li><a href="#" class="text-gray-400 hover:text-primary-400 transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary-500 rounded-full"></span> Facebook</a></li>
+              <li><a href="#" class="text-gray-400 hover:text-primary-400 transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary-500 rounded-full"></span> Instagram</a></li>
+              <li><a href="#" class="text-gray-400 hover:text-primary-400 transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary-500 rounded-full"></span> YouTube</a></li>
+            </ul>
+          </div>
+          <div>
+            <h5 class="text-gray-300 font-medium mb-3 text-sm uppercase tracking-wider">{t('common.resources')}</h5>
+            <ul class="space-y-2 text-sm">
+              <li><a href="/ressources" class="text-gray-400 hover:text-primary-400 transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary-500 rounded-full"></span> {t('footer.resources')}</a></li>
+              <li><a href="/faq" class="text-gray-400 hover:text-primary-400 transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary-500 rounded-full"></span> FAQ</a></li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- Bottom bar -->
-  <div class="bg-gray-950 py-6">
+  <div class="bg-black/40 py-6 border-t border-white/5 backdrop-blur-sm">
     <div class="container mx-auto px-4">
-      <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-        <!-- Copyright -->
-        <p class="text-gray-400 text-sm">
-          {t('footer.copyright')}
-        </p>
-
-        <!-- Legal Links -->
-        <div class="flex space-x-6">
-          <a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm">
-            {t('footer.privacy')}
-          </a>
-          <a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm">
-            {t('footer.terms')}
-          </a>
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
+        <p>{t('footer.copyright')}</p>
+        <div class="flex gap-6">
+          <a href="#" class="hover:text-white transition-colors">{t('footer.privacy')}</a>
+          <a href="#" class="hover:text-white transition-colors">{t('footer.terms')}</a>
         </div>
-      </div>
-
-      <!-- Made with love -->
-      <div class="mt-4 text-center">
-        <p class="text-gray-500 text-xs">
-          {t('footer.madeWith')}
-        </p>
       </div>
     </div>
   </div>

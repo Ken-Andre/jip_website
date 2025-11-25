@@ -1,74 +1,77 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+  darkMode: 'class', // Enable class-based dark mode
   theme: {
     extend: {
       colors: {
-        // JIP Brand Colors
+        // JIP Brand Colors - Vibrant & Premium
         primary: {
-          50: '#f4f2fa',
-          100: '#e8e3f5',
-          200: '#d1c9ed',
-          300: '#b4a3e2',
-          400: '#9474d2',
-          500: '#6B3FB5', // Primary violet
-          600: '#593899',
-          700: '#473179',
-          800: '#39295f',
-          900: '#2e204d',
+          50: '#f5f3ff',
+          100: '#ede9fe',
+          200: '#ddd6fe',
+          300: '#c4b5fd',
+          400: '#a78bfa',
+          500: '#8b5cf6', // Vibrant Violet
+          600: '#7c3aed',
+          700: '#6d28d9',
+          800: '#5b21b6',
+          900: '#4c1d95',
+          950: '#2e1065',
         },
         secondary: {
-          50: '#fdf9f0',
-          100: '#faf0db',
-          200: '#f4deba',
-          300: '#ebc58e',
-          400: '#dea45a',
-          500: '#D4AF37', // Secondary gold
-          600: '#d4a329',
-          700: '#b08821',
-          800: '#8c6c1b',
-          900: '#725916',
+          50: '#fffbeb',
+          100: '#fef3c7',
+          200: '#fde68a',
+          300: '#fcd34d',
+          400: '#fbbf24',
+          500: '#f59e0b', // Rich Gold
+          600: '#d97706',
+          700: '#b45309',
+          800: '#92400e',
+          900: '#78350f',
+          950: '#451a03',
         },
         accent: {
-          50: '#ffffff',
-          100: '#ffffff',
-          500: '#FFFFFF', // Pure white
+          50: '#fafafa',
+          100: '#f4f4f5',
+          500: '#ffffff',
+          900: '#18181b',
         },
-        text: {
-          50: '#f7f7f7',
-          100: '#e3e3e3',
-          200: '#c8c8c8',
-          300: '#a4a4a4',
-          400: '#818181',
-          500: '#666666',
-          600: '#515151',
-          700: '#434343',
-          800: '#383838',
-          900: '#1F1F1F', // Primary text color
-        },
-        background: {
-          50: '#F5F5F0', // Cream background
-        }
       },
       fontFamily: {
-        'serif': ['Playfair Display', 'serif'],
-        'sans': ['Montserrat', 'sans-serif'],
+        'serif': ['"Playfair Display"', 'serif'],
+        'sans': ['"Montserrat"', 'sans-serif'],
       },
-      spacing: {
-        'xs': '8px',
-        'sm': '16px',
-        'md': '24px',
-        'lg': '32px',
-        'xl': '40px',
-        '2xl': '48px',
-        '3xl': '56px',
-        '4xl': '64px',
+      animation: {
+        'fade-in': 'fadeIn 0.8s ease-out forwards',
+        'slide-up': 'slideUp 0.8s ease-out forwards',
+        'slide-down': 'slideDown 0.5s ease-out forwards',
+        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'float': 'float 6s ease-in-out infinite',
       },
-      boxShadow: {
-        'sm': '0 2px 4px rgba(0,0,0,0.08)',
-        'md': '0 8px 16px rgba(0,0,0,0.12)',
-        'lg': '0 16px 32px rgba(0,0,0,0.16)',
-      }
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        slideUp: {
+          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        slideDown: {
+          '0%': { opacity: '0', transform: 'translateY(-20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-10px)' },
+        },
+      },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'hero-pattern': "url('/src/assets/images/pattern-bg.svg')", // Placeholder if needed
+      },
     },
   },
   plugins: [],
