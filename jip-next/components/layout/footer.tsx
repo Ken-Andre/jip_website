@@ -33,7 +33,7 @@ export function Footer() {
                                 <span className="font-serif text-lg font-bold text-primary-foreground">JIP</span>
                             </div>
                         </div>
-                        <h3 className="mb-3 font-serif text-lg font-semibold text-foreground">{t("footer.about")}</h3>
+                        <h3 className="mb-3 font-serif text-lg font-semibold text-foreground">{t("footer.about.title")}</h3>
                         <p className="text-sm leading-relaxed text-muted-foreground">{t("footer.about.desc")}</p>
                     </div>
 

@@ -1,281 +1,287 @@
 {
-    "nav": {
-        "home": "Accueil",
-        "vision": "Vision",
-        "founder": "Fondateur",
-        "program": "Programme",
-        "participation": "Participation",
-        "gallery": "Galerie",
-        "donations": "Dons",
-        "contact": "Contact",
-        "resources": "Ressources"
-    },
+  "nav": {
+    "home": "Accueil",
+    "vision": "Vision",
+    "founder": "Fondateur",
+    "program": "Programme",
+    "participation": "Participation",
+    "gallery": "Galerie",
+    "donations": "Dons",
+    "contact": "Contact",
+    "resources": "Ressources"
+  },
+  "hero": {
+    "title": "Journée Internationale des Pasteurs",
+    "subtitle": "Honorer ceux qui veillent sur nos âmes",
+    "date": "12 Décembre 2025",
+    "location": "Yaoundé, Cameroun",
+    "cta": {
+      "register": "S'inscrire",
+      "program": "Voir le Programme"
+    }
+  },
+  "countdown": {
+    "until": "Compte à rebours",
+    "days": "Jours",
+    "hours": "Heures",
+    "minutes": "Minutes",
+    "seconds": "Secondes"
+  },
+  "section": {
+    "program": "Programme de la Journée",
+    "testimonials": "Témoignages",
+    "founder": "Le Fondateur"
+  },
+  "program": {
     "hero": {
-        "title": "Journée Internationale des Pasteurs",
-        "subtitle": "Honorer ceux qui veillent sur nos âmes",
-        "date": "12 Décembre 2025",
-        "location": "Yaoundé, Cameroun",
-        "cta": {
-            "register": "S'inscrire",
-            "program": "Voir le Programme"
-        }
+      "title": "Programme Officiel",
+      "date": "12 Décembre 2025",
+      "subtitle": "Une journée riche en enseignements et célébrations"
     },
-    "countdown": {
-        "until": "Compte à rebours",
-        "days": "Jours",
-        "hours": "Heures",
-        "minutes": "Minutes",
-        "seconds": "Secondes"
+    "welcome": "Accueil et Inscription",
+    "session1": "Session Plénière - Enseignement",
+    "lunch": "Pause Déjeuner",
+    "celebration": "Célébration et Reconnaissance",
+    "closing": "Clôture et Photos",
+    "morning": "Matin",
+    "afternoon": "Après-midi",
+    "evening": "Soir",
+    "08h00": {
+      "title": "Accueil et Inscription",
+      "desc": "Enregistrement des participants et distribution des badges"
     },
-    "section": {
-        "program": "Programme de la Journée",
-        "testimonials": "Témoignages",
-        "founder": "Le Fondateur"
+    "09h00": {
+      "title": "Ouverture Officielle",
+      "desc": "Mot de bienvenue et prière d'ouverture"
     },
-    "program": {
-        "hero": {
-            "title": "Programme Officiel",
-            "date": "12 Décembre 2025",
-            "subtitle": "Une journée riche en enseignements et célébrations"
-        },
-        "welcome": "Accueil et Inscription",
-        "session1": "Session Plénière - Enseignement",
-        "lunch": "Pause Déjeuner",
-        "celebration": "Célébration et Reconnaissance",
-        "closing": "Clôture et Photos",
-        "morning": "Matin",
-        "afternoon": "Après-midi",
-        "evening": "Soir",
-        "08h00": {
-            "title": "Accueil et Inscription",
-            "desc": "Enregistrement des participants et distribution des badges"
-        },
-        "09h00": {
-            "title": "Ouverture Officielle",
-            "desc": "Mot de bienvenue et prière d'ouverture"
-        },
-        "09h30": {
-            "title": "Session Plénière",
-            "desc": "Enseignement principal sur le ministère pastoral"
-        },
-        "11h00": {
-            "title": "Pause Café",
-            "desc": "Moment de fellowship et de networking"
-        },
-        "11h30": {
-            "title": "Ateliers Thématiques",
-            "desc": "Sessions parallèles sur différents aspects du ministère"
-        },
-        "12h30": {
-            "title": "Déjeuner",
-            "desc": "Repas communautaire"
-        },
-        "14h00": {
-            "title": "Célébration et Louange",
-            "desc": "Temps de louange et d'adoration"
-        },
-        "15h30": {
-            "title": "Cérémonie de Reconnaissance",
-            "desc": "Honorer les pasteurs pour leur service fidèle"
-        },
-        "17h00": {
-            "title": "Clôture et Photos",
-            "desc": "Mot de clôture et photos de groupe"
-        }
+    "09h30": {
+      "title": "Session Plénière",
+      "desc": "Enseignement principal sur le ministère pastoral"
     },
-    "founder": {
-        "name": "Pasteur Patrick",
-        "title": "Fondateur de la JIP",
-        "quote": "Honorer les pasteurs, c'est honorer le cœur de Dieu pour Son peuple.",
-        "bio": "Pasteur Patrick est un serviteur de Dieu passionné par l'honneur et le soutien des leaders spirituels. Sa vision pour la Journée Internationale des Pasteurs est née d'un profond désir de voir les pasteurs encouragés et célébrés pour leur service sacrificiel.",
-        "page": {
-            "subtitle": "Fondateur et Visionnaire de la Journée Internationale des Pasteurs"
-        },
-        "calling": {
-            "title": "L'Appel Divin",
-            "text": "En 2008, Dieu a placé dans le cœur de Pasteur Patrick une vision claire : créer un moment unique pour honorer et encourager les pasteurs du monde entier. Cette vision est devenue la Journée Internationale des Pasteurs, un mouvement qui touche aujourd'hui des milliers de serviteurs de Dieu."
-        },
-        "timeline": {
-            "2008": "Réception de la vision divine pour honorer les pasteurs",
-            "2015": "Première édition de la Journée Internationale des Pasteurs à Yaoundé",
-            "2020": "Expansion du mouvement à travers l'Afrique Centrale",
-            "2025": "Célébration de la 10ème édition avec plus de 500 pasteurs attendus"
-        },
-        "journey": {
-            "title": "Le Parcours"
-        },
-        "message": {
-            "title": "Message du Fondateur",
-            "text": "Chers pasteurs, vous êtes les bergers que Dieu a choisis pour veiller sur Son troupeau. Votre service, votre sacrifice et votre fidélité méritent d'être honorés. La Journée Internationale des Pasteurs est notre façon de dire merci et de vous encourager à continuer votre noble mission."
-        }
+    "11h00": {
+      "title": "Pause Café",
+      "desc": "Moment de fellowship et de networking"
     },
-    "vision": {
-        "hero": {
-            "title": "Notre Vision",
-            "subtitle": "Honorer, Encourager et Équiper les Pasteurs du Monde Entier"
-        },
-        "mission": {
-            "title": "Notre Mission",
-            "text": "Créer un moment unique de reconnaissance et d'encouragement pour tous les pasteurs, en célébrant leur service fidèle et en les équipant pour un ministère encore plus impactant."
-        },
-        "values": {
-            "title": "Nos Valeurs",
-            "excellence": {
-                "title": "Excellence",
-                "text": "Nous visons l'excellence dans tout ce que nous faisons pour honorer dignement les serviteurs de Dieu."
-            },
-            "unity": {
-                "title": "Unité",
-                "text": "Nous rassemblons les pasteurs au-delà des dénominations pour célébrer notre foi commune."
-            },
-            "impact": {
-                "title": "Impact",
-                "text": "Nous créons un impact durable dans la vie des pasteurs et de leurs communautés."
-            },
-            "honor": {
-                "title": "Honneur",
-                "text": "Nous honorons ceux qui veillent sur nos âmes avec respect et gratitude."
-            }
-        },
-        "impact": {
-            "title": "Notre Impact",
-            "text": "Depuis 2015, la Journée Internationale des Pasteurs a touché des milliers de vies et continue de grandir chaque année.",
-            "pastors": "Pasteurs Honorés",
-            "countries": "Pays Représentés",
-            "years": "Années d'Existence"
-        }
+    "11h30": {
+      "title": "Ateliers Thématiques",
+      "desc": "Sessions parallèles sur différents aspects du ministère"
     },
-    "participation": {
-        "hero": {
-            "title": "Participez à la JIP 2025",
-            "subtitle": "Rejoignez-nous pour cette journée exceptionnelle d'honneur et de célébration"
-        },
-        "info": {
-            "title": "Informations Pratiques",
-            "date": "Date",
-            "location": "Lieu",
-            "free": "Participation Gratuite",
-            "languages": "Langues",
-            "languages.value": "Français & Anglais"
-        },
-        "form": {
-            "title": "Formulaire d'Inscription"
-        }
+    "12h30": {
+      "title": "Déjeuner",
+      "desc": "Repas communautaire"
     },
-    "gallery": {
-        "hero": {
-            "title": "Galerie Photos",
-            "subtitle": "Revivez les moments forts des éditions précédentes"
-        },
-        "category": {
-            "all": "Tout",
-            "ceremonies": "Cérémonies",
-            "worship": "Louange",
-            "fellowship": "Communion",
-            "speakers": "Orateurs"
-        }
+    "14h00": {
+      "title": "Célébration et Louange",
+      "desc": "Temps de louange et d'adoration"
     },
-    "donations": {
-        "hero": {
-            "title": "Soutenez la Vision",
-            "subtitle": "Votre générosité permet de continuer à honorer les pasteurs"
-        },
-        "why": {
-            "title": "Pourquoi Donner ?",
-            "text": "Vos dons nous permettent d'organiser cet événement exceptionnel, de couvrir les frais logistiques et de bénir les pasteurs participants. Chaque contribution, quelle que soit sa taille, fait une différence."
-        },
-        "mobile": "Mobile Money",
-        "mobile.name": "MTN Mobile Money",
-        "mobile.number": "+237 6 00 00 00 00",
-        "mobile.name2": "Orange Money",
-        "mobile.number2": "+237 6 00 00 00 00",
-        "paypal": "PayPal",
-        "paypal.email": "dons@jip.org",
-        "bank": "Virement Bancaire",
-        "bank.name": "Nom de la Banque",
-        "bank.account": "XXXXXXXXXX",
-        "bank.iban": "CM XX XXXX XXXX XXXX XXXX",
-        "impact": {
-            "title": "Votre Impact",
-            "text": "Grâce à votre soutien, nous pouvons continuer à honorer et encourager les pasteurs qui servent fidèlement dans leurs communautés. Merci pour votre générosité !"
-        }
+    "15h30": {
+      "title": "Cérémonie de Reconnaissance",
+      "desc": "Honorer les pasteurs pour leur service fidèle"
     },
-    "contact": {
-        "hero": {
-            "title": "Contactez-Nous",
-            "subtitle": "Nous sommes à votre écoute pour toute question ou information"
-        },
-        "form": {
-            "title": "Envoyez-nous un Message"
-        },
-        "info": {
-            "title": "Coordonnées",
-            "email": "Email",
-            "phone": "Téléphone",
-            "address": "Adresse",
-            "hours": "Horaires",
-            "hours.value": "Lun - Ven: 9h - 17h"
-        },
-        "social": "Suivez-nous"
+    "17h00": {
+      "title": "Clôture et Photos",
+      "desc": "Mot de clôture et photos de groupe"
+    }
+  },
+  "founder": {
+    "name": "Pasteur Patrick",
+    "title": "Fondateur de la JIP",
+    "quote": "Honorer les pasteurs, c'est honorer le cœur de Dieu pour Son peuple.",
+    "bio": "Pasteur Patrick est un serviteur de Dieu passionné par l'honneur et le soutien des leaders spirituels. Sa vision pour la Journée Internationale des Pasteurs est née d'un profond désir de voir les pasteurs encouragés et célébrés pour leur service sacrificiel.",
+    "page": {
+      "subtitle": "Fondateur et Visionnaire de la Journée Internationale des Pasteurs"
     },
-    "resources": {
-        "hero": {
-            "title": "Kit Média",
-            "subtitle": "Téléchargez nos ressources officielles pour promouvoir la JIP"
-        },
-        "download": {
-            "all": "Télécharger Tout"
-        },
-        "logos": {
-            "title": "Logos",
-            "desc": "Logos officiels de la JIP"
-        },
-        "posters": {
-            "title": "Affiches",
-            "desc": "Affiches et flyers imprimables"
-        },
-        "banners": {
-            "title": "Bannières",
-            "desc": "Bannières pour réseaux sociaux"
-        },
-        "documents": {
-            "title": "Documents",
-            "desc": "Brochures et communiqués"
-        },
-        "format": "Format",
-        "size": "Taille"
+    "calling": {
+      "title": "L'Appel Divin",
+      "text": "En 2008, Dieu a placé dans le cœur de Pasteur Patrick une vision claire : créer un moment unique pour honorer et encourager les pasteurs du monde entier. Cette vision est devenue la Journée Internationale des Pasteurs, un mouvement qui touche aujourd'hui des milliers de serviteurs de Dieu."
+    },
+    "timeline": {
+      "2008": "Réception de la vision divine pour honorer les pasteurs",
+      "2015": "Première édition de la Journée Internationale des Pasteurs à Yaoundé",
+      "2020": "Expansion du mouvement à travers l'Afrique Centrale",
+      "2025": "Célébration de la 10ème édition avec plus de 500 pasteurs attendus"
+    },
+    "journey": {
+      "title": "Le Parcours"
+    },
+    "message": {
+      "title": "Message du Fondateur",
+      "text": "Chers pasteurs, vous êtes les bergers que Dieu a choisis pour veiller sur Son troupeau. Votre service, votre sacrifice et votre fidélité méritent d'être honorés. La Journée Internationale des Pasteurs est notre façon de dire merci et de vous encourager à continuer votre noble mission."
+    }
+  },
+  "vision": {
+    "hero": {
+      "title": "Notre Vision",
+      "subtitle": "Honorer, Encourager et Équiper les Pasteurs du Monde Entier"
+    },
+    "mission": {
+      "title": "Notre Mission",
+      "text": "Créer un moment unique de reconnaissance et d'encouragement pour tous les pasteurs, en célébrant leur service fidèle et en les équipant pour un ministère encore plus impactant."
+    },
+    "values": {
+      "title": "Nos Valeurs",
+      "excellence": {
+        "title": "Excellence",
+        "text": "Nous visons l'excellence dans tout ce que nous faisons pour honorer dignement les serviteurs de Dieu."
+      },
+      "unity": {
+        "title": "Unité",
+        "text": "Nous rassemblons les pasteurs au-delà des dénominations pour célébrer notre foi commune."
+      },
+      "impact": {
+        "title": "Impact",
+        "text": "Nous créons un impact durable dans la vie des pasteurs et de leurs communautés."
+      },
+      "honor": {
+        "title": "Honneur",
+        "text": "Nous honorons ceux qui veillent sur nos âmes avec respect et gratitude."
+      }
+    },
+    "impact": {
+      "title": "Notre Impact",
+      "text": "Depuis 2015, la Journée Internationale des Pasteurs a touché des milliers de vies et continue de grandir chaque année.",
+      "pastors": "Pasteurs Honorés",
+      "countries": "Pays Représentés",
+      "years": "Années d'Existence"
+    }
+  },
+  "participation": {
+    "hero": {
+      "title": "Participez à la JIP 2025",
+      "subtitle": "Rejoignez-nous pour cette journée exceptionnelle d'honneur et de célébration"
+    },
+    "info": {
+      "title": "Informations Pratiques",
+      "date": "Date",
+      "location": "Lieu",
+      "free": "Participation Gratuite",
+      "languages": {
+        "label": "Langues",
+        "value": "Français & Anglais"
+      },
+      "languages.value": "Français & Anglais"
     },
     "form": {
-        "name": "Nom Complet",
-        "email": "Email",
-        "phone": "Téléphone",
-        "church": "Église / Organisation",
-        "type": "Type de Participation",
-        "type.pastor": "Pasteur",
-        "type.leader": "Leader d'Église",
-        "type.member": "Membre",
-        "type.visitor": "Visiteur",
-        "message": "Message",
-        "subject": "Sujet",
-        "submit": "Envoyer",
-        "registering": "Inscription en cours...",
-        "sending": "Envoi en cours...",
-        "required": "Ce champ est requis",
-        "invalid.email": "Email invalide",
-        "register.success": "Inscription réussie ! Nous vous contacterons bientôt.",
-        "contact.success": "Message envoyé ! Nous vous répondrons dans les plus brefs délais."
-    },
-    "common": {
-        "learnmore": "En Savoir Plus",
-        "viewall": "Voir Tout",
-        "readmore": "Lire Plus"
-    },
-    "footer": {
-        "about": "À Propos",
-        "about.desc": "La Journée Internationale des Pasteurs est un événement annuel dédié à l'honneur et à l'encouragement des pasteurs du monde entier.",
-        "quicklinks": "Liens Rapides",
-        "resources": "Ressources",
-        "contact": "Contact",
-        "rights": "Tous droits réservés"
+      "title": "Formulaire d'Inscription"
     }
+  },
+  "gallery": {
+    "hero": {
+      "title": "Galerie Photos",
+      "subtitle": "Revivez les moments forts des éditions précédentes"
+    },
+    "category": {
+      "all": "Tout",
+      "ceremonies": "Cérémonies",
+      "worship": "Louange",
+      "fellowship": "Communion",
+      "speakers": "Orateurs"
+    }
+  },
+  "donations": {
+    "hero": {
+      "title": "Soutenez la Vision",
+      "subtitle": "Votre générosité permet de continuer à honorer les pasteurs"
+    },
+    "why": {
+      "title": "Pourquoi Donner ?",
+      "text": "Vos dons nous permettent d'organiser cet événement exceptionnel, de couvrir les frais logistiques et de bénir les pasteurs participants. Chaque contribution, quelle que soit sa taille, fait une différence."
+    },
+    "mobile": "Mobile Money",
+    "mobile.name": "MTN Mobile Money",
+    "mobile.number": "+237 6 00 00 00 00",
+    "mobile.name2": "Orange Money",
+    "mobile.number2": "+237 6 00 00 00 00",
+    "paypal": "PayPal",
+    "paypal.email": "dons@jip.org",
+    "bank": "Virement Bancaire",
+    "bank.name": "Nom de la Banque",
+    "bank.account": "XXXXXXXXXX",
+    "bank.iban": "CM XX XXXX XXXX XXXX XXXX",
+    "impact": {
+      "title": "Votre Impact",
+      "text": "Grâce à votre soutien, nous pouvons continuer à honorer et encourager les pasteurs qui servent fidèlement dans leurs communautés. Merci pour votre générosité !"
+    }
+  },
+  "contact": {
+    "hero": {
+      "title": "Contactez-Nous",
+      "subtitle": "Nous sommes à votre écoute pour toute question ou information"
+    },
+    "form": {
+      "title": "Envoyez-nous un Message"
+    },
+    "info": {
+      "title": "Coordonnées",
+      "email": "Email",
+      "phone": "Téléphone",
+      "address": "Adresse",
+      "hours": "Horaires",
+      "hours.value": "Lun - Ven: 9h - 17h"
+    },
+    "social": "Suivez-nous"
+  },
+  "resources": {
+    "hero": {
+      "title": "Kit Média",
+      "subtitle": "Téléchargez nos ressources officielles pour promouvoir la JIP"
+    },
+    "download": {
+      "all": "Télécharger Tout"
+    },
+    "logos": {
+      "title": "Logos",
+      "desc": "Logos officiels de la JIP"
+    },
+    "posters": {
+      "title": "Affiches",
+      "desc": "Affiches et flyers imprimables"
+    },
+    "banners": {
+      "title": "Bannières",
+      "desc": "Bannières pour réseaux sociaux"
+    },
+    "documents": {
+      "title": "Documents",
+      "desc": "Brochures et communiqués"
+    },
+    "format": "Format",
+    "size": "Taille"
+  },
+  "form": {
+    "name": "Nom Complet",
+    "email": "Email",
+    "phone": "Téléphone",
+    "church": "Église / Organisation",
+    "type": "Type de Participation",
+    "type.pastor": "Pasteur",
+    "type.leader": "Leader d'Église",
+    "type.member": "Membre",
+    "type.visitor": "Visiteur",
+    "message": "Message",
+    "subject": "Sujet",
+    "submit": "Envoyer",
+    "registering": "Inscription en cours...",
+    "sending": "Envoi en cours...",
+    "required": "Ce champ est requis",
+    "invalid.email": "Email invalide",
+    "register.success": "Inscription réussie ! Nous vous contacterons bientôt.",
+    "contact.success": "Message envoyé ! Nous vous répondrons dans les plus brefs délais."
+  },
+  "common": {
+    "learnmore": "En Savoir Plus",
+    "viewall": "Voir Tout",
+    "readmore": "Lire Plus"
+  },
+  "footer": {
+    "about": {
+      "title": "À Propos",
+      "desc": "La Journée Internationale des Pasteurs est un événement annuel dédié à l'honneur et à l'encouragement des pasteurs du monde entier."
+    },
+    "about.desc": "La Journée Internationale des Pasteurs est un événement annuel dédié à l'honneur et à l'encouragement des pasteurs du monde entier.",
+    "quicklinks": "Liens Rapides",
+    "resources": "Ressources",
+    "contact": "Contact",
+    "rights": "Tous droits réservés"
+  }
 }

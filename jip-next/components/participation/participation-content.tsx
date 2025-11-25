@@ -11,7 +11,7 @@ export function ParticipationContent() {
         { icon: CalendarDays, label: t("participation.info.date"), value: t("hero.date") },
         { icon: MapPin, label: t("participation.info.location"), value: "Yaoundé, Cameroun" },
         { icon: Ticket, label: t("participation.info.free"), value: "✓" },
-        { icon: Globe, label: t("participation.info.languages"), value: t("participation.info.languages.value") },
+        { icon: Globe, label: t("participation.info.languages.label"), value: t("participation.info.languages.value") },
     ]
 
     return (

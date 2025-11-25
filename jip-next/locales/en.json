@@ -1,281 +1,287 @@
 {
-    "nav": {
-        "home": "Home",
-        "vision": "Vision",
-        "founder": "Founder",
-        "program": "Program",
-        "participation": "Participation",
-        "gallery": "Gallery",
-        "donations": "Donations",
-        "contact": "Contact",
-        "resources": "Resources"
-    },
+  "nav": {
+    "home": "Home",
+    "vision": "Vision",
+    "founder": "Founder",
+    "program": "Program",
+    "participation": "Participation",
+    "gallery": "Gallery",
+    "donations": "Donations",
+    "contact": "Contact",
+    "resources": "Resources"
+  },
+  "hero": {
+    "title": "International Pastors Day",
+    "subtitle": "Honoring Those Who Watch Over Our Souls",
+    "date": "December 12, 2025",
+    "location": "Yaoundé, Cameroon",
+    "cta": {
+      "register": "Register Now",
+      "program": "View Program"
+    }
+  },
+  "countdown": {
+    "until": "Countdown",
+    "days": "Days",
+    "hours": "Hours",
+    "minutes": "Minutes",
+    "seconds": "Seconds"
+  },
+  "section": {
+    "program": "Day's Program",
+    "testimonials": "Testimonials",
+    "founder": "The Founder"
+  },
+  "program": {
     "hero": {
-        "title": "International Pastors Day",
-        "subtitle": "Honoring Those Who Watch Over Our Souls",
-        "date": "December 12, 2025",
-        "location": "Yaoundé, Cameroon",
-        "cta": {
-            "register": "Register Now",
-            "program": "View Program"
-        }
+      "title": "Official Program",
+      "date": "December 12, 2025",
+      "subtitle": "A day full of teachings and celebrations"
     },
-    "countdown": {
-        "until": "Countdown",
-        "days": "Days",
-        "hours": "Hours",
-        "minutes": "Minutes",
-        "seconds": "Seconds"
+    "welcome": "Welcome and Registration",
+    "session1": "Plenary Session - Teaching",
+    "lunch": "Lunch Break",
+    "celebration": "Celebration and Recognition",
+    "closing": "Closing and Photos",
+    "morning": "Morning",
+    "afternoon": "Afternoon",
+    "evening": "Evening",
+    "08h00": {
+      "title": "Welcome and Registration",
+      "desc": "Participant registration and badge distribution"
     },
-    "section": {
-        "program": "Day's Program",
-        "testimonials": "Testimonials",
-        "founder": "The Founder"
+    "09h00": {
+      "title": "Official Opening",
+      "desc": "Welcome address and opening prayer"
     },
-    "program": {
-        "hero": {
-            "title": "Official Program",
-            "date": "December 12, 2025",
-            "subtitle": "A day full of teachings and celebrations"
-        },
-        "welcome": "Welcome and Registration",
-        "session1": "Plenary Session - Teaching",
-        "lunch": "Lunch Break",
-        "celebration": "Celebration and Recognition",
-        "closing": "Closing and Photos",
-        "morning": "Morning",
-        "afternoon": "Afternoon",
-        "evening": "Evening",
-        "08h00": {
-            "title": "Welcome and Registration",
-            "desc": "Participant registration and badge distribution"
-        },
-        "09h00": {
-            "title": "Official Opening",
-            "desc": "Welcome address and opening prayer"
-        },
-        "09h30": {
-            "title": "Plenary Session",
-            "desc": "Main teaching on pastoral ministry"
-        },
-        "11h00": {
-            "title": "Coffee Break",
-            "desc": "Fellowship and networking time"
-        },
-        "11h30": {
-            "title": "Thematic Workshops",
-            "desc": "Parallel sessions on different aspects of ministry"
-        },
-        "12h30": {
-            "title": "Lunch",
-            "desc": "Community meal"
-        },
-        "14h00": {
-            "title": "Celebration and Worship",
-            "desc": "Time of praise and worship"
-        },
-        "15h30": {
-            "title": "Recognition Ceremony",
-            "desc": "Honoring pastors for their faithful service"
-        },
-        "17h00": {
-            "title": "Closing and Photos",
-            "desc": "Closing remarks and group photos"
-        }
+    "09h30": {
+      "title": "Plenary Session",
+      "desc": "Main teaching on pastoral ministry"
     },
-    "founder": {
-        "name": "Pastor Patrick",
-        "title": "Founder of IPD",
-        "quote": "Honoring pastors is honoring God's heart for His people.",
-        "bio": "Pastor Patrick is a servant of God passionate about honoring and supporting spiritual leaders. His vision for International Pastors Day was born from a deep desire to see pastors encouraged and celebrated for their sacrificial service.",
-        "page": {
-            "subtitle": "Founder and Visionary of International Pastors Day"
-        },
-        "calling": {
-            "title": "The Divine Calling",
-            "text": "In 2008, God placed in Pastor Patrick's heart a clear vision: to create a unique moment to honor and encourage pastors worldwide. This vision became International Pastors Day, a movement that now touches thousands of God's servants."
-        },
-        "timeline": {
-            "2008": "Received the divine vision to honor pastors",
-            "2015": "First edition of International Pastors Day in Yaoundé",
-            "2020": "Movement expansion across Central Africa",
-            "2025": "Celebrating the 10th edition with over 500 pastors expected"
-        },
-        "journey": {
-            "title": "The Journey"
-        },
-        "message": {
-            "title": "Founder's Message",
-            "text": "Dear pastors, you are the shepherds God has chosen to watch over His flock. Your service, sacrifice, and faithfulness deserve to be honored. International Pastors Day is our way of saying thank you and encouraging you to continue your noble mission."
-        }
+    "11h00": {
+      "title": "Coffee Break",
+      "desc": "Fellowship and networking time"
     },
-    "vision": {
-        "hero": {
-            "title": "Our Vision",
-            "subtitle": "Honoring, Encouraging, and Equipping Pastors Worldwide"
-        },
-        "mission": {
-            "title": "Our Mission",
-            "text": "To create a unique moment of recognition and encouragement for all pastors, celebrating their faithful service and equipping them for an even more impactful ministry."
-        },
-        "values": {
-            "title": "Our Values",
-            "excellence": {
-                "title": "Excellence",
-                "text": "We strive for excellence in everything we do to worthily honor God's servants."
-            },
-            "unity": {
-                "title": "Unity",
-                "text": "We bring pastors together across denominations to celebrate our common faith."
-            },
-            "impact": {
-                "title": "Impact",
-                "text": "We create lasting impact in the lives of pastors and their communities."
-            },
-            "honor": {
-                "title": "Honor",
-                "text": "We honor those who watch over our souls with respect and gratitude."
-            }
-        },
-        "impact": {
-            "title": "Our Impact",
-            "text": "Since 2015, International Pastors Day has touched thousands of lives and continues to grow each year.",
-            "pastors": "Pastors Honored",
-            "countries": "Countries Represented",
-            "years": "Years of Existence"
-        }
+    "11h30": {
+      "title": "Thematic Workshops",
+      "desc": "Parallel sessions on different aspects of ministry"
     },
-    "participation": {
-        "hero": {
-            "title": "Join IPD 2025",
-            "subtitle": "Join us for this exceptional day of honor and celebration"
-        },
-        "info": {
-            "title": "Practical Information",
-            "date": "Date",
-            "location": "Location",
-            "free": "Free Participation",
-            "languages": "Languages",
-            "languages.value": "French & English"
-        },
-        "form": {
-            "title": "Registration Form"
-        }
+    "12h30": {
+      "title": "Lunch",
+      "desc": "Community meal"
     },
-    "gallery": {
-        "hero": {
-            "title": "Photo Gallery",
-            "subtitle": "Relive the highlights from previous editions"
-        },
-        "category": {
-            "all": "All",
-            "ceremonies": "Ceremonies",
-            "worship": "Worship",
-            "fellowship": "Fellowship",
-            "speakers": "Speakers"
-        }
+    "14h00": {
+      "title": "Celebration and Worship",
+      "desc": "Time of praise and worship"
     },
-    "donations": {
-        "hero": {
-            "title": "Support the Vision",
-            "subtitle": "Your generosity enables us to continue honoring pastors"
-        },
-        "why": {
-            "title": "Why Give?",
-            "text": "Your donations allow us to organize this exceptional event, cover logistical costs, and bless participating pastors. Every contribution, regardless of size, makes a difference."
-        },
-        "mobile": "Mobile Money",
-        "mobile.name": "MTN Mobile Money",
-        "mobile.number": "+237 6 00 00 00 00",
-        "mobile.name2": "Orange Money",
-        "mobile.number2": "+237 6 00 00 00 00",
-        "paypal": "PayPal",
-        "paypal.email": "donations@ipd.org",
-        "bank": "Bank Transfer",
-        "bank.name": "Bank Name",
-        "bank.account": "XXXXXXXXXX",
-        "bank.iban": "CM XX XXXX XXXX XXXX XXXX",
-        "impact": {
-            "title": "Your Impact",
-            "text": "Thanks to your support, we can continue to honor and encourage pastors who serve faithfully in their communities. Thank you for your generosity!"
-        }
+    "15h30": {
+      "title": "Recognition Ceremony",
+      "desc": "Honoring pastors for their faithful service"
     },
-    "contact": {
-        "hero": {
-            "title": "Contact Us",
-            "subtitle": "We're here to answer any questions or provide information"
-        },
-        "form": {
-            "title": "Send Us a Message"
-        },
-        "info": {
-            "title": "Contact Information",
-            "email": "Email",
-            "phone": "Phone",
-            "address": "Address",
-            "hours": "Hours",
-            "hours.value": "Mon - Fri: 9am - 5pm"
-        },
-        "social": "Follow Us"
+    "17h00": {
+      "title": "Closing and Photos",
+      "desc": "Closing remarks and group photos"
+    }
+  },
+  "founder": {
+    "name": "Pastor Patrick",
+    "title": "Founder of IPD",
+    "quote": "Honoring pastors is honoring God's heart for His people.",
+    "bio": "Pastor Patrick is a servant of God passionate about honoring and supporting spiritual leaders. His vision for International Pastors Day was born from a deep desire to see pastors encouraged and celebrated for their sacrificial service.",
+    "page": {
+      "subtitle": "Founder and Visionary of International Pastors Day"
     },
-    "resources": {
-        "hero": {
-            "title": "Media Kit",
-            "subtitle": "Download our official resources to promote IPD"
-        },
-        "download": {
-            "all": "Download All"
-        },
-        "logos": {
-            "title": "Logos",
-            "desc": "Official IPD logos"
-        },
-        "posters": {
-            "title": "Posters",
-            "desc": "Printable posters and flyers"
-        },
-        "banners": {
-            "title": "Banners",
-            "desc": "Social media banners"
-        },
-        "documents": {
-            "title": "Documents",
-            "desc": "Brochures and press releases"
-        },
-        "format": "Format",
-        "size": "Size"
+    "calling": {
+      "title": "The Divine Calling",
+      "text": "In 2008, God placed in Pastor Patrick's heart a clear vision: to create a unique moment to honor and encourage pastors worldwide. This vision became International Pastors Day, a movement that now touches thousands of God's servants."
+    },
+    "timeline": {
+      "2008": "Received the divine vision to honor pastors",
+      "2015": "First edition of International Pastors Day in Yaoundé",
+      "2020": "Movement expansion across Central Africa",
+      "2025": "Celebrating the 10th edition with over 500 pastors expected"
+    },
+    "journey": {
+      "title": "The Journey"
+    },
+    "message": {
+      "title": "Founder's Message",
+      "text": "Dear pastors, you are the shepherds God has chosen to watch over His flock. Your service, sacrifice, and faithfulness deserve to be honored. International Pastors Day is our way of saying thank you and encouraging you to continue your noble mission."
+    }
+  },
+  "vision": {
+    "hero": {
+      "title": "Our Vision",
+      "subtitle": "Honoring, Encouraging, and Equipping Pastors Worldwide"
+    },
+    "mission": {
+      "title": "Our Mission",
+      "text": "To create a unique moment of recognition and encouragement for all pastors, celebrating their faithful service and equipping them for an even more impactful ministry."
+    },
+    "values": {
+      "title": "Our Values",
+      "excellence": {
+        "title": "Excellence",
+        "text": "We strive for excellence in everything we do to worthily honor God's servants."
+      },
+      "unity": {
+        "title": "Unity",
+        "text": "We bring pastors together across denominations to celebrate our common faith."
+      },
+      "impact": {
+        "title": "Impact",
+        "text": "We create lasting impact in the lives of pastors and their communities."
+      },
+      "honor": {
+        "title": "Honor",
+        "text": "We honor those who watch over our souls with respect and gratitude."
+      }
+    },
+    "impact": {
+      "title": "Our Impact",
+      "text": "Since 2015, International Pastors Day has touched thousands of lives and continues to grow each year.",
+      "pastors": "Pastors Honored",
+      "countries": "Countries Represented",
+      "years": "Years of Existence"
+    }
+  },
+  "participation": {
+    "hero": {
+      "title": "Join IPD 2025",
+      "subtitle": "Join us for this exceptional day of honor and celebration"
+    },
+    "info": {
+      "title": "Practical Information",
+      "date": "Date",
+      "location": "Location",
+      "free": "Free Participation",
+      "languages": {
+        "label": "Languages",
+        "value": "French & English"
+      },
+      "languages.value": "French & English"
     },
     "form": {
-        "name": "Full Name",
-        "email": "Email",
-        "phone": "Phone",
-        "church": "Church / Organization",
-        "type": "Participation Type",
-        "type.pastor": "Pastor",
-        "type.leader": "Church Leader",
-        "type.member": "Member",
-        "type.visitor": "Visitor",
-        "message": "Message",
-        "subject": "Subject",
-        "submit": "Submit",
-        "registering": "Registering...",
-        "sending": "Sending...",
-        "required": "This field is required",
-        "invalid.email": "Invalid email",
-        "register.success": "Registration successful! We'll contact you soon.",
-        "contact.success": "Message sent! We'll respond as soon as possible."
-    },
-    "common": {
-        "learnmore": "Learn More",
-        "viewall": "View All",
-        "readmore": "Read More"
-    },
-    "footer": {
-        "about": "About",
-        "about.desc": "International Pastors Day is an annual event dedicated to honoring and encouraging pastors worldwide.",
-        "quicklinks": "Quick Links",
-        "resources": "Resources",
-        "contact": "Contact",
-        "rights": "All rights reserved"
+      "title": "Registration Form"
     }
+  },
+  "gallery": {
+    "hero": {
+      "title": "Photo Gallery",
+      "subtitle": "Relive the highlights from previous editions"
+    },
+    "category": {
+      "all": "All",
+      "ceremonies": "Ceremonies",
+      "worship": "Worship",
+      "fellowship": "Fellowship",
+      "speakers": "Speakers"
+    }
+  },
+  "donations": {
+    "hero": {
+      "title": "Support the Vision",
+      "subtitle": "Your generosity enables us to continue honoring pastors"
+    },
+    "why": {
+      "title": "Why Give?",
+      "text": "Your donations allow us to organize this exceptional event, cover logistical costs, and bless participating pastors. Every contribution, regardless of size, makes a difference."
+    },
+    "mobile": "Mobile Money",
+    "mobile.name": "MTN Mobile Money",
+    "mobile.number": "+237 6 00 00 00 00",
+    "mobile.name2": "Orange Money",
+    "mobile.number2": "+237 6 00 00 00 00",
+    "paypal": "PayPal",
+    "paypal.email": "donations@ipd.org",
+    "bank": "Bank Transfer",
+    "bank.name": "Bank Name",
+    "bank.account": "XXXXXXXXXX",
+    "bank.iban": "CM XX XXXX XXXX XXXX XXXX",
+    "impact": {
+      "title": "Your Impact",
+      "text": "Thanks to your support, we can continue to honor and encourage pastors who serve faithfully in their communities. Thank you for your generosity!"
+    }
+  },
+  "contact": {
+    "hero": {
+      "title": "Contact Us",
+      "subtitle": "We're here to answer any questions or provide information"
+    },
+    "form": {
+      "title": "Send Us a Message"
+    },
+    "info": {
+      "title": "Contact Information",
+      "email": "Email",
+      "phone": "Phone",
+      "address": "Address",
+      "hours": "Hours",
+      "hours.value": "Mon - Fri: 9am - 5pm"
+    },
+    "social": "Follow Us"
+  },
+  "resources": {
+    "hero": {
+      "title": "Media Kit",
+      "subtitle": "Download our official resources to promote IPD"
+    },
+    "download": {
+      "all": "Download All"
+    },
+    "logos": {
+      "title": "Logos",
+      "desc": "Official IPD logos"
+    },
+    "posters": {
+      "title": "Posters",
+      "desc": "Printable posters and flyers"
+    },
+    "banners": {
+      "title": "Banners",
+      "desc": "Social media banners"
+    },
+    "documents": {
+      "title": "Documents",
+      "desc": "Brochures and press releases"
+    },
+    "format": "Format",
+    "size": "Size"
+  },
+  "form": {
+    "name": "Full Name",
+    "email": "Email",
+    "phone": "Phone",
+    "church": "Church / Organization",
+    "type": "Participation Type",
+    "type.pastor": "Pastor",
+    "type.leader": "Church Leader",
+    "type.member": "Member",
+    "type.visitor": "Visitor",
+    "message": "Message",
+    "subject": "Subject",
+    "submit": "Submit",
+    "registering": "Registering...",
+    "sending": "Sending...",
+    "required": "This field is required",
+    "invalid.email": "Invalid email",
+    "register.success": "Registration successful! We'll contact you soon.",
+    "contact.success": "Message sent! We'll respond as soon as possible."
+  },
+  "common": {
+    "learnmore": "Learn More",
+    "viewall": "View All",
+    "readmore": "Read More"
+  },
+  "footer": {
+    "about": {
+      "title": "About",
+      "desc": "International Pastors Day is an annual event dedicated to honoring and encouraging pastors worldwide."
+    },
+    "about.desc": "International Pastors Day is an annual event dedicated to honoring and encouraging pastors worldwide.",
+    "quicklinks": "Quick Links",
+    "resources": "Resources",
+    "contact": "Contact",
+    "rights": "All rights reserved"
+  }
 }

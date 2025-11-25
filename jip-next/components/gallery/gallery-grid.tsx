@@ -2,8 +2,9 @@
 
 import { useState } from "react"
 import { useLanguage } from "@/contexts/language-context"
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogTrigger, DialogTitle } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden"
 import { cn } from "@/lib/utils"
 
 export function GalleryGrid() {
@@ -61,6 +62,9 @@ export function GalleryGrid() {
                             </div>
                         </DialogTrigger>
                         <DialogContent className="max-w-4xl border-none bg-transparent p-0 shadow-none">
+                            <VisuallyHidden>
+                                <DialogTitle>{image.alt}</DialogTitle>
+                            </VisuallyHidden>
                             <div className="relative aspect-video w-full overflow-hidden rounded-lg">
                                 <img
                                     src={image.src}
