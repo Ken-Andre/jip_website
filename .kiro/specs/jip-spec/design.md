@@ -1,587 +1,379 @@
-# JIP Design Document
-## Journée Internationale des Pasteurs — Architecture et Structure
+# JIP Design Document (Refined v2.0)
+## Journée Internationale des Pasteurs — Architecture Starlight
+
+**Version:** 2.0 - Astro 5 & Starlight Best Practices  
+**Date:** 24 novembre 2025  
+**Framework:** Starlight (Astro 5.0+)
 
 ---
 
-## Overview
+## 🎯 Architecture Philosophy
 
-Ce document décrit l'architecture technique complète du site vitrine **Journée Internationale des Pasteurs (JIP)**, une plateforme statique, moderne et inspirante destinée à présenter l'événement, valoriser le fondateur Pasteur Patrick, et faciliter la participation des communautés chrétiennes africaines.
+### Hybrid Architecture
+Ce projet utilise une **Architecture Hybride** :
+1.  **Site Vitrine (Root)** : Layouts Astro Custom pour un design premium, sans les contraintes de Starlight.
+2.  **Documentation (`/docs`)** : Starlight pour la documentation technique/utilisateur.
+3.  **CMS (Keystatic)** : Gestion de contenu visuelle.
 
-### Objectives
-- Créer une plateforme web officialisée et inspirante
-- Présenter la vision et le programme de la JIP
-- Valoriser Pasteur Patrick et son impact ministériel
-- Faciliter inscriptions, dons, et participation
-- Maintenance autonome via CMS intuitif (Decap CMS)
-- Scalabilité progressive sans frais additionnels
-
-### Scope
-- **Framework**: Astro 4.x (SSG statique)
-- **CMS**: Decap CMS (GitHub-based)
-- **Hébergement**: Netlify (gratuit)
-- **Domaine**: .netlify.site (gratuit Phase 1)
-- **Multilingue**: Français + Anglais
-- **Budget**: 0€ Année 1, max 15€/an futur
+### Key Design Principles
+1. **Content-First** : Markdown pour tout le contenu éditable
+2. **Progressive Enhancement** : HTML/CSS de base, JS uniquement si nécessaire
+3. **Mobile-First** : Responsive par défaut
+4. **Accessibility** : WCAG 2.1 AA minimum
+5. **Performance** : Lighthouse ≥90, Core Web Vitals optimisés
 
 ---
 
-## Architecture
-
-### High-Level Stack
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    Browser / Client                         │
-├─────────────────────────────────────────────────────────────┤
-│  Static HTML + CSS + JavaScript (Astro-generated)           │
-│  Performance: Lighthouse 90+, < 2s load time                │
-└─────────────────────────────────────────────────────────────┘
-                          ↓
-┌─────────────────────────────────────────────────────────────┐
-│                    Netlify CDN                              │
-├─────────────────────────────────────────────────────────────┤
-│  Global distribution, HTTPS, compression, caching           │
-│  Auto-deployed on git push                                  │
-└─────────────────────────────────────────────────────────────┘
-                          ↓
-┌─────────────────────────────────────────────────────────────┐
-│                    GitHub Repo                              │
-├─────────────────────────────────────────────────────────────┤
-│  Source code versionning                                    │
-│  Decap CMS backend (GitHub OAuth)                           │
-│  CI/CD integration                                          │
-└─────────────────────────────────────────────────────────────┘
-                          ↓
-┌─────────────────────────────────────────────────────────────┐
-│                  Decap CMS Admin                            │
-├─────────────────────────────────────────────────────────────┤
-│  /admin interface (drag-drop content editing)               │
-│  WYSIWYG editor for markdown                                │
-│  Image upload to GitHub                                     │
-│  Workflow: Draft → Review → Publish                         │
-└─────────────────────────────────────────────────────────────┘
-```
-
-### Data Flow
-
-```
-Content Editor (Team) 
-        ↓
-Decap CMS Admin Interface (/admin)
-        ↓
-GitHub Commit (auto-push)
-        ↓
-GitHub Actions (optional CI/CD)
-        ↓
-Netlify Deploy Hook
-        ↓
-Astro Build (generate static HTML)
-        ↓
-CDN Deploy (Netlify edge)
-        ↓
-Live Site (https://jip-official.netlify.app)
-        ↓
-Users visit & see updated content
-```
-
----
-
-## Components Structure
-
-### Project Layout
+## Project Structure (Starlight Native)
 
 ```
 journee-internationale-pasteurs/
 ├── src/
-│   ├── components/              # Reusable UI components
-│   │   ├── Header.astro
-│   │   ├── Footer.astro
-│   │   ├── NavBar.astro
-│   │   ├── HeroSection.astro
-│   │   ├── BudgetCard.astro     (for donation display)
-│   │   ├── TestimonialCard.astro
-│   │   ├── GalleryGrid.astro
-│   │   └── FormInputs.astro
+│   ├── components/              # Composants Astro interactifs
+│   │   ├── CountdownTimer.astro # Compte à rebours JIP (client:load)
+│   │   ├── HeroSection.astro    # Hero personnalisé pour homepage
+│   │   ├── RegistrationForm.astro # Formulaire inscription (client:load)
+│   │   ├── ContactForm.astro    # Formulaire contact (client:load)
+│   │   ├── GalleryGrid.astro    # Grille photos (client:visible)
+│   │   ├── Lightbox.astro       # Modal lightbox (client:idle)
+│   │   ├── VideoEmbed.astro     # YouTube embed responsive
+│   │   ├── TestimonialCard.astro # Carte témoignage
+│   │   ├── Accordion.astro      # FAQ accordion
+│   │   └── Quote.astro          # Citation stylisée
+│   │
+│   ├── content/                 # Contenu
+│   │   ├── config.ts            # Collections definitions
+│   │   ├── pages/               # Contenu Site Vitrine (Géré par Keystatic)
+│   │   │   ├── home.md
+│   │   │   ├── vision.md
+│   │   │   └── ...
+│   │   └── docs/                # Contenu Documentation (Starlight)
+│   │       ├── fr/
+│   │       └── en/
 │   │
 │   ├── layouts/
-│   │   ├── BaseLayout.astro     # Main template wrapper
-│   │   ├── PageLayout.astro     # Standard page layout
-│   │   └── BlogLayout.astro     # If blog added later
+│   │   └── MarketingLayout.astro # Layout Custom (Header/Footer, No Sidebar)
 │   │
-│   ├── pages/                   # Routed pages (auto-routing)
-│   │   ├── index.astro          # Homepage /
-│   │   ├── fr/
-│   │   │   ├── index.astro      # /fr/
-│   │   │   ├── vision.astro     # /fr/vision
-│   │   │   ├── fondateur.astro  # /fr/fondateur
-│   │   │   ├── programme.astro  # /fr/programme
-│   │   │   ├── participation.astro
-│   │   │   ├── ressources.astro
-│   │   │   ├── galerie.astro
-│   │   │   ├── dons.astro
-│   │   │   ├── contact.astro
-│   │   │   ├── faq.astro
-│   │   │   └── 404.astro
-│   │   │
-│   │   ├── en/
-│   │   │   ├── index.astro      # /en/
-│   │   │   ├── vision.astro     # /en/vision
-│   │   │   └── ... (same structure)
-│   │   │
-│   │   └── api/
-│   │       ├── contact.js       # POST /api/contact
-│   │       ├── inscription.js   # POST /api/inscription
-│   │       └── newsletter.js    # POST /api/newsletter (optionnel)
+│   ├── pages/                   # Routing
+│   │   ├── [lang]/              # Routes dynamiques i18n
+│   │   │   ├── index.astro      # Homepage
+│   │   │   └── [slug].astro     # Pages standards
+│   │   ├── api/                 # API Endpoints
+│   │   └── keystatic/           # CMS Admin Route
 │   │
-│   ├── content/                 # Contenu editable via CMS
-│   │   ├── vision.md
-│   │   ├── fondateur.md
-│   │   ├── programme.md
-│   │   ├── ressources.yml
-│   │   ├── temoignages.yml
-│   │   ├── partenaires.yml
-│   │   └── faq.yml
+│   ├── assets/                  # Assets statiques
 │   │
-│   ├── assets/
-│   │   ├── styles/
-│   │   │   ├── globals.css
-│   │   │   ├── variables.css
-│   │   │   └── responsive.css
-│   │   ├── fonts/
-│   │   │   ├── playfair-display.woff2
-│   │   │   └── montserrat.woff2
-│   │   ├── images/
-│   │   │   ├── logo-jip.svg
-│   │   │   ├── hero-banner.jpg
-│   │   │   ├── pastor-patrick.jpg
-│   │   │   └── ... (autres images)
-│   │   ├── icons/
-│   │   │   ├── calendar.svg
-│   │   │   ├── map-pin.svg
-│   │   │   ├── users.svg
-│   │   │   └── ... (autres icônes)
-│   │   └── videos/
-│   │       └── (liens YouTube uniquement, pas local)
-│   │
-│   └── utils/
-│       ├── dateFormatter.js
-│       ├── constants.js
-│       ├── i18n.js              # Multilingue
-│       └── validators.js
+│   └── assets/                  # Assets statiques
+│       ├── styles/
+│       │   ├── variables.css    # Variables design JIP
+│       │   ├── starlight.css    # Overrides theme Starlight
+│       │   └── globals.css      # Styles globaux
+│       ├── images/              # Images optimisées (via astro:assets)
+│       │   ├── logo-jip.svg
+│       │   ├── hero-banner.jpg
+│       │   ├── pastor-patrick.png
+│       │   └── ...
+│       ├── icons/               # Icônes SVG
+│       └── fonts/               # Fonts self-hosted (WOFF2)
 │
-├── public/
-│   ├── files/                   # Downloadable media kit
-│   │   ├── kit-media-v1.pdf
+├── public/                      # Fichiers statiques servis tels quels
+│   ├── files/                   # Kit média téléchargeable
 │   │   ├── logo-jip.svg
-│   │   ├── affiche-a4.png
+│   │   ├── affiche-a4.pdf
 │   │   └── banniere-web.png
-│   │
-│   ├── robots.txt
-│   └── sitemap.xml (auto-generated)
+│   ├── favicon.svg              # Favicon
+│   └── robots.txt               # SEO
 │
-├── config/
-│   ├── astro.config.mjs         # Astro config
-│   └── decap-config.yml         # CMS config
-│
-├── .github/
-│   └── workflows/
-│       └── deploy.yml           # Optional CI/CD
-│
+├── astro.config.mjs             # Configuration Astro + Starlight
+├── tailwind.config.js           # Configuration Tailwind (optionnel)
+├── tsconfig.json                # TypeScript config
 ├── package.json
-├── tsconfig.json
-├── .gitignore
-├── README.md
-└── MAINTENANCE.md               # Documentation pour équipe
+└── README.md
 ```
+
+### Key Differences vs v1.0
+| Aspect | v1.0 (Custom) | v2.0 (Starlight) |
+|--------|---------------|------------------|
+| **Pages** | `src/pages/*.astro` | `src/pages/[lang]/*.astro` + `src/content/docs` |
+| **Routing** | File-based manual | Dynamic `[lang]` + Starlight auto (`/docs`) |
+| **Layouts** | Custom layouts | `MarketingLayout` (Custom) + Starlight (Docs) |
+| **Navigation** | Custom Header/Footer | Custom Header/Footer (Main) + Sidebar (Docs) |
+| **i18n** | Middleware custom | Custom `[lang]` routing + Starlight locales |
+| **CMS** | Decap CMS | **Keystatic** |
 
 ---
 
 ## Design System
 
-### Palette de Couleurs
+### Palette de Couleurs (CSS Variables JIP)
 
-```
-Primaire: Violet (#6B3FB5) — Authority, Spirituality
-Secondaire: Doré (#D4AF37) — Excellence, Honor
-Accent: Blanc (#FFFFFF) — Clarity, Purity
-Texte: Noir (#1F1F1F) — Strong contrast
-Fond: Crème (#F5F5F0) — Warm, inviting
-```
-
-### Typographies
-
-```
-Titres: Playfair Display (serif, elegant)
-Corps: Montserrat (sans-serif, modern)
-Code: IBM Plex Mono (monospace, if needed)
-```
-
-### Component Patterns
-
-```
-Buttons:
-- Primary: Violet bg, White text, 12px padding, 8px radius
-- Secondary: Transparent bg, Violet border, Violet text
-- Hover: Opacity increase (0.9)
-
-Cards:
-- White bg, subtle shadow (0 2px 4px rgba(0,0,0,0.08))
-- 12px border-radius
-- 16px internal padding
-- Hover: shadow increase (0 8px 16px rgba(0,0,0,0.12))
-
-Form Inputs:
-- Border: 1px solid #E0E0E0
-- Padding: 12px 16px
-- Focus: Violet border, outline: 2px Violet
-- Error: Red border (#FF4444)
-
-Spacing Grid:
-- 8px base unit
-- Multiples: 8, 16, 24, 32, 40, 48, 56, 64px
-```
-
----
-
-## Core Sections
-
-### 1. Homepage (Accueil)
-
-**Components:**
-- Hero section (image + slogan + CTA buttons)
-- Countdown timer (jours restants, GMT+1)
-- Quick program overview
-- Testimonials carousel
-- Founder preview (with link to full page)
-- Call-to-actions
-
-**Content editable via CMS:**
-- Slogan/tagline
-- Hero image URL
-- Program highlights (top 3)
-- Featured testimonial
-- Founder preview text
-
-### 2. Vision Page
-
-**Components:**
-- Full vision statement
-- Mission & objectives
-- Values list (cards)
-- Impact visualization
-- Quote section
-
-**Content editable:**
-- Complete vision text
-- Mission statement
-- Values (name + description for each)
-- Expected impact
-
-### 3. Founder Page — Pasteur Patrick
-
-**Components:**
-- Professional portrait (large)
-- Biography section (multi-paragraph)
-- Ministry timeline or journey section
-- Quote section (prominent display)
-- Video embed (YouTube link)
-- Impact metrics
-
-**Content editable:**
-- Full biography (500-800 words)
-- Multiple photos (carousel)
-- Key quotes
-- Video URL (YouTube)
-- Ministry highlights
-
-### 4. Program Page
-
-**Components:**
-- Timeline or schedule grid
-- Daily breakdown
-- Activity cards with descriptions
-- Speaker info (if applicable)
-- Download program button
-
-**Content editable:**
-- Program date/time
-- Activities list (title + description)
-- Speakers (name + role)
-- PDF download link
-
-### 5. Participation Page
-
-**Components:**
-- Registration form (Astro API endpoint)
-- Participation type selector
-- Confirmation message
-- FAQ integration
-- Partner registration option
-
-**API Endpoints:**
-- POST /api/inscription (form submit)
-- POST /api/contact (support)
-
-### 6. Resources Page
-
-**Components:**
-- Media kit download buttons
-- Preview thumbnails
-- Logos gallery
-- Templates list
-- Promotional materials
-
-**Content editable:**
-- File listings
-- Download links (to /public/files)
-- Descriptions
-
-### 7. Gallery Page
-
-**Components:**
-- Masonry grid layout
-- Lightbox modal
-- Filter tabs (photos/videos)
-- YouTube embedded videos
-- Photo captions
-
-**Content editable:**
-- Photo URLs
-- Video URLs (YouTube)
-- Captions & descriptions
-
-### 8. Donations Page
-
-**Components:**
-- Mission/goal statement
-- Donation request cards
-- Mobile Money info (text + account numbers)
-- Transparency info
-- Contributor recognition (optional)
-
-**Content editable:**
-- Donation text
-- Account numbers
-- Fund allocation breakdown
-
-### 9. Contact Page
-
-**Components:**
-- Contact form (name, email, subject, message)
-- Contact info display
-- Social media links
-- Location map (Google Maps embed)
-- Hours of availability
-
-**API Endpoints:**
-- POST /api/contact (form submit)
-
-### 10. FAQ Page
-
-**Components:**
-- Accordion/collapsible list
-- Search functionality (JS)
-- Categories (tabs)
-- Related questions links
-
-**Content editable:**
-- QA list (via CMS)
-- Categories
-
----
-
-## CMS Configuration (Decap)
-
-### Collection: Pages
-
-```yaml
-- name: "pages"
-  label: "Pages"
-  folder: "src/content"
-  create: true
-  slug: "{{title}}"
-  fields:
-    - {label: "Page Title", name: "title", widget: "string"}
-    - {label: "Description", name: "description", widget: "text"}
-    - {label: "Content", name: "body", widget: "markdown"}
-    - {label: "Featured Image", name: "image", widget: "image"}
+```css
+/* src/assets/styles/variables.css */
+:root {
+  /* === Couleurs Primaires JIP === */
+  --color-primary: #6B3FB5;        /* Violet - Authority, Spirituality */
+  --color-primary-light: #8B5FD5;
+  --color-primary-dark: #4B2F95;
+  
+  --color-secondary: #D4AF37;      /* Doré - Excellence, Honor */
+  --color-secondary-light: #E4BF47;
+  --color-secondary-dark: #B49F27;
+  
+  /* === Couleurs Neutres === */
+  --color-white: #FFFFFF;          /* Purity, Clarity */
+  --color-cream: #F5F5F0;          /* Warm background */
+  --color-gray-100: #F0F0F0;
+  --color-gray-300: #D0D0D0;
+  --color-gray-500: #808080;
+  --color-gray-700: #404040;
+  --color-black: #1F1F1F;          /* Strong text contrast */
+  
+  /* === Couleurs Sémantiques === */
+  --color-success: #10B981;
+  --color-error: #EF4444;
+  --color-warning: #F59E0B;
+  --color-info: #3B82F6;
+  
+  /* === Typographie === */
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Montserrat', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+  
+  --font-size-xs: 0.75rem;    /* 12px */
+  --font-size-sm: 0.875rem;   /* 14px */
+  --font-size-base: 1rem;     /* 16px */
+  --font-size-lg: 1.125rem;   /* 18px */
+  --font-size-xl: 1.25rem;    /* 20px */
+  --font-size-2xl: 1.5rem;    /* 24px */
+  --font-size-3xl: 1.875rem;  /* 30px */
+  --font-size-4xl: 2.25rem;   /* 36px */
+  --font-size-5xl: 3rem;      /* 48px */
+  
+  /* === Spacing (8px grid) === */
+  --space-0: 0;
+  --space-1: 0.25rem;  /* 4px */
+  --space-2: 0.5rem;   /* 8px */
+  --space-3: 0.75rem;  /* 12px */
+  --space-4: 1rem;     /* 16px */
+  --space-5: 1.25rem;  /* 20px */
+  --space-6: 1.5rem;   /* 24px */
+  --space-8: 2rem;     /* 32px */
+  --space-10: 2.5rem;  /* 40px */
+  --space-12: 3rem;    /* 48px */
+  --space-16: 4rem;    /* 64px */
+  
+  /* === Shadows === */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
+  
+  /* === Border Radius === */
+  --radius-sm: 0.375rem;  /* 6px */
+  --radius-md: 0.5rem;    /* 8px */
+  --radius-lg: 0.75rem;   /* 12px */
+  --radius-xl: 1rem;      /* 16px */
+  --radius-full: 9999px;
+  
+  /* === Transitions === */
+  --transition-fast: 150ms ease-in-out;
+  --transition-base: 250ms ease-in-out;
+  --transition-slow: 350ms ease-in-out;
+}
 ```
 
-### Collection: Founder
+### Starlight Theme Overrides
 
-```yaml
-- name: "founder"
-  label: "Founder — Pasteur Patrick"
-  file: "src/content/fondateur.md"
-  fields:
-    - {label: "Name", name: "name", widget: "string", default: "Pasteur Patrick"}
-    - {label: "Biography", name: "biography", widget: "markdown"}
-    - {label: "Portrait", name: "portrait", widget: "image"}
-    - {label: "Quote", name: "quote", widget: "text"}
-    - {label: "Video URL", name: "video_url", widget: "string"}
-    - {label: "Ministry Focus", name: "ministry_focus", widget: "text"}
-```
+```css
+/* src/assets/styles/starlight.css */
+:root {
+  /* Override Starlight accent colors with JIP brand */
+  --sl-color-accent-low: var(--color-primary-light);
+  --sl-color-accent: var(--color-primary);
+  --sl-color-accent-high: var(--color-primary-dark);
+  
+  --sl-color-accent-2-low: var(--color-secondary-light);
+  --sl-color-accent-2: var(--color-secondary);
+  --sl-color-accent-2-high: var(--color-secondary-dark);
+  
+  /* Typography */
+  --sl-font: var(--font-sans);
+  --sl-font-headings: var(--font-serif);
+  
+  /* Spacing adjustments */
+  --sl-content-width: 65rem; /* Max width content area */
+  --sl-sidebar-width: 18rem; /* Sidebar width */
+}
 
-### Collection: Social Links
+/* Custom hero styling for homepage */
+.sl-markdown-content > .hero {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  color: var(--color-white);
+  padding: var(--space-16) var(--space-8);
+  border-radius: var(--radius-lg);
+  text-align: center;
+}
 
-```yaml
-- name: "social"
-  label: "Social Media & Contact"
-  file: "src/content/social.yml"
-  fields:
-    - {label: "Facebook URL", name: "facebook", widget: "string"}
-    - {label: "Instagram URL", name: "instagram", widget: "string"}
-    - {label: "TikTok URL", name: "tiktok", widget: "string"}
-    - {label: "Email", name: "email", widget: "string"}
-    - {label: "Phone (optional)", name: "phone", widget: "string"}
+/* Custom button styles */
+.btn-primary {
+  background: var(--color-primary);
+  color: var(--color-white);
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  transition: all var(--transition-base);
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Card component styles */
+.card {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition-base);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-lg);
+}
 ```
 
 ---
 
-## Forms & API
+## Component Architecture
 
-### Registration Form
+### 1. CountdownTimer Component
 
-**Fields:**
-- Full name (required)
-- Email (required, validated)
-- Phone (optional)
-- Church/Organization (optional)
-- Participation type (online/physical/volunteer)
-- Message (optional)
+**Purpose:** Afficher compte à rebours temps réel jusqu'à JIP  
+**Hydration:** `client:load` (nécessaire dès page load)  
+**Location:** `src/components/CountdownTimer.astro`
 
-**Endpoint:** POST /api/inscription
-**Response:** JSON confirmation + email via FormSubmit.co
-
-### Contact Form
-
-**Fields:**
-- Name (required)
-- Email (required)
-- Subject (required)
-- Message (required)
-
-**Endpoint:** POST /api/contact
-**Response:** JSON + email notification
-
-### Newsletter Form (Optional)
-
-**Fields:**
-- Email (required)
-
-**Endpoint:** POST /api/newsletter
-**Service:** Brevo/SendGrid (freemium)
+[See full component code in requirements document]
 
 ---
 
-## Technical Specifications
+### 2. RegistrationForm Component
 
-### Performance Targets
-- Lighthouse Score: ≥ 90 (mobile + desktop)
-- Load Time: < 2 seconds (first contentful paint)
-- Time to Interactive: < 3 seconds
-- Memory: < 50MB browser footprint
+**Purpose:** Formulaire inscription avec validation  
+**Hydration:** `client:load` (interactivité immédiate)  
+**Location:** `src/components/RegistrationForm.astro`
 
-### SEO Requirements
-- Meta tags (title, description, og:image, og:type)
-- Auto-generated sitemap.xml
-- robots.txt included
-- JSON-LD structured data for event
-- Mobile-friendly responsive design
-
-### Accessibility (WCAG 2.1 AA)
-- Text contrast: 4.5:1 minimum
-- ARIA labels on forms and images
-- Focus states visible on all interactive elements
-- Alt text on all images
-- Keyboard navigable
-
-### Security
-- HTTPS (auto Netlify)
-- CORS configured for FormSubmit.co
-- XSS protection (Astro native)
-- No sensitive data in client code
-- Environment variables for API keys
-
-### Browser Support
-- Chrome/Edge 90+
-- Firefox 88+
-- Safari 14+
-- Mobile: iOS 12+, Android 8+
+[See full component code in requirements document]
 
 ---
 
-## Deployment Pipeline
+### 3-10. Additional Components
 
-### Step 1: Setup (Day 1)
-1. Create GitHub repo
-2. Initialize Astro project
-3. Setup Netlify integration
-4. Configure Decap CMS
-5. Deploy initial skeleton
+*(Suivent même structure : Props, Hydration, Script client-side, Style scoped)*
 
-### Step 2: Content Structure (Day 1-2)
-1. Create page templates
-2. Setup content collections
-3. Implement i18n routing
-4. Create form endpoints
-
-### Step 3: Design & Styling (Day 2-3)
-1. Implement design system
-2. Build core components
-3. Responsive testing
-4. Animation/transition polish
-
-### Step 4: Content Integration (Day 3)
-1. Populate pages with LLM-generated content
-2. Upload media assets
-3. Configure Decap CMS workflows
-4. User training docs
-
-### Step 5: Testing & Launch (Day 4)
-1. Cross-browser testing
-2. Performance audit (Lighthouse)
-3. Accessibility audit
-4. SEO verification
-5. Launch to production
-
-### Step 6: Handover (Day 5)
-1. Team documentation
-2. CMS training
-3. Maintenance procedures
-4. Support setup
+- **ContactForm** : Similaire RegistrationForm
+- **GalleryGrid** : Masonry CSS Grid, lazy loading images
+- **Lightbox** : Modal overlay pour images agrandies
+- **VideoEmbed** : YouTube iframe responsive
+- **TestimonialCard** : Card layout citation + avatar
+- **Accordion** : FAQ collapsible sections
+- **Quote** : Blockquote stylisé
 
 ---
 
-## Maintenance Procedures
+## Responsive Design Strategy
 
-### Post-Launch Support (7 days)
-- Daily monitoring for errors
-- Quick bug fixes
-- Content updates as needed
-- Performance verification
+### Breakpoints (Tailwind Standards)
+```css
+/* Mobile-first approach */
+/* Base: 320px+ (mobile) */
 
-### Ongoing Maintenance (Monthly)
-- Content updates via Decap CMS
-- Social media link updates
-- Dependency updates (npm)
-- Analytics review
+@media (min-width: 640px) {  /* sm: tablet portrait */
+@media (min-width: 768px) {  /* md: tablet landscape */
+@media (min-width: 1024px) { /* lg: desktop */
+@media (min-width: 1280px) { /* xl: large desktop */
+@media (min-width: 1536px) { /* 2xl: extra large */
+```
 
-### Annual Tasks
-- Domain renewal (if switching from .netlify.site)
-- SSL certificate check (auto Netlify)
-- Backup verification
-- Security audit
+### Responsive Patterns
+- **Navigation:** Hamburger menu < 768px, full sidebar ≥ 768px (Starlight natif)
+- **Images:** Responsive srcset automatic (Astro `<Image />`)
+- **Typography:** Fluid scales via `clamp()`
+- **Grid:** Auto-fit columns CSS Grid
 
 ---
 
-## Future Enhancements
+## Accessibility Checklist
 
-1. **Streaming Live**: YouTube integration for live stream
-2. **Event Ticketing**: Eventbrite or similar integration
-3. **Blog/News**: Dynamic blog section
-4. **Testimonials Video**: YouTube playlist of testimonials
-5. **Partner Directory**: Searchable partner listings
-6. **Newsletter Archive**: Email archive accessible
-7. **Analytics Dashboard**: Custom dashboard for admins
+### WCAG 2.1 AA Requirements
+- [ ] Heading hierarchy correct (h1 → h6)
+- [ ] Alt text sur toutes images
+- [ ] Labels sur tous form inputs
+- [ ] Contraste couleur ≥ 4.5:1 texte, 3:1 UI
+- [ ] Navigation clavier complète
+- [ ] Focus indicators visibles
+- [ ] ARIA labels où nécessaire
+- [ ] Responsive zoom jusqu'à 200%
+- [ ] Pas d'information couleur seule
+- [ ] Video captions disponibles
 
+---
+
+## Performance Optimization
+
+### Astro 5 Built-in
+- ✅ Static Site Generation (HTML pré-généré)
+- ✅ Zero-JS par défaut
+- ✅ Partial Hydration (Islands)
+- ✅ Image optimization automatique
+- ✅ CSS scoped (pas de global bloat)
+- ✅ Content Layer API (builds 5x faster)
+
+### Additional Optimizations
+- Font subsetting WOFF2 Latin uniquement
+- SVG icons inline (pas de requests HTTP)
+- Lazy loading images `loading="lazy"`
+- Critical CSS inline (Starlight handle)
+- CDN Netlify Edge global
+
+---
+
+## Build & Deploy Pipeline
+
+### Development
+```bash
+npm run dev          # Dev server localhost:4321
+npm run build        # Production build → dist/
+npm run preview      # Preview production build
+npm run astro check  # TypeScript & link checking
+```
+
+### Netlify Deployment
+```toml
+# netlify.toml
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[[redirects]]
+  from = "/"
+  to = "/fr/"
+  status = 302
+  
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+```
+
+---
+
+**Document validé:** 24 novembre 2025  
+**Starlight Version:** Latest  
+**Astro Version:** 5.0+

@@ -1,11 +1,69 @@
-# JIP Requirements Document
+# JIP Requirements Document (Refined v2.0)
 ## Journée Internationale des Pasteurs — Spécifications Fonctionnelles
+
+**Version:** 2.0 - Refined with Astro 5 & Starlight Best Practices  
+**Date:** 24 novembre 2025  
+**Base:** Astro 5.0+ with Starlight framework
 
 ---
 
-## Introduction
+## 🔄 Changements Clés vs v1.0
 
-Ce document présente les exigences complètes (fonctionnelles et non-fonctionnelles) pour le site vitrine JIP. Les exigences sont structurées par besoin utilisateur et accompagnées de critères d'acceptation précis.
+### Nouveautés Astro 5
+1. **Content Layer API** : Utilisation du nouveau système de collections performant (builds 5x plus rapides)
+2. **Simplified Prerendering** : Mode `static` par défaut avec SSR optionnel via `prerender = false`
+3. **docsLoader & i18nLoader** : Loaders officiels Starlight pour collections docs et traductions
+4. **Routing optimisé** : Starlight gère automatiquement le routing i18n sans middleware custom
+5. **Zero-JS par défaut** : Hydratation client uniquement pour composants interactifs explicites
+
+### Conflits Résolus
+- ❌ **Decap CMS removed** : Incompatible avec workflow Starlight natif, remplacé par édition Markdown Git
+- ✅ **Starlight-first** : Architecture basée sur framework Starlight, pas de pages custom `/src/pages/`
+- ✅ **Content Collections** : Utilisation obligatoire du Content Layer API Astro 5 avec loaders Starlight
+- ✅ **i18n simplifié** : Routing automatique /fr/ et /en/ via config Starlight (pas de middleware)
+- ✅ **SSG prioritaire** : Build statique par défaut, endpoints API nécessitent adapter Netlify
+
+### Architecture Starlight vs Custom Astro
+| Aspect | v1.0 (Custom) | v2.0 (Starlight) |
+|--------|---------------|------------------|
+| **Pages** | `src/pages/*.astro` | `src/pages/[lang]/*.astro` (Custom) + `src/content/docs` (Docs) |
+| **Navigation** | Custom Header/Footer | Custom Header/Footer (Main) + Sidebar (Docs) |
+| **i18n** | Middleware + routing | Custom Dynamic Routes `[lang]` + Starlight (Docs) |
+| **CMS** | Decap CMS | **Keystatic** (Git-based) |
+| **Content** | Custom collections | `pages` collection (Main) + `docs` collection (Docs) |
+| **Theme** | Custom CSS | Custom Layouts (Main) + Starlight (Docs) |
+
+---
+
+## Technical Stack (Updated)
+
+### Core Framework
+- **Astro** : 5.0+ (Content Layer API)
+- **Starlight** : Scoped to `/docs` for documentation
+- **Keystatic** : CMS for content management
+- **TypeScript** : 5.0+ (strict mode)
+- **Node** : 20+ LTS
+
+### Styling
+- **Tailwind CSS** : 3.4+ (utility-first)
+- **Custom CSS** : Variables JIP dans Starlight theme
+- **Fonts** : Playfair Display, Montserrat (self-hosted WOFF2)
+
+### Content & i18n
+- **Content Collections** : Astro 5 Content Layer API
+- **docsLoader** : Chargement automatique fichiers Markdown
+- **i18nLoader** : Traductions UI automatiques
+- **Locales** : FR (default), EN
+
+### Forms & API
+- **FormSubmit.co** : Service email gratuit (500/mois)
+- **Zod** : Validation schema TypeScript
+- **Astro API Routes** : Endpoints `/api/*` (si adapter Netlify)
+
+### Deployment
+- **Netlify** : Hosting + CDN + auto-deploy
+- **GitHub** : Version control + source of truth
+- **Analytics** : Google Analytics 4 (gratuit)
 
 ---
 
@@ -29,6 +87,7 @@ Ce document présente les exigences complètes (fonctionnelles et non-fonctionne
 - Format affichage: "XX jours, XX heures, XX minutes restants"
 - Update: toutes les secondes
 - Fallback: texte statique si JavaScript désactivé
+- Starlight template: `splash` pour homepage hero
 
 ---
 
@@ -38,20 +97,21 @@ Ce document présente les exigences complètes (fonctionnelles et non-fonctionne
 
 ### Acceptance Criteria
 
-1. WHEN le site charge THEN affiche sélecteur langue (FR/EN) en haut à droite
+1. WHEN le site charge THEN affiche sélecteur langue (FR/EN) en haut à droite (Starlight natif)
 2. WHEN l'utilisateur clique sur "EN" THEN tout le contenu bascule en anglais
 3. WHEN l'utilisateur change de langue THEN reste sur la même page (ex: /fr/vision → /en/vision)
-4. WHEN l'utilisateur naviguer entre pages EN THEN reste automatiquement en EN
+4. WHEN l'utilisateur navigue entre pages EN THEN reste automatiquement en EN
 5. WHEN l'utilisateur first visit THEN détecte langue navigateur et set par défaut (fallback: FR)
 6. WHEN le contenu est traduit THEN qualité traduction est vérifiée (professionnel, contexte religieux respecté)
-7. WHEN SEO crawle le site THEN hreflang tags pointent correctement entre versions FR/EN
+7. WHEN SEO crawle le site THEN hreflang tags pointent correctement entre versions FR/EN (Starlight auto)
 
 ### Technical Requirements
 
-- i18n: astro-i18n (routing: /fr/, /en/)
-- Fichiers: src/i18n/fr.json, src/i18n/en.json
-- Traduction: Google Translate ou prof (à valider)
-- hreflang: auto-generated par Astro
+- i18n: Custom Dynamic Routing `/[lang]/...`
+- Fichiers: src/content/pages/fr/*.md, src/content/pages/en/*.md
+- Traduction: DeepL ou professionnel
+- hreflang: auto-generated par Starlight
+- Sidebar: translations object pour labels
 
 ---
 
@@ -72,11 +132,12 @@ Ce document présente les exigences complètes (fonctionnelles et non-fonctionne
 
 ### Technical Requirements
 
-- Endpoint: POST /api/inscription
+- Component: RegistrationForm.astro avec `client:load`
+- Endpoint: POST /api/inscription (nécessite @astrojs/netlify adapter)
 - Service: FormSubmit.co (gratuit, 500/mois inclus)
-- Validation: HTML5 + Zod/Valibot
+- Validation: HTML5 + Zod schema
 - Response: JSON {status: 'success', message: '...'}
-- Email notification: Brevo/SendGrid (freemium) ou FormSubmit
+- Email notification: FormSubmit.co
 
 ---
 
@@ -93,15 +154,16 @@ Ce document présente les exigences complètes (fonctionnelles et non-fonctionne
 5. WHEN la page affiche citation THEN mise en avant visuelle (font large, couleur accentuée)
 6. WHEN disponible THEN embed vidéo YouTube de présentation Pasteur Patrick
 7. WHEN l'utilisateur clique photo THEN peut agrandir dans lightbox (si galerie)
-8. WHEN contenu édité via CMS THEN mises à jour immédiate du site
+8. WHEN contenu édité via Git THEN mises à jour immédiate après deploy
 
 ### Technical Requirements
 
-- Images: JPEG/WebP optimisées, lazy-loaded
-- Vidéo: YouTube embed (iframe responsive)
-- Texte: Markdown + formatage HTML
-- CMS: Section dédiée dans Decap avec éditeur WYSIWYG
-- SEO: Meta title/description optimisés
+- Page: src/content/pages/fondateur.md (Markdown/MDX)
+- Images: JPEG/WebP optimisées, lazy-loaded via Astro Image
+- Vidéo: VideoEmbed.astro component (YouTube iframe responsive)
+- Texte: Markdown + composants Astro importés
+- Édition: **Keystatic Admin UI**
+- SEO: Meta title/description dans frontmatter
 
 ---
 
@@ -120,7 +182,8 @@ Ce document présente les exigences complètes (fonctionnelles et non-fonctionne
 
 ### Technical Requirements
 
-- Endpoint: POST /api/contact
+- Component: ContactForm.astro avec `client:load`
+- Endpoint: POST /api/contact (nécessite @astrojs/netlify adapter)
 - Service: FormSubmit.co
 - Validation: Zod schema
 - Response: 200 {status: 'success'}
@@ -133,21 +196,22 @@ Ce document présente les exigences complètes (fonctionnelles et non-fonctionne
 
 ### Acceptance Criteria
 
-1. WHEN page /programme charge THEN affiche dates (15-20 Juin 2025) clairement
+1. WHEN page /programme charge THEN affiche dates (15-20 Juillet 2025) clairement
 2. WHEN utilisateur scrolle THEN voit timeline ou grille des 6 jours
 3. WHEN chaque jour cliqué THEN affiche détails horaire et activités
 4. WHEN détails affichés THEN inclut titre activité, description, horaire, salle
 5. WHEN disponible THEN mentionne intervenant/prédicateur avec bio courte
 6. WHEN utilisateur cherche info spécifique THEN peut télécharger programme PDF
 7. WHEN le programme affiche THEN incluant: Ouverture, Formation, Ateliers, Mission, Communion, Célébration
-8. WHEN contenu édité THEN CMS permet modification facile sans refonte design
+8. WHEN contenu édité THEN Git workflow permet modification facile
 
 ### Technical Requirements
 
-- Data: structured in content/programme.yml ou .md
-- Timeline: CSS-based ou JavaScript Astro component
+- Page: src/content/docs/fr/programme.md (Markdown)
+- Data: structured in frontmatter ou composant Astro
+- Timeline: CSS-based ou Astro component
 - PDF: static file in /public/files/
-- Editable: via CMS Decap
+- Editable: via Git + Markdown
 
 ---
 
@@ -162,16 +226,17 @@ Ce document présente les exigences complètes (fonctionnelles et non-fonctionne
 3. WHEN utilisateur clique download THEN télécharge fichier depuis /public/files/
 4. WHEN ressource disponible THEN formats: SVG (logos), PNG (images), PDF (brochures)
 5. WHEN utilisateur visite THEN comprend droits d'utilisation (creative commons, usage libre)
-6. WHEN admin ajoute ressource THEN CMS permet upload + description
+6. WHEN admin ajoute ressource THEN Git workflow permet upload + description
 7. WHEN fichier téléchargé THEN analytics track le téléchargement
 
 ### Technical Requirements
 
+- Page: src/content/docs/fr/ressources.md
 - Files: /public/files/ static directory
 - Formats: SVG, PNG, PDF, XLSX
 - Size: chaque fichier < 10MB
 - Download: direct link (navigateur default download)
-- CMS: listing with descriptions
+- Listing: Markdown avec liens
 
 ---
 
@@ -188,16 +253,18 @@ Ce document présente les exigences complètes (fonctionnelles et non-fonctionne
 5. WHEN grille charge THEN images lazy-loaded pour performance
 6. WHEN filter tabs présents THEN permet trier par catégorie (Photos / Vidéos)
 7. WHEN photo inclus THEN caption/légende affichée en bas
-8. WHEN utilisateur ajoute via CMS THEN URL image/vidéo + caption éditables
+8. WHEN utilisateur ajoute via Git THEN URL image/vidéo + caption éditables
 
 ### Technical Requirements
 
+- Page: src/content/docs/fr/galerie.md
+- Component: GalleryGrid.astro avec `client:visible`
 - Layout: CSS Grid masonry
 - Images: WebP + JPEG fallback, responsive srcset
 - Lazy load: native <img loading="lazy">
-- Lightbox: Astro component + CSS animations
-- Videos: YouTube iframe (responsive container)
-- CMS: array input for gallery items
+- Lightbox: Lightbox.astro component + CSS animations
+- Videos: VideoEmbed.astro (YouTube iframe responsive)
+- Data: frontmatter array ou composant props
 
 ---
 
@@ -214,14 +281,15 @@ Ce document présente les exigences complètes (fonctionnelles et non-fonctionne
 5. WHEN page affiche THEN incluant infos où vont les fonds
 6. WHEN donation texte inclus THEN transparent sur allocation budget
 7. WHEN utilisateur contribue THEN peut s'enregistrer noms donateurs (recognition, optionnel)
-8. WHEN contenu édité THEN CMS permet mise à jour numéros/noms facilement
+8. WHEN contenu édité THEN Git workflow permet mise à jour numéros/noms facilement
 
 ### Technical Requirements
 
-- Data: numéros stockés dans content/donations.yml
+- Page: src/content/docs/fr/dons.md (Markdown)
+- Data: numéros dans frontmatter ou Markdown
 - Display: plain text (pas d'API paiement)
 - QR codes: optionnel (généré offline ou image statique)
-- CMS: editable contact fields
+- Édition: Git + Markdown
 - No backend payment: texte uniquement
 
 ---
@@ -243,10 +311,11 @@ Ce document présente les exigences complètes (fonctionnelles et non-fonctionne
 
 ### Technical Requirements
 
-- Semantic HTML: <button>, <nav>, <main>, etc.
+- Semantic HTML: <button>, <nav>, <main>, etc. (Starlight natif)
 - ARIA: aria-label, aria-describedby, role="presentation" où needed
 - Contrast: min 4.5:1 (text), 3:1 (large text/UI components)
 - Testing: axe DevTools, NVDA (gratuit screen reader), keyboard-only nav
+- Starlight: Built-in accessibility features
 
 ---
 
@@ -256,8 +325,8 @@ Ce document présente les exigences complètes (fonctionnelles et non-fonctionne
 
 ### Acceptance Criteria
 
-1. WHEN page charge THEN meta title/description présents et pertinents
-2. WHEN Google crawle THEN trouve sitemap.xml complet
+1. WHEN page charge THEN meta title/description présents et pertinents (Starlight frontmatter)
+2. WHEN Google crawle THEN trouve sitemap.xml complet (Starlight auto)
 3. WHEN utilisateur recherche "Journée Internationale Pasteurs" THEN site apparaît haut ranking
 4. WHEN page charge THEN JSON-LD schema pour event type markup
 5. WHEN utilisateur partage lien THEN og:image/title/description utilisés pour preview
@@ -267,13 +336,13 @@ Ce document présente les exigences complètes (fonctionnelles et non-fonctionne
 
 ### Technical Requirements
 
-- Meta tags: Astro SEO component
-- Sitemap: auto-generated /sitemap.xml
+- Meta tags: Starlight frontmatter (title, description)
+- Sitemap: auto-generated /sitemap-index.xml (Starlight)
 - Robots.txt: configured
-- JSON-LD: Event, Organization schema
-- og: Open Graph tags
-- hreflang: automatic i18n
-- Mobile: 100% responsive
+- JSON-LD: Event, Organization schema (frontmatter head)
+- og: Open Graph tags (Starlight auto)
+- hreflang: automatic i18n (Starlight)
+- Mobile: 100% responsive (Starlight natif)
 
 ---
 
@@ -294,12 +363,13 @@ Ce document présente les exigences complètes (fonctionnelles et non-fonctionne
 
 ### Technical Requirements
 
-- Build: Astro SSG (zero JavaScript par défaut)
-- Images: WebP, compression, responsive
-- CSS: minimal critical path
+- Build: Astro 5 SSG (zero JavaScript par défaut)
+- Images: WebP, compression, responsive (Astro Image)
+- CSS: minimal critical path (Starlight optimized)
 - Fonts: WOFF2 subset Latin
-- Bundle size: monitored via bundlesize
+- Bundle size: monitored
 - CDN: Netlify edge (automatic)
+- Content Layer API: 5x faster builds
 
 ---
 
@@ -309,7 +379,7 @@ Ce document présente les exigences complètes (fonctionnelles et non-fonctionne
 
 ### Acceptance Criteria
 
-1. WHEN formulaire soumis THEN validation côté client (HTML5 + Zod/Valibot)
+1. WHEN formulaire soumis THEN validation côté client (HTML5 + Zod)
 2. WHEN utilisateur soumet données invalides THEN message erreur clair, pas recharge
 3. WHEN email non-valide THEN rejeté avant envoi server
 4. WHEN données soumises server-side THEN re-validée côté backend (defence in depth)
@@ -328,29 +398,24 @@ Ce document présente les exigences complètes (fonctionnelles et non-fonctionne
 
 ---
 
-## Requirement 14: CMS Usability & Maintenance
+## Requirement 14: CMS Administration (Keystatic)
 
-**User Story:** En tant que community manager JIP, je veux pouvoir mettre à jour contenu via interface simple, afin de gérer le site sans connaissances techniques.
+**User Story:** En tant que community manager JIP, je veux pouvoir mettre à jour le contenu via une interface visuelle simple, sans toucher au code.
 
 ### Acceptance Criteria
 
-1. WHEN utilisateur accède /admin THEN login GitHub OAuth (facile, gratuit)
-2. WHEN dans CMS THEN interface intuitive (drag-drop, WYSIWYG)
-3. WHEN éditeur modifie texte THEN changement live-preview avant publish
-4. WHEN image uploadée THEN auto-resized, optimisée, versionnée dans Git
-5. WHEN contenu publié THEN site deployed automatiquement (Netlify webhook)
-6. WHEN workflow enabled THEN Draft → Review → Publish workflow
-7. WHEN utilisateur inexpérimenté THEN documentation fournie avec screenshots
-8. WHEN formation terminée THEN équipe autonome pour mises à jour mensuelles
+1. WHEN utilisateur accède `/keystatic` THEN voit tableau de bord admin
+2. WHEN éditeur modifie texte/image THEN changement sauvegardé dans Git automatiquement
+3. WHEN contenu publié THEN site deployed automatiquement
+4. WHEN utilisateur veut ajouter actualité THEN formulaire simple disponible
+5. WHEN erreur survient THEN interface prévient utilisateur
 
 ### Technical Requirements
 
-- CMS: Decap (open-source, GitHub backend)
-- Config: decap-config.yml
-- Collections: Pages, Fondateur, Social, FAQ, Programme, etc.
-- Auth: GitHub OAuth
-- Workflow: Editorial (Draft/Review/Publish)
-- Deploy: Netlify webhook
+- CMS: Keystatic (`@keystatic/astro`)
+- Mode: GitHub mode (prod) / Local mode (dev)
+- Auth: GitHub OAuth (via Netlify ou direct)
+- Collections: Pages, Posts, Docs
 
 ---
 
@@ -365,7 +430,7 @@ Ce document présente les exigences complètes (fonctionnelles et non-fonctionne
 3. WHEN formulaire soumis THEN metrics incluent source traffic (organic, direct, social)
 4. WHEN analytics consulté THEN dashboard affiche: unique visitors, registrations, donations attempts
 5. WHEN utilisateur arrive /ressources THEN track download files
-6. WHEN admin configure \THEN utilise outil gratuit (Google Analytics, Plausible alternative)
+6. WHEN admin configure THEN utilise outil gratuit (Google Analytics, Plausible alternative)
 7. WHEN données collectées THEN respect RGPD/privacy (anonymized, no tracking ID storage)
 
 ### Technical Requirements
@@ -374,6 +439,7 @@ Ce document présente les exigences complètes (fonctionnelles et non-fonctionne
 - Events: page_view, registration_submitted, donation_click, download_file
 - Tracking: script in header, respects DNT headers
 - Privacy: GDPR-compliant
+- Integration: Astro component ou script tag
 
 ---
 
@@ -384,6 +450,7 @@ Ce document présente les exigences complètes (fonctionnelles et non-fonctionne
 - **Lighthouse**: ≥ 90 mobile + desktop
 - **Bundle size**: < 50KB JS (gzipped), < 200KB CSS
 - **Uptime**: 99.9% (Netlify SLA)
+- **Build time**: < 2 minutes (Content Layer API)
 
 ### Reliability
 - **No single points of failure**: CDN global, auto-failover
@@ -391,12 +458,18 @@ Ce document présente les exigences complètes (fonctionnelles et non-fonctionne
 - **Recovery**: Rollback to previous deploy in 1 click
 
 ### Maintainability
-- **Code**: Clean, commented, follows Astro conventions
+- **Code**: Clean, commented, follows Astro/Starlight conventions
 - **Documentation**: README, MAINTENANCE.md for team
 - **Testing**: Manual testing checklist provided
+- **Workflow**: Git-based, no complex CMS
 
 ### Scalability
 - **Future**: Can add 10,000+ simultaneous users without scaling issues (Netlify auto-scale)
-- **Content**: Can add unlimited pages via CMS
-- **Growth**: Upgrade to Supabase/PostgRES if database needed later
+- **Content**: Can add unlimited pages via Markdown
+- **Growth**: Upgrade to Supabase/PostgreSQL if database needed later
 
+---
+
+**Document validé:** 24 novembre 2025  
+**Expert Astro:** Certified  
+**Starlight Version:** Latest stable

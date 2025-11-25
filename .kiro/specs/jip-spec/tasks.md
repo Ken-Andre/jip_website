@@ -1,696 +1,554 @@
-# JIP Implementation Tasks
-## Journée Internationale des Pasteurs — Plan d'Action Détaillé
+# JIP Implementation Tasks (Refined v2.0)
+## Journée Internationale des Pasteurs — Plan d'Action Starlight
+
+**Version:** 2.0 - Astro 5 & Starlight Optimized  
+**Date:** 24 novembre 2025  
+**Duration:** ~5 jours (1 dev expert Astro) - **ACCELERATED with existing assets**
 
 ---
 
-## Phase 1: Project Setup & Infrastructure (Jour 1)
+## 🚀 ASSET STRATEGY - FAST DELIVERY (ASSETS ALREADY IN PLACE!)
 
-### Task 1.1: Initialize Astro Project
-- [ ] Create GitHub repo `journee-internationale-pasteurs`
-- [ ] Clone locally and setup
-- [ ] Run `npm create astro@latest` with:
-  - Template: blank
-  - Dependencies: Yes (TypeScript + Git)
-  - Tailwind: Yes
-  - git init: Yes
-- [ ] Install additional packages:
-  ```bash
-  npm install astro-i18n decap-cms
-  npm install -D tailwindcss autoprefixer
-  ```
-- [ ] Initialize Tailwind config
-- [ ] Create folder structure (as per design.md)
-- [ ] First commit: "Initial Astro setup"
-- **Deliverable**: Working local dev environment (`npm run dev` → http://localhost:3000)
+**✅ ALL ASSETS ARE ALREADY GENERATED AND IN CORRECT FOLDERS!**
 
-### Task 1.2: Configure Netlify Deployment
-- [ ] Login/create Netlify account
-- [ ] Connect GitHub repo to Netlify
-- [ ] Setup build command: `npm run build`
-- [ ] Set publish directory: `dist`
-- [ ] Configure environment variables (if any)
-- [ ] Deploy skeleton site
-- [ ] Verify domain: `journee-internationale-pasteurs.netlify.app`
-- [ ] Enable auto-deploy on git push
-- [ ] Test: Push change → verify auto-deploy
-- **Deliverable**: Skeleton site live on Netlify with auto-deploy working
+**Priority Order for Images:**
+1. **First choice:** Use existing JPG/PNG if available (hero-banner.jpg, pastor-patrick.png) - **PHOTOREALISTIC QUALITY**
+2. **Fallback:** Use existing SVG assets (50+ files already generated) - **ALREADY IN PLACE ✅**
+3. **No generation needed:** All assets verified in codebase!
 
-### Task 1.3: Setup Decap CMS
-- [ ] Create `/public/admin/index.html` (Decap entry point)
-- [ ] Create `decap-config.yml` in root with:
-  - GitHub backend config
-  - Collections (pages, founder, social, faq, programme)
-  - Media folder: `/src/assets/images/`
-  - Publishing mode: editorial_workflow (Draft/Review/Publish)
-- [ ] Generate GitHub Personal Access Token (scope: public_repo)
-- [ ] Setup Netlify Identity (optional, for team management)
-- [ ] Test: Access `/admin` → login with GitHub
-- **Deliverable**: CMS accessible at `/admin` with login working
+**Existing Assets Inventory (VERIFIED IN CODEBASE):**
+✅ **Icons:** 20/20 SVG icons in `src/assets/icons/` - **100% COMPLETE**
+  - calendar, clock, map-pin, users, cross, dove, heart, book, prayer-hands, globe
+  - microphone, phone, email, share, download, search, menu, close, arrow-next, star
 
-### Task 1.4: Configure i18n Routing
-- [ ] Install `astro-i18n`
-- [ ] Create `src/i18n/fr.json` with French strings
-- [ ] Create `src/i18n/en.json` with English strings
-- [ ] Configure `astro.config.mjs` for i18n:
-  ```js
-  i18n: {
-    defaultLocale: "fr",
-    locales: ["fr", "en"],
-    routing: { prefixDefaultLocale: true }
-  }
-  ```
-- [ ] Test: Navigate /fr/ and /en/ prefixes work
-- [ ] Verify hreflang tags in HTML head
-- **Deliverable**: i18n routing functional, pages respond to language prefixes
+✅ **Images:** 37 files in `src/assets/images/` - **100% COMPLETE**
+  - **JPG/PNG (photorealistic):** hero-banner.jpg, pastor-patrick.png, logo-jip (2).png
+  - **SVG (scalable):** logo-jip.svg, facebook-cover.svg, og-image.svg
+  - **Hero sliders:** hero-slider-1.svg through hero-slider-4.svg
+  - **Gallery:** gallery-placeholder-1.svg through gallery-placeholder-6.svg
+  - **Testimonials:** testimonial-avatar-1.svg through testimonial-avatar-5.svg
+  - **Infographics:** infographic-impact.svg, infographic-program.svg, infographic-values.svg
+  - **Patterns:** pattern-spiritual.svg, pattern-communion.svg, pattern-global.svg
+  - **Sections:** section-vision.svg, section-programme.svg, section-dons.svg
+  - **Social:** instagram-story-1.svg through instagram-story-3.svg
+  - **Flags:** flag-fr.svg, flag-en.svg
+
+✅ **Animations:** 2 SVG animations in `src/assets/animations/` - **100% COMPLETE**
+  - spinner-loading.svg, pulse-heartbeat.svg
+
+✅ **Favicon:** SVG favicon in `public/` - **READY**
+
+**Key Photorealistic Assets (JPG/PNG - USE FIRST):**
+- ✅ `hero-banner.jpg` (1920x600px) - **PRIMARY HERO IMAGE**
+- ✅ `pastor-patrick.png` (portrait) - **PRIMARY FOUNDER IMAGE**
+- ✅ `logo-jip (2).png` (backup logo format)
+
+**NO ASSET GENERATION NEEDED - FOCUS ON INTEGRATION!**
+
+**Time Savings:**
+- ✅ **Asset Generation:** -6h (all 50+ assets already created)
+- ✅ **Asset Organization:** -2h (already in correct folders)
+- ✅ **Total Reduction:** **8 hours** (from 41h to 33h)
 
 ---
 
-## Phase 2: Core Components & Pages (Jours 2-3)
+## Phase 1: Project Setup & Infrastructure (Jour 1 - 4h)
 
-### Task 2.1: Create Layout System
-- [ ] Build `src/layouts/BaseLayout.astro`:
-  - Header component with lang selector
-  - Navigation bar with menu links
-  - Footer with social/contact links
-  - Responsive hamburger mobile menu
-- [ ] Build `src/layouts/PageLayout.astro`:
-  - Extends BaseLayout
-  - Main content wrapper
-  - Sidebar ready (optional future)
-- [ ] Create `src/components/Header.astro`:
-  - Logo + site title
-  - Language selector (FR/EN toggle)
-  - Navigation links
-  - Mobile menu icon
-- [ ] Create `src/components/Footer.astro`:
-  - Copyright info
-  - Social media links (placeholder URLs for now)
-  - Contact email
-  - Quick links
-- [ ] Test: All layouts render without errors
-- **Deliverable**: Base layouts and components ready
+### Task 1.1: Initialize Starlight Project ⏱ 45min
 
-### Task 2.2: Build Homepage (index.astro)
-- [ ] Create `src/pages/index.astro` with:
-  - Hero section (image + slogan + CTA buttons)
-  - Countdown timer component (JavaScript)
-  - Program preview section
-  - Testimonials carousel (3-5 testimonials)
-  - Founder preview card with link
-  - Newsletter signup (optional)
-  - CTAs: S'inscrire, Faire un don, En savoir plus
-- [ ] Build countdown logic:
-  - Calculate days/hours/minutes until July 2nd 2025
-  - Update every second
-  - GMT+1 timezone
-  - Format: "XX jours, XX heures, XX minutes"
-- [ ] Create hero image placeholder (1920x600px)
-- [ ] Style with Tailwind
-- [ ] Test responsiveness (mobile/tablet/desktop)
-- **Deliverable**: Homepage visually complete and responsive
+**Goal:** Créer projet Astro avec Starlight intégré
 
-### Task 2.3: Create Static Pages
-- [ ] Create `/fr/vision.astro`:
-  - Vision statement
-  - Mission bullets
-  - Values cards (4 cards)
-  - Impact section
-  - Content from CMS
-- [ ] Create `/fr/fondateur.astro`:
-  - Large portrait image
-  - Biography section
-  - Ministry timeline or highlights
-  - Quote section (prominent)
-  - Video embed placeholder (YouTube)
-  - Content from CMS
-- [ ] Create `/fr/programme.astro`:
-  - Timeline/schedule grid
-  - 6 days breakdown
-  - Activity cards with descriptions
-  - Speaker info (if applicable)
-  - Download program button
-- [ ] Create `/fr/participation.astro`:
-  - Registration form (integrated from Task 2.5)
-  - Participation type selector
-  - Confirmation message placeholder
-  - FAQ preview
-- [ ] Create `/fr/ressources.astro`:
-  - Media kit section
-  - Download buttons for files
-  - Descriptions
-- [ ] Create `/fr/galerie.astro`:
-  - Masonry grid layout
-  - Lightbox component
-  - YouTube video embeds
-  - Photo captions
-- [ ] Create `/fr/dons.astro`:
-  - Donation appeal text
-  - Mobile Money info display
-  - Account numbers and names
-  - Transparency section
-- [ ] Create `/fr/contact.astro`:
-  - Contact form (integrated from Task 2.5)
-  - Contact info display
-  - Social media links
-  - Google Maps embed (placeholder)
-- [ ] Create `/fr/faq.astro`:
-  - Accordion component
-  - FAQ items (from CMS)
-  - Search functionality (JavaScript)
-- [ ] Create `/en/*` duplicates:
-  - Copy each FR page to `/en/` directory
-  - Update with English content
-- [ ] Test: All pages render, navigation works
-- **Deliverable**: All page templates created with placeholder content
-
-### Task 2.4: Build Reusable Components
-- [ ] Create `src/components/HeroSection.astro`:
-  - Background image
-  - Title + subtitle
-  - CTA buttons
-  - Overlay transparency option
-- [ ] Create `src/components/TestimonialCard.astro`:
-  - Avatar/photo
-  - Quote text
-  - Attribution (name, role)
-  - Styling with Tailwind
-- [ ] Create `src/components/GalleryGrid.astro`:
-  - Masonry layout CSS
-  - Lazy loading images
-  - Responsive breakpoints
-- [ ] Create `src/components/Lightbox.astro`:
-  - Modal overlay
-  - Next/Prev navigation
-  - Close button
-  - Keyboard support (ESC)
-- [ ] Create `src/components/CountdownTimer.astro`:
-  - JavaScript for real-time countdown
-  - GMT+1 timezone calculation
-  - Fallback text
-- [ ] Create `src/components/Accordion.astro`:
-  - Collapsible sections
-  - Animation on toggle
-  - Keyboard accessible
-- [ ] Test: Components render and function correctly
-- **Deliverable**: Component library ready for use
-
-### Task 2.5: Implement Forms & API Endpoints
-- [ ] Create `src/pages/api/inscription.js`:
-  - POST endpoint for registration form
-  - Validate input (Zod schema):
-    - name: string, non-empty
-    - email: string, valid email
-    - phone: optional string
-    - church: optional string
-    - participationType: enum (online, physical, volunteer)
-    - message: optional text
-  - Submit to FormSubmit.co API
-  - Return JSON response {status: 'success' | 'error', message: '...'}
-  - Handle errors gracefully
-  - Log any errors to console for debugging
-- [ ] Create `src/pages/api/contact.js`:
-  - POST endpoint for contact form
-  - Validate input:
-    - name: string, non-empty
-    - email: string, valid email
-    - subject: string, non-empty
-    - message: string, non-empty
-  - Submit to FormSubmit.co API
-  - Return JSON response
-- [ ] Setup FormSubmit.co integration:
-  - Create account at FormSubmit.co
-  - Get form endpoint URL
-  - Configure backend integration in code
-- [ ] Create HTML forms in pages:
-  - Registration form in `/participation.astro`
-  - Contact form in `/contact.astro`
-  - Form validation (HTML5 + JavaScript Zod)
-  - Error messages display
-  - Success messages
-  - Loading states (spinner during submit)
-- [ ] Test forms end-to-end:
-  - Submit valid data → confirmation message
-  - Submit invalid email → error message
-  - Check email received at FormSubmit
-  - Test retry after error
-- **Deliverable**: Forms functional and connected to FormSubmit.co
+- [ ] Create GitHub repo: `gh repo create journee-internationale-pasteurs --public`
+- [ ] Initialize Starlight project: `npm create astro@latest . -- --template starlight --yes`
+- [ ] Install additional dependencies: `npm install -D tailwindcss autoprefixer` and `npm install @astrojs/netlify`
+- [ ] **Install Keystatic:** `npm install @keystatic/astro @keystatic/core`
+- [ ] Configure Tailwind (optionnel): `npx tailwindcss init`
+- [ ] First commit and push to GitHub
+- **Requirements:** 1.1, 1.2, 1.3, 14.1
+- **Deliverable:** Working local dev, Keystatic installed, Git repo created
+- **Deliverable:** Working local dev (`npm run dev` → http://localhost:3000), Starlight theme active, Git repo created
 
 ---
 
-## Phase 3: Design & Styling (Jours 3-4)
+### Task 1.2: Configure Netlify Deployment ⏱ 30min
 
-### Task 3.1: Implement Design System
-- [ ] Create `src/assets/styles/variables.css`:
-  ```css
-  :root {
-    --color-primary: #6B3FB5;
-    --color-secondary: #D4AF37;
-    --color-white: #FFFFFF;
-    --color-text: #1F1F1F;
-    --color-bg: #F5F5F0;
-    --font-serif: 'Playfair Display', serif;
-    --font-sans: 'Montserrat', sans-serif;
-    --space-xs: 8px;
-    --space-sm: 16px;
-    --space-md: 24px;
-    --space-lg: 32px;
-    --shadow-sm: 0 2px 4px rgba(0,0,0,0.08);
-    --shadow-md: 0 8px 16px rgba(0,0,0,0.12);
-  }
-  ```
-- [ ] Download fonts (Playfair Display, Montserrat) → `/src/assets/fonts/`
-- [ ] Configure Tailwind theme in `tailwind.config.js`:
-  - Extend colors with brand palette
-  - Add custom fonts
-  - Define spacing scale
-  - Add shadow values
-- [ ] Create `src/assets/styles/globals.css`:
-  - Base element styles (body, headings, buttons)
-  - Typography scale
-  - Responsive utilities
-- [ ] Create `src/assets/styles/responsive.css`:
-  - Mobile-first breakpoints
-  - Utility classes for common responsive patterns
-- [ ] Test: Colors and typography applied across site
-- **Deliverable**: Design system fully implemented in code
+**Goal:** Setup continuous deployment
 
-### Task 3.2: Style Core Components
-- [ ] Style `Header.astro`:
-  - Fixed or sticky positioning
-  - Logo + nav links horizontal
-  - Language selector right-aligned
-  - Mobile: hamburger menu with slide-down
-  - Hover states on links
-- [ ] Style `Footer.astro`:
-  - Dark background
-  - Links, copyright, social icons
-  - Multi-column layout desktop, stacked mobile
-- [ ] Style `HeroSection.astro`:
-  - Full-width background image
-  - Semi-transparent overlay
-  - Centered text content
-  - Large heading + subtitle
-  - Button styling
-- [ ] Style `TestimonialCard.astro`:
-  - Card layout with shadow
-  - Avatar image on left
-  - Quote text center
-  - Attribution bottom
-  - Hover: shadow increase
-- [ ] Style `FormInputs.astro`:
-  - Consistent form styling
-  - Labels above inputs
-  - Focus state (blue border + ring)
-  - Error state (red border)
-  - Placeholder text styling
-- [ ] Style `GalleryGrid.astro`:
-  - CSS Grid masonry layout
-  - Auto-fit responsive columns
-  - Image aspect ratio consistent
-  - Hover: zoom effect on image
-- [ ] Test: All components styled and responsive
-- **Deliverable**: All components visually polished
-
-### Task 3.3: Responsive Design Testing
-- [ ] Test on multiple viewport sizes:
-  - Mobile: 375px (iPhone SE)
-  - Tablet: 768px (iPad)
-  - Desktop: 1920px (HD)
-  - Desktop: 2560px (4K)
-- [ ] Verify breakpoints work (Tailwind responsive):
-  - `sm:`, `md:`, `lg:`, `xl:`, `2xl:`
-- [ ] Test mobile menu hamburger
-- [ ] Verify images scale properly
-- [ ] Check form fields on mobile (input size, spacing)
-- [ ] Use DevTools device emulation + real devices if available
-- [ ] Fix any layout issues
-- [ ] Document viewport breakpoints used
-- **Deliverable**: Site fully responsive across all sizes
+- [ ] Login Netlify and create new site from Git
+- [ ] Configure: Branch `main`, Build command `npm run build`, Publish directory `dist`
+- [ ] Configure environment variables if needed: `PUBLIC_GA_ID`
+- [ ] Test deployment and verify URL
+- [ ] Enable auto-deploy webhook
+- **Requirements:** 1.2, 15.1
+- **Deliverable:** Site live on Netlify, Auto-deploy configured
 
 ---
 
-## Phase 4: Content & CMS Integration (Jours 4-5)
+### Task 1.3: Configure Starlight Theme & Navigation ⏱ 1h30
 
-### Task 4.1: Generate Content via LLM
-- [ ] Use Claude/GPT-4 to generate realistic content:
-  - Vision statement (500-800 words)
-  - Pasteur Patrick biography (600-800 words)
-  - Program descriptions
-  - FAQ entries (10-15 Q&As)
-  - Testimonials (3-5)
-- [ ] Review all generated content for:
-  - Spiritual accuracy (christian values)
-  - Tone (solemn, professional, warm)
-  - No obvious AI patterns
-  - Culturally appropriate (African context)
-- [ ] Manually refine/edit if needed
-- [ ] Translate EN versions
-- [ ] Store in `/src/content/` markdown files
-- **Deliverable**: All content files ready for CMS
+**Goal:** Personaliser Starlight avec branding JIP
 
-### Task 4.2: Setup CMS Collections
-- [ ] Update `decap-config.yml` with collections:
-  - **pages**: Generic pages (vision, program, etc.)
-  - **founder**: Pasteur Patrick specific
-  - **social**: Social media links + contact email
-  - **faq**: FAQ items
-  - **testimonials**: Testimonials array
-  - **resources**: Media kit files
-- [ ] Configure each collection with fields:
-  - Text inputs, text areas
-  - Markdown editors
-  - Image upload
-  - List/array inputs for repeated fields
-  - Selector inputs for enums
-- [ ] Test CMS interface:
-  - Can add/edit entries
-  - Preview looks correct
-  - Publish to branch works
-- [ ] Create sample entries in each collection
-- **Deliverable**: CMS fully configured and tested
-
-### Task 4.3: Integrate Content into Pages
-- [ ] Update all `.astro` pages to import from `content/`:
-  ```astro
-  import { getCollection } from 'astro:content';
-  const visionData = await getCollection('vision');
-  ```
-- [ ] Map content fields to page sections:
-  - Homepage: intro, program preview, testimonials
-  - Vision: full text + mission/values
-  - Founder: biography, photo, video link, quote
-  - Program: schedule, activities
-  - FAQ: items list
-  - Resources: file listings
-  - Dons: account numbers, descriptions
-  - Social: links and email
-- [ ] Add fallback content (if CMS entry missing)
-- [ ] Test: Content displays correctly on all pages
-- [ ] Verify: CMS edits propagate to site after redeploy
-- **Deliverable**: Content fully integrated with CMS
-
-### Task 4.4: Upload Media Assets
-- [ ] Prepare hero image (1920x600px, optimized):
-  - Create/find appropriate image
-  - Export as WebP + JPEG
-  - Compress to < 200KB
-- [ ] Prepare Pasteur Patrick portrait (1920x1200px):
-  - Placeholder or actual photo
-  - WebP + JPEG formats
-  - Compress < 300KB
-- [ ] Create/prepare logos:
-  - JIP logo (SVG + PNG)
-  - Pasteur Patrick logo (if exists)
-  - Church/organization logos
-- [ ] Create icons (SVG):
-  - Calendar icon
-  - Map pin icon
-  - Users icon
-  - Heart icon (donation)
-  - Download icon
-  - Share icon
-- [ ] Upload all to `/src/assets/images/` in Git
-- [ ] Create kit media files in `/public/files/`:
-  - Logo files (SVG + PNG)
-  - Sample affiche (PDF)
-  - Sample banner (PNG)
-- [ ] Test: Images load correctly on all pages
-- **Deliverable**: All media assets uploaded and optimized
+- [x] Edit `astro.config.mjs` with Starlight configuration (logo, sidebar, locales, social links)
+- [ ] Create CSS variables in `src/assets/styles/variables.css`
+- [ ] Create Starlight overrides in `src/assets/styles/starlight.css`
+- [ ] Test navigation sidebar, colors, logo, language switcher
+- **Requirements:** 2.1, 2.2, 2.3
+- **Deliverable:** Starlight themed with JIP branding, Sidebar navigation configured, i18n switcher active
 
 ---
 
-## Phase 5: Testing & Optimization (Jour 5)
+### Task 1.4: Configure Content Collections & Keystatic ⏱ 1h30
 
-### Task 5.1: Performance Optimization
-- [ ] Run Lighthouse audit (Chrome DevTools):
-  - Target: ≥ 90 score on mobile and desktop
-  - If below 90, identify issues
-- [ ] Optimize images:
-  - Already using WebP with JPEG fallback
-  - Verify lazy loading on gallery
-  - Check responsive srcsets
-  - Measure image file sizes
-- [ ] Audit JavaScript:
-  - Measure bundle size (goal: < 50KB gzipped)
-  - Remove unused dependencies
-  - Code split if possible
-- [ ] Audit CSS:
-  - Remove unused CSS (PurgeCSS)
-  - Minimize critical path CSS
-  - Defer non-critical CSS
-- [ ] Test Core Web Vitals:
-  - LCP (Largest Contentful Paint): < 2.5s
-  - FID (First Input Delay): < 100ms
-  - CLS (Cumulative Layout Shift): < 0.1
-- [ ] Verify caching headers in Netlify
-- [ ] Run WebPageTest for detailed analysis
-- **Target**: Lighthouse 90+, LCP < 2s on 3G slow
+**Goal:** Setup Content Layer API et CMS
 
-### Task 5.2: Accessibility Audit
-- [ ] Install axe DevTools browser extension
-- [ ] Scan all pages for violations:
-  - Contrast issues
-  - Missing alt text
-  - Form label issues
-  - Keyboard navigation
-- [ ] Fix all critical issues (WCAG AA level minimum)
-- [ ] Test keyboard-only navigation:
-  - Tab through all pages
-  - Can access all links/buttons
-  - Focus visible always
-  - Forms fillable with keyboard
-- [ ] Test with screen reader (NVDA on Windows, VoiceOver on Mac):
-  - Page structure understandable
-  - Form labels read correctly
-  - Images have alt text
-  - Links descriptive (not "click here")
-- [ ] Run accessibility plugin checklist
-- **Target**: Zero axe violations, fully keyboard accessible
+- [ ] Create `src/content.config.ts` with `pages` collection (glob loader) and `docs` collection (docsLoader)
+- [ ] Create `keystatic.config.ts` defining collections for Pages and Docs
+- [ ] Add Keystatic integration to `astro.config.mjs`
+- [ ] Test: Access `/keystatic` admin dashboard
+- **Requirements:** 2.1, 2.2, 2.7, 14.1
+- **Deliverable:** Content Collections configured, Keystatic Admin working
 
-### Task 5.3: SEO Verification
-- [ ] Verify meta tags on all pages:
-  - Unique titles (40-60 chars)
-  - Unique descriptions (150-160 chars)
-  - og:image/title/description for social
-- [ ] Check sitemap.xml generation:
-  - All pages included
-  - Priority levels set
-  - Last modified dates
-  - Valid XML
-- [ ] Verify hreflang tags for i18n:
-  - FR pages link to EN equivalents
-  - EN pages link to FR equivalents
-  - Home page handles default language
-- [ ] Check robots.txt:
-  - Allows crawling
-  - Sitemap URL included
-- [ ] Run SEO audit (SEO auditor tool or manual):
-  - Headings hierarchy correct (h1 → h2 → h3)
-  - Internal links present
-  - External links (if any) with rel="noopener"
-  - Structured data (JSON-LD) present for event
-- [ ] Test search engine preview:
-  - Title/description display correctly
-  - Image shows in preview
-- [ ] Monitor search console (setup):
-  - Submit sitemap to Google Search Console
-  - Monitor for indexing
-- **Target**: All pages indexed, high SEO score
+---
 
-### Task 5.4: Cross-Browser & Device Testing
-- [ ] Test on browsers:
-  - Chrome/Edge 90+
-  - Firefox 88+
-  - Safari 14+
-- [ ] Test on devices:
-  - iOS 12+ (iPhone, iPad)
-  - Android 8+ (various phones)
-  - Desktop Windows, macOS, Linux
-- [ ] Check specific issues:
-  - Font loading (WOFF2 support)
-  - CSS Grid/Flexbox rendering
-  - Form input styling
-  - Mobile zoom/scale
-  - Touch interactions (if any)
-- [ ] Document any issues + fixes
-- [ ] Verify site renders correctly everywhere
-- **Target**: Works on all major browsers and devices
+## Phase 2: Core Components & Content (Jours 2-3 - 10h) **REDUCED**
 
-### Task 5.5: Security Checklist
+### Task 2.1: Build Reusable Components & Layouts ⏱ 4h
+
+**Goal:** Créer Layouts Custom et Composants
+
+- [ ] **Create `MarketingLayout.astro`:** Custom header (sticky), footer, no sidebar
+- [ ] **Create `ThemeToggle.astro`:** Dark/Light mode switcher
+- [ ] **Create `LanguagePicker.astro`:** FR/EN switcher
+- [ ] Create CountdownTimer.astro (client:load) - **Use existing clock.svg icon** ✅
+- [ ] Create RegistrationForm.astro (client:load) - **Use existing email.svg, phone.svg, users.svg icons** ✅
+- [ ] Create ContactForm.astro (client:load) - **Use existing email.svg, phone.svg icons** ✅
+- [ ] Create GalleryGrid.astro (client:visible) - **Use existing gallery-placeholder-*.svg (6 files)** ✅
+- [ ] Create Lightbox.astro (client:idle) - **Use existing close.svg icon** ✅
+- [ ] Create VideoEmbed.astro (static)
+- [ ] Create TestimonialCard.astro (static) - **Use existing testimonial-avatar-*.svg (5 files)** ✅
+- [ ] Create Accordion.astro (client:load) - **Use existing arrow-next.svg icon** ✅
+- [ ] Create Quote.astro (static)
+- [ ] Test each component on test page
+- **Requirements:** 1.1, 1.2, 3.1, 5.1, 8.1
+- **Assets Used:** 
+  - Icons: clock.svg, email.svg, phone.svg, users.svg, close.svg, arrow-next.svg ✅
+  - Gallery: gallery-placeholder-1.svg through gallery-placeholder-6.svg ✅
+  - Avatars: testimonial-avatar-1.svg through testimonial-avatar-5.svg ✅
+- **Deliverable:** 9 composants créés et testés, Assets existants intégrés, Hydratation client configurée
+
+---
+
+### Task 2.2: Create Homepage Content ⏱ 1h30 **REDUCED**
+
+**Goal:** Construire page d'accueil attractive avec assets existants
+
+- [ ] Create `src/content/pages/home.md` (or JSON/YAML via Keystatic)
+- [ ] Create `src/pages/[lang]/index.astro` using `MarketingLayout`
+- [ ] **Use existing hero banner:** `hero-banner.jpg` (primary) or `hero-slider-1.svg` (fallback) ✅
+- [ ] **Integrate testimonial cards:** Use existing `testimonial-avatar-*.svg` ✅
+- [ ] **Use existing icons:** calendar.svg, map-pin.svg, users.svg for program preview ✅
+- [ ] Create EN version: `src/content/docs/en/index.md`
+- [ ] Test homepage rendering, countdown updates, CTA buttons, hero image
+- **Requirements:** 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7
+- **Assets Used:**
+  - Hero: hero-banner.jpg ✅ or hero-slider-1.svg ✅
+  - Testimonials: testimonial-avatar-1.svg through testimonial-avatar-5.svg ✅
+  - Icons: calendar.svg, map-pin.svg, users.svg ✅
+- **Deliverable:** Homepage FR + EN complètes, Components intégrés
+
+---
+
+### Task 2.3: Create Content Pages (Markdown) ⏱ 3h **REDUCED**
+
+**Goal:** Créer toutes les pages de contenu avec assets existants
+
+- [ ] **Migrate content:** Move existing docs content to `src/content/pages/`
+- [ ] Create `src/pages/[lang]/[slug].astro` dynamic route
+- [ ] Create vision.md (FR + EN) in `pages` collection
+- [ ] Create fondateur.md / founder.md (FR + EN) - **Use `pastor-patrick.png`** ✅
+- [ ] Create programme.md / program.md (FR + EN) - **Use `section-programme.svg` + `infographic-program.svg`** ✅
+- [ ] Create participation.md (FR + EN) - **Use `users.svg`, `calendar.svg` icons** ✅
+- [ ] Create ressources.md / resources.md (FR + EN) - **Link to existing files in `public/files/`** ✅
+- [ ] Create galerie.md / gallery.md (FR + EN) - **Use `gallery-placeholder-*.svg`** ✅
+- [ ] Create dons.md / donations.md (FR + EN) - **Use `section-dons.svg` + `heart.svg` icon** ✅
+- [ ] Create contact.md (FR + EN) - **Use contact icons from `src/assets/icons/`** ✅
+- [ ] Create faq.md (FR + EN) - **Use `book.svg` icon** ✅
+- [ ] Test all pages accessible via sidebar, i18n routing works
+- **Requirements:** 2.1-2.7, 4.1-4.8, 5.1, 6.1-6.8, 7.1-7.8, 8.1-8.8, 9.1-9.8
+- **Assets Used:**
+  - Sections: section-vision.svg, section-programme.svg, section-dons.svg ✅
+  - Portrait: pastor-patrick.png ✅
+  - Gallery: gallery-placeholder-1.svg through gallery-placeholder-6.svg ✅
+  - Infographics: infographic-program.svg, infographic-impact.svg, infographic-values.svg ✅
+  - Icons: users.svg, calendar.svg, heart.svg, book.svg, phone.svg, email.svg, map-pin.svg ✅
+- **Deliverable:** 9 pages FR + 9 pages EN créées, Assets existants intégrés, Navigation sidebar fonctionnelle
+
+---
+
+### Task 2.4: Implement Forms & API Endpoints ⏱ 2h
+
+**Goal:** Connecter formulaires à FormSubmit.co avec assets existants
+
+- [ ] Choose Option A (client-side direct) or Option B (server endpoints)
+- [ ] If Option B: Create `src/pages/api/inscription.ts` with Zod validation
+- [ ] If Option B: Create `src/pages/api/contact.ts` with Zod validation
+- [ ] If Option B: Install Netlify adapter: `npx astro add netlify`
+- [ ] Configure FormSubmit.co account and verify email
+- [ ] **Use form icons:** `email.svg`, `phone.svg`, `users.svg` from existing assets ✅
+- [ ] **Use loading animation:** `spinner-loading.svg` for form submission ✅
+- [ ] Test forms end-to-end: valid data, invalid email, email received, retry after error
+- **Requirements:** 3.1-3.8, 5.1-5.6, 13.1-13.8
+- **Assets Used:** Icons from `src/assets/icons/` + spinner-loading.svg ✅
+- **Deliverable:** Forms connected to FormSubmit.co, Assets intégrés, Validation working, Email notifications working
+
+---
+
+## Phase 3: Design & Styling (Jour 3-4 - 5h) **REDUCED**
+
+### Task 3.1: Implement JIP Design System ⏱ 1h30 **REDUCED**
+
+**Goal:** Appliquer design system complet avec assets existants
+
+- [ ] Create `src/assets/styles/variables.css` with all JIP colors, fonts, spacing, shadows
+- [ ] Create `src/assets/styles/starlight.css` with theme overrides and component styles
+- [ ] **Use existing patterns:** Integrate `pattern-spiritual.svg`, `pattern-communion.svg`, `pattern-global.svg` ✅
+- [ ] Download and configure fonts (Playfair Display, Montserrat) in `src/assets/fonts/`
+- [ ] Test colors, typography, spacing, shadows, background patterns
+- **Requirements:** Design System section
+- **Assets Used:** 
+  - Patterns: pattern-spiritual.svg, pattern-communion.svg, pattern-global.svg ✅
+- **Deliverable:** Design system CSS complet, Background patterns integrated, Fonts self-hosted, Theme override appliqué
+
+---
+
+### Task 3.2: Responsive Design Testing ⏱ 2h
+
+**Goal:** Vérifier responsive sur tous viewports avec focus SVG
+
+- [ ] Test breakpoints: 375px, 768px, 1280px, 1920px, 2560px
+- [ ] Check navigation, images, forms, typography, grid layouts
+- [ ] **Verify SVG scaling:** Ensure all SVG assets scale properly ✅
+- [ ] **Test JPG/PNG responsiveness:** Verify hero-banner.jpg and pastor-patrick.png scale correctly ✅
+- [ ] Use DevTools device emulation
+- [ ] Test on real devices if possible (iOS Safari, Android Chrome)
+- [ ] Fix issues with Tailwind breakpoints or custom media queries
+- **Requirements:** 10.1-10.8, 12.1-12.8
+- **Deliverable:** Site fully responsive 320px-2560px, SVG assets scale properly, JPG/PNG responsive, No horizontal scroll on mobile
+
+---
+
+### Task 3.3: Accessibility Audit ⏱ 1h30 **REDUCED**
+
+**Goal:** Atteindre WCAG 2.1 AA compliance avec focus SVG
+
+- [ ] Install axe DevTools extension
+- [ ] Scan all pages and document violations
+- [ ] Fix violations: alt text, color contrast, ARIA labels, form labels, heading hierarchy
+- [ ] **Verify SVG accessibility:** Add proper `<title>` and `aria-label` to SVG assets ✅
+- [ ] **Test icon accessibility:** Ensure all icon SVGs have proper ARIA attributes ✅
+- [ ] Test keyboard navigation: tab through all pages, focus indicators visible
+- [ ] Test with screen reader (NVDA or VoiceOver)
+- [ ] Target: Zero axe violations
+- **Requirements:** 10.1-10.8
+- **Assets Verified:** All SVG icons and images for accessibility ✅
+- **Deliverable:** axe audit 0 violations, SVG accessibility compliant, Keyboard navigation complète, Screen reader compatible
+
+---
+
+## Phase 4: Asset Integration & Verification (Jour 4 - 2h) **UPDATED - ASSETS ALREADY IN PLACE**
+
+### Task 4.1: Verify Existing Assets & Integration ⏱ 1h **NEW**
+
+**Goal:** Vérifier que tous les assets existants sont correctement intégrés
+
+- [ ] **Verify JPG/PNG assets (photorealistic - USE FIRST):**
+  - ✅ `hero-banner.jpg` - Test in homepage hero section
+  - ✅ `pastor-patrick.png` - Test in founder page
+  - ✅ `logo-jip (2).png` - Verify as backup logo format
+- [ ] **Verify SVG icons (20 icons):**
+  - Test all icons render correctly in components
+  - Verify: calendar, clock, map-pin, users, phone, email, menu, close, etc.
+- [ ] **Verify SVG images (37 files):**
+  - Test logo-jip.svg in header/footer
+  - Test hero-slider-*.svg (4 files) for carousel
+  - Test gallery-placeholder-*.svg (6 files) in gallery
+  - Test testimonial-avatar-*.svg (5 files) in testimonials
+  - Test infographic-*.svg (3 files) in content pages
+  - Test pattern-*.svg (3 files) as backgrounds
+  - Test section-*.svg (3 files) in page headers
+  - Test social media assets (facebook-cover.svg, instagram-story-*.svg, og-image.svg)
+  - Test flag-*.svg (2 files) in language switcher
+- [ ] **Verify animations:**
+  - Test spinner-loading.svg in forms
+  - Test pulse-heartbeat.svg on CTA buttons
+- [ ] **Create asset usage documentation:**
+  - Document which components use which assets
+  - Note JPG/PNG vs SVG usage strategy
+- **Requirements:** 4.1-4.8, 7.1-7.8, 8.1-8.8
+- **Assets Used:** ALL 50+ existing assets ✅
+- **Deliverable:** All assets verified working, Asset usage documented, No missing assets
+
+---
+
+### Task 4.2: Optimize Existing Assets (if needed) ⏱ 30min **REDUCED**
+
+**Goal:** Optimiser les assets existants si nécessaire
+
+- [ ] **Check file sizes:**
+  - Verify hero-banner.jpg < 300KB
+  - Verify pastor-patrick.png < 200KB
+  - Verify all SVG files are optimized
+- [ ] **Create WebP versions (optional):**
+  - Convert hero-banner.jpg → hero-banner.webp
+  - Convert pastor-patrick.png → pastor-patrick.webp
+- [ ] **Test lazy loading:**
+  - Verify `loading="lazy"` on non-critical images
+  - Test images load progressively
+- [ ] **Verify responsive behavior:**
+  - Test all images scale properly on mobile/tablet/desktop
+  - Verify SVG assets maintain quality at all sizes
+- **Requirements:** 12.1-12.8
+- **Assets Processed:** hero-banner.jpg, pastor-patrick.png, all SVG files ✅
+- **Deliverable:** Assets optimized for web, WebP versions created (optional), Lazy loading working
+
+---
+
+### Task 4.3: Generate Content via LLM ⏱ 30min **REDUCED**
+
+**Goal:** Créer contenu réaliste professionnel (assets already in place, focus on text)
+
+- [ ] Use Claude/GPT-4 to generate: Vision statement, Pasteur Patrick biography, Program descriptions, FAQ entries, Testimonials
+- [ ] Review content for spiritual accuracy, appropriate tone, no AI patterns, cultural appropriateness
+- [ ] Translate to EN using DeepL or professional translator
+- [ ] Insert into Markdown files in `/fr/` and `/en/` pages
+- [ ] **Link to existing assets:** Reference existing images in markdown (hero-banner.jpg, pastor-patrick.png, etc.)
+- **Requirements:** 4.1-4.8, 6.1-6.8
+- **Assets Used:** All existing images referenced in content ✅
+- **Deliverable:** All content pages populated, Assets properly referenced, Traductions EN complètes
+
+---
+
+## Phase 5: Testing & Optimization (Jour 5 - 5h) **REDUCED**
+
+### Task 5.1: Performance Audit & Optimization ⏱ 1h30 **REDUCED**
+
+**Goal:** Atteindre Lighthouse ≥90 avec assets SVG
+
+- [ ] Run Lighthouse audit on mobile + desktop
+- [ ] **Verify SVG performance:** Check that SVG assets don't impact performance ✅
+- [ ] **Verify JPG/PNG optimization:** Ensure hero-banner.jpg and pastor-patrick.png are optimized ✅
+- [ ] Optimize if below target: images, JavaScript, CSS, fonts
+- [ ] Check Core Web Vitals: LCP < 2.5s, FID < 100ms, CLS < 0.1
+- [ ] Run WebPageTest from African location if possible
+- [ ] Verify Netlify caching headers
+- **Requirements:** 12.1-12.8
+- **Assets Verified:** All SVG assets + JPG/PNG optimized ✅
+- **Deliverable:** Lighthouse mobile ≥90, Lighthouse desktop ≥90, SVG assets optimized, Core Web Vitals green
+
+---
+
+### Task 5.2: SEO Verification ⏱ 1h30 **REDUCED**
+
+**Goal:** Maximiser référencement Google avec assets existants
+
+- [ ] Verify meta tags all pages: unique titles, descriptions, og:image/title/description
+- [ ] **Use existing OG image:** Configure `og-image.svg` for social sharing ✅
+- [ ] Check sitemap.xml at `/sitemap-index.xml`
+- [ ] Verify hreflang tags in page source
+- [ ] **Verify flag icons:** Ensure flag-fr.svg and flag-en.svg work in language switcher ✅
+- [ ] Check robots.txt at `/robots.txt`
+- [ ] Add JSON-LD structured data for Event and Organization
+- [ ] Submit to Google Search Console
+- **Requirements:** 11.1-11.8
+- **Assets Used:** og-image.svg, flag-fr.svg, flag-en.svg ✅
+- **Deliverable:** SEO tags optimisés, OG image configured, Sitemap.xml valide, hreflang correct, Structured data présent, Soumis à Google Search Console
+
+---
+
+### Task 5.3: Cross-Browser & Device Testing ⏱ 1h
+
+**Goal:** Vérifier compatibilité avec focus SVG
+
+- [ ] Test browsers: Chrome 90+, Firefox 88+, Safari 14+, Edge 90+
+- [ ] Test devices: iOS 12+, Android 8+, Desktop Windows/macOS
+- [ ] **Check SVG compatibility:** Verify SVG rendering across all browsers ✅
+- [ ] **Test JPG/PNG fallbacks:** Ensure images display correctly everywhere ✅
+- [ ] Check font loading, CSS Grid/Flexbox, form styling, touch interactions, mobile zoom
+- [ ] Use BrowserStack (optional trial)
+- [ ] Document issues and fix critical bugs
+- **Requirements:** 10.1-10.8, 12.1-12.8
+- **Assets Verified:** All SVG and JPG/PNG assets across browsers ✅
+- **Deliverable:** Works on all major browsers, SVG assets render correctly, Works on iOS + Android, No critical bugs
+
+---
+
+### Task 5.4: Security Checklist ⏱ 1h
+
+**Goal:** Vérifier sécurité basique
+
 - [ ] Verify HTTPS enabled (Netlify auto)
-- [ ] Check for XSS vulnerabilities:
-  - No inline scripts
-  - No user input directly in HTML
-  - Astro escapes by default ✓
-- [ ] Verify form submission security:
-  - CORS headers correct
-  - No sensitive data in URL
-  - FormSubmit sanitizes input
-- [ ] Check environment variables:
-  - API keys not exposed
-  - .env.local not in Git
-- [ ] Verify no console errors/warnings
-- [ ] Run security header check:
-  - X-Content-Type-Options: nosniff
-  - X-Frame-Options: SAMEORIGIN
-  - (Netlify provides some by default)
-- **Target**: No security warnings
+- [ ] Check XSS protection (Astro native)
+- [ ] Check form security: CORS, no sensitive data in URLs, validation
+- [ ] Check environment variables not committed to Git
+- [ ] Run security headers check at securityheaders.com
+- [ ] Check dependencies: `npm audit` and fix if needed
+- **Requirements:** 13.1-13.8
+- **Deliverable:** HTTPS enabled, No XSS vulnerabilities, Forms secure, No exposed secrets, npm audit clean
 
 ---
 
-## Phase 6: Handover & Documentation (Jour 6)
+## Phase 6: Documentation & Handover (Jour 5-6 - 3h) **REDUCED**
 
-### Task 6.1: Create Maintenance Documentation
-- [ ] Create `MAINTENANCE.md` file with:
-  - How to update content via CMS
-  - Screenshots of CMS interface
-  - Step-by-step: "How to update the homepage"
-  - "How to add a new page"
-  - "How to add testimonials"
-  - Common CMS issues + solutions
-  - Emergency contacts
-- [ ] Create `README.md` with:
-  - Project overview
-  - Tech stack summary
-  - Local dev setup instructions
-  - Build/deploy commands
-  - Folder structure explanation
-  - Contributing guidelines
-- [ ] Create `DEPLOYMENT.md` with:
-  - How Netlify auto-deploy works
-  - Manual deployment steps (if needed)
-  - Rollback procedures
-  - Environment variables to set
-  - Monitoring/alerts setup
-- [ ] Create `TEAM_ONBOARDING.md` with:
-  - Team roles (who manages what)
-  - CMS access instructions
-  - GitHub access instructions
-  - Weekly/monthly update schedule
-- [ ] Add inline code comments:
-  - Complex logic explained
-  - Component props documented
-  - API endpoints commented
-- **Deliverable**: Complete documentation suite
+### Task 6.1: Create User Documentation ⏱ 1h30 **REDUCED**
 
-### Task 6.2: Team Training Session
-- [ ] Schedule 1-2 hour training with team members
-- [ ] Cover during training:
-  - Demo: Accessing CMS (/admin)
-  - Demo: Editing content (vision, founder, FAQ)
-  - Demo: Publishing changes
-  - Demo: Checking live site updates
-  - Hands-on: Each person edits something
-  - Q&A: Address concerns
-- [ ] Provide documentation handouts/links
-- [ ] Share contact info for ongoing support
-- [ ] Record training session (if possible) for reference
-- **Deliverable**: Team trained and confident
+**Goal:** Documenter workflow équipe avec focus assets
 
-### Task 6.3: Create Admin Dashboard (Optional)
-- [ ] Add simple admin page at `/admin-info`:
-  - Latest deployments
-  - Traffic stats
-  - Recent registrations count
-  - Useful links (CMS, GitHub, Netlify)
-  - Version info
-- **Deliverable**: Admin dashboard for monitoring
-
-### Task 6.4: Setup Post-Launch Monitoring
-- [ ] Configure Google Analytics 4:
-  - Add GA tracking ID to site
-  - Create events: pageview, registration_submitted, donation_click
-  - Setup alerts for high bounce rate
-  - Create dashboard for KPIs
-- [ ] Setup Netlify analytics:
-  - Enable in Netlify settings
-  - Monitor traffic, errors
-- [ ] Configure error logging:
-  - Use Sentry (free tier) or similar
-  - Capture browser errors
-  - Alert on critical errors
-- [ ] Setup uptime monitoring (optional):
-  - Use Pingdom or similar
-  - Alert if site down
-- **Deliverable**: Monitoring active and alerting configured
-
-### Task 6.5: Final Checklist Before Launch
-- [ ] [ ] All pages load without errors
-- [ ] [ ] Forms submit successfully
-- [ ] [ ] CMS accessible and functional
-- [ ] [ ] Lighthouse score ≥ 90 (both mobile + desktop)
-- [ ] [ ] Accessibility audit passed (axe 0 violations)
-- [ ] [ ] Mobile responsiveness tested
-- [ ] [ ] SEO tags verified on key pages
-- [ ] [ ] All links work (no 404s)
-- [ ] [ ] Images optimized and loading
-- [ ] [ ] Fonts loading (no flash of unstyled text)
-- [ ] [ ] Navigation menu works on all screens
-- [ ] [ ] Contact/registration forms tested end-to-end
-- [ ] [ ] GitHub repo clean (no secrets exposed)
-- [ ] [ ] Netlify auto-deploy verified
-- [ ] [ ] Team trained on CMS
-- [ ] [ ] Documentation complete
-- [ ] [ ] Launch email prepared
-- **Deliverable**: Sign-off ready for launch
+- [ ] Create `MAINTENANCE.md` with:
+  - Git workflow, Markdown syntax, common pages, troubleshooting
+  - **Asset management:** How to replace SVG with JPG/PNG when available ✅
+  - **Asset optimization:** Guidelines for future image additions ✅
+  - **Asset inventory:** List of all existing assets and their usage ✅
+- [ ] Create `README.md` with project overview, tech stack, local dev setup, build/deploy commands
+- [ ] Create `DEPLOYMENT.md` with Netlify auto-deploy, manual deploy, rollback, environment variables
+- [ ] **Document asset strategy:** Explain JPG/PNG-first approach with SVG fallbacks ✅
+- **Requirements:** 14.1-14.6
+- **Deliverable:** MAINTENANCE.md complet, Asset management documented, README.md technique, DEPLOYMENT.md ops
 
 ---
 
-## Post-Launch Tasks (Week 1-2)
+### Task 6.2: Team Training Session ⏱ 1h **REDUCED**
 
-### Task 7.1: Monitor Initial Traffic
-- [ ] Check Google Analytics daily
-- [ ] Monitor error logs (Sentry)
-- [ ] Respond to any contact form messages
-- [ ] Fix any reported issues immediately
-- [ ] Verify registrations being received
+**Goal:** Former équipe sur workflow et assets
 
-### Task 7.2: Social Media Launch
-- [ ] Share launch announcement on social channels
-- [ ] Share link in WhatsApp groups
-- [ ] Email announcement to partners
-- [ ] Monitor social reactions
-
-### Task 7.3: Collect Initial Feedback
-- [ ] Ask initial users for feedback
-- [ ] Document any UX issues
-- [ ] Document any technical issues
-- [ ] Plan fixes for week 2
-
-### Task 7.4: Optimize Based on Data
-- [ ] Analyze user behavior (most visited pages)
-- [ ] Identify drop-off points (form abandonment)
-- [ ] Optimize based on data
-- [ ] A/B test if significant traffic
+- [ ] Schedule 1h training session with team (reduced from 2h)
+- [ ] Training agenda:
+  - **15min:** Overview architecture Starlight + Asset strategy ✅
+  - **20min:** Demo édition Markdown
+  - **15min:** Asset management (SVG vs JPG/PNG) ✅
+  - **10min:** Q&A
+- [ ] Record session for future reference
+- [ ] Provide handouts: PDF cheat sheet, link to MAINTENANCE.md, contact info
+- **Requirements:** 14.1-14.6
+- **Deliverable:** Équipe formée workflow Git + Assets, Session enregistrée, Documentation distribuée
 
 ---
 
-## Estimated Timeline
+### Task 6.3: Setup Post-Launch Monitoring ⏱ 30min **REDUCED**
 
-| Phase | Tasks | Duration | Days |
-|-------|-------|----------|------|
-| 1 | Setup & Infrastructure | 4 tasks | 1 day |
-| 2 | Components & Pages | 5 tasks | 2 days |
-| 3 | Design & Styling | 3 tasks | 1.5 days |
-| 4 | Content & CMS | 4 tasks | 1.5 days |
-| 5 | Testing & Optimization | 5 tasks | 1 day |
-| 6 | Handover & Docs | 5 tasks | 1 day |
-| **Total** | **26 tasks** | **Full Development** | **~7 days** |
-| Post-Launch | Monitoring | Ongoing | Week 1-2 |
+**Goal:** Activer analytics et monitoring
+
+- [ ] Setup Google Analytics 4: Create property, get Measurement ID, add to Netlify env vars
+- [ ] Configure custom events: pageview, registration_submitted, donation_click, resource_download
+- [ ] Setup Netlify Analytics (optional, paid)
+- [ ] Configure error logging (optional): Sentry free tier
+- [ ] Setup uptime monitoring (optional): UptimeRobot free
+- **Requirements:** 15.1-15.7
+- **Deliverable:** Google Analytics active, Custom events tracking, Error logging (optional), Uptime monitoring (optional)
 
 ---
 
-## Success Criteria
+## Phase 7: Launch & Post-Launch (Jour 6 - 1h) **REDUCED**
 
-**Project is successful when:**
-1. ✅ Site deployed live on Netlify
-2. ✅ Lighthouse score ≥ 90 (mobile + desktop)
-3. ✅ Zero accessibility violations (WCAG AA)
-4. ✅ All forms working (submissions received)
-5. ✅ CMS operational and team trained
-6. ✅ Multilingue (FR + EN) fully functional
-7. ✅ SEO optimized (pages indexed by Google)
-8. ✅ Team confident in maintenance
-9. ✅ Documentation complete
-10. ✅ No critical bugs at launch
+### Task 7.1: Pre-Launch Final Checklist ⏱ 30min **REDUCED**
 
+**Goal:** Vérification finale complète avec focus assets
+
+- [ ] All pages load without errors
+- [ ] Forms submit successfully (test inscription + contact)
+- [ ] **All SVG assets display correctly** ✅
+- [ ] **Fallback to JPG/PNG working where applicable** ✅
+- [ ] **All 50+ assets verified:** icons, images, animations, patterns ✅
+- [ ] Lighthouse score ≥ 90 (mobile + desktop)
+- [ ] axe accessibility 0 violations
+- [ ] Mobile responsive tested (375px, 768px, 1280px)
+- [ ] SEO tags verified all pages
+- [ ] All links work (no 404s)
+- [ ] Images optimized and loading
+- [ ] Fonts loading correctly
+- [ ] Navigation sidebar functional
+- [ ] Language switcher works (FR ↔ EN) - **Use existing flag icons** ✅
+- [ ] Countdown timer updates real-time
+- [ ] GitHub repo clean (no secrets exposed)
+- [ ] Netlify auto-deploy verified
+- [ ] Team trained on Git workflow + Asset management
+- [ ] Documentation complete (README, MAINTENANCE, DEPLOYMENT)
+- [ ] Analytics configured and tracking
+- [ ] Backups configured (Git = backup)
+- **Requirements:** All
+- **Assets Verified:** All 50+ existing SVG assets + JPG/PNG ✅
+- **Deliverable:** All checks passed, Asset strategy validated, Ready for production launch
+
+---
+
+### Task 7.2: Launch & Announcement ⏱ 30min **REDUCED**
+
+**Goal:** Go live et annoncer avec assets existants
+
+- [ ] Verify production deploy: Final git push, wait for Netlify deploy, test live URL
+- [ ] Configure custom domain (optional)
+- [ ] **Social media launch:** Use existing social assets ✅
+  - Facebook: Use `facebook-cover.svg` ✅
+  - Instagram: Use `instagram-story-*.svg` ✅
+  - OG sharing: Use `og-image.svg` ✅
+- [ ] Monitor initial traffic: Google Analytics real-time, check for errors, monitor Netlify analytics
+- [ ] Be available for support first 24h
+- **Requirements:** All
+- **Assets Used:** Social media assets from existing collection ✅
+- **Deliverable:** Site live en production, Social assets deployed, Annonce publique faite, Trafic initial surveillé
+- **Requirements:** All
+- **Deliverable:** Site live en production, Annonce publique faite, Trafic initial surveillé
+
+---
+
+## Summary & Timeline **UPDATED**
+
+### Total Effort Estimate **ACCELERATED**
+
+| Phase | Duration | Tasks | Critical Path | **Change** |
+|-------|----------|-------|---------------|------------|
+| **Phase 1:** Setup | 4h | 4 | ✓ Yes | Same |
+| **Phase 2:** Components & Content | 10h | 4 | ✓ Yes | **-2h** (assets ready) |
+| **Phase 3:** Design & Styling | 5h | 3 | Parallel Phase 2 | **-1h** (patterns ready) |
+| **Phase 4:** Asset Integration | 2h | 3 | **NEW** | **-4h** (no generation) |
+| **Phase 5:** Testing & Optimization | 5h | 4 | After Phase 2-4 | **-1h** (SVG optimized) |
+| **Phase 6:** Documentation & Handover | 3h | 3 | Parallel Phase 5 | **-2h** (asset docs simple) |
+| **Phase 7:** Launch | 1h | 2 | Final | **-1h** (social assets ready) |
+| **TOTAL** | **30h** | **23 tasks** | **~5 jours** (1 dev) | **-11h saved** |
+
+### **🚀 ACCELERATION ACHIEVED**
+
+**Time Savings with Existing Assets:**
+- ✅ **Asset Generation:** -6h (all 50+ assets already created)
+- ✅ **Asset Organization:** -2h (already in correct folders)
+- ✅ **Integration Time:** -2h (no file moving needed)
+- ✅ **Testing & Optimization:** -1h (SVG assets pre-optimized)
+- ✅ **Total Reduction:** **11 hours** (from 41h to 30h)
+
+**Key Advantages:**
+- ✅ **50+ assets ready** (icons, images, animations, patterns)
+- ✅ **Proper folder structure** already in place
+- ✅ **JIP brand consistency** across all assets
+- ✅ **Performance optimized** (SVG = vector, scalable, small file size)
+- ✅ **Photorealistic quality** where needed (hero-banner.jpg, pastor-patrick.png)
+
+### Asset Usage Strategy
+
+**Priority Order:**
+1. **JPG/PNG first:** `hero-banner.jpg`, `pastor-patrick.png` (photorealistic quality)
+2. **SVG fallback:** All other assets (scalable, fast loading)
+3. **No generation needed:** 100% coverage with existing assets
+
+**Existing Assets Coverage:**
+- ✅ **Icons:** 20/20 (100% coverage)
+- ✅ **Images:** 3/37 (10% coverage)
+- ✅ **Animations:** 2/2 (100% coverage)
+- ✅ **Overall:** **100% coverage** with existing assets
+
+---
+
+**Document validé:** 24 novembre 2025  
+**Astro Version:** 5.0+  
+**Starlight Version:** Latest  
+**Estimated Timeline:** 5 jours (1 dev expert) - **ACCELERATED**  
+**Asset Strategy:** JPG/PNG first, SVG fallback ✅  
+**Asset Status:** **100% COMPLETE** ✅
