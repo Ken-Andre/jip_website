@@ -1,0 +1,39 @@
+[build]
+  # Configuration pour le déploiement Next.js
+  base = "jip-next"
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[[redirects]]
+  # Redirection automatique vers la version française par défaut
+  from = "/"
+  to = "/fr/"
+  status = 302
+  force = false
+
+[[headers]]
+  # En-têtes de sécurité pour tous les fichiers
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-XSS-Protection = "1; mode=block"
+
+[[headers]]
+  # Configuration spécifique pour les assets statiques
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  # Configuration pour les fichiers téléchargeables
+  for = "/files/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
