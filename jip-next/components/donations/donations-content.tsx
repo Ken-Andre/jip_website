@@ -31,7 +31,7 @@ export function DonationsContent() {
                         <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-gold/10">
                             <Smartphone className="h-7 w-7 text-gold" />
                         </div>
-                        <h3 className="mb-4 font-serif text-xl font-bold text-foreground">{t("donations.mobile")}</h3>
+                        <h3 className="mb-4 font-serif text-xl font-bold text-foreground">{t("donations.mobile.title")}</h3>
 
                         <div className="space-y-4">
                             {/* MTN */}
@@ -81,7 +81,7 @@ export function DonationsContent() {
                         <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary/10">
                             <CreditCard className="h-7 w-7 text-primary" />
                         </div>
-                        <h3 className="mb-4 font-serif text-xl font-bold text-foreground">{t("donations.paypal")}</h3>
+                        <h3 className="mb-4 font-serif text-xl font-bold text-foreground">{t("donations.paypal.title")}</h3>
 
                         <div className="rounded-lg bg-muted/50 p-4">
                             <p className="mb-1 text-sm font-medium text-foreground">Email PayPal</p>
@@ -115,7 +115,7 @@ export function DonationsContent() {
                         <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-gold/10">
                             <Building2 className="h-7 w-7 text-gold" />
                         </div>
-                        <h3 className="mb-4 font-serif text-xl font-bold text-foreground">{t("donations.bank")}</h3>
+                        <h3 className="mb-4 font-serif text-xl font-bold text-foreground">{t("donations.bank.title")}</h3>
 
                         <div className="space-y-4">
                             <div className="rounded-lg bg-muted/50 p-4">

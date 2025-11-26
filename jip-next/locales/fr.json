@@ -158,8 +158,7 @@
       "languages": {
         "label": "Langues",
         "value": "Français & Anglais"
-      },
-      "languages.value": "Français & Anglais"
+      }
     },
     "form": {
       "title": "Formulaire d'Inscription"
@@ -187,17 +186,23 @@
       "title": "Pourquoi Donner ?",
       "text": "Vos dons nous permettent d'organiser cet événement exceptionnel, de couvrir les frais logistiques et de bénir les pasteurs participants. Chaque contribution, quelle que soit sa taille, fait une différence."
     },
-    "mobile": "Mobile Money",
-    "mobile.name": "MTN Mobile Money",
-    "mobile.number": "+237 6 00 00 00 00",
-    "mobile.name2": "Orange Money",
-    "mobile.number2": "+237 6 00 00 00 00",
-    "paypal": "PayPal",
-    "paypal.email": "dons@jip.org",
-    "bank": "Virement Bancaire",
-    "bank.name": "Nom de la Banque",
-    "bank.account": "XXXXXXXXXX",
-    "bank.iban": "CM XX XXXX XXXX XXXX XXXX",
+    "mobile": {
+      "title": "Mobile Money",
+      "name": "MTN Mobile Money",
+      "number": "+237 6 00 00 00 00",
+      "name2": "Orange Money",
+      "number2": "+237 6 00 00 00 00"
+    },
+    "paypal": {
+      "title": "PayPal",
+      "email": "dons@jip.org"
+    },
+    "bank": {
+      "title": "Virement Bancaire",
+      "name": "Nom de la Banque",
+      "account": "XXXXXXXXXX",
+      "iban": "CM XX XXXX XXXX XXXX XXXX"
+    },
     "impact": {
       "title": "Votre Impact",
       "text": "Grâce à votre soutien, nous pouvons continuer à honorer et encourager les pasteurs qui servent fidèlement dans leurs communautés. Merci pour votre générosité !"
@@ -216,8 +221,10 @@
       "email": "Email",
       "phone": "Téléphone",
       "address": "Adresse",
-      "hours": "Horaires",
-      "hours.value": "Lun - Ven: 9h - 17h"
+      "hours": {
+        "label": "Horaires",
+        "value": "Lun - Ven: 9h - 17h"
+      }
     },
     "social": "Suivez-nous"
   },
@@ -266,7 +273,8 @@
     "required": "Ce champ est requis",
     "invalid.email": "Email invalide",
     "register.success": "Inscription réussie ! Nous vous contacterons bientôt.",
-    "contact.success": "Message envoyé ! Nous vous répondrons dans les plus brefs délais."
+    "contact.success": "Message envoyé ! Nous vous répondrons dans les plus brefs délais.",
+    "send.success": "Message envoyé avec succès !"
   },
   "common": {
     "learnmore": "En Savoir Plus",

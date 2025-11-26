@@ -11,7 +11,7 @@ export function DonationOptions() {
     const options = [
         {
             icon: Smartphone,
-            title: t("donations.mobile"),
+            title: t("donations.mobile.title"),
             description: "MTN / Orange Money",
             content: (
                 <div className="space-y-4">
@@ -28,7 +28,7 @@ export function DonationOptions() {
         },
         {
             icon: CreditCard,
-            title: t("donations.paypal"),
+            title: t("donations.paypal.title"),
             description: "International",
             content: (
                 <div className="text-center space-y-4">
@@ -43,7 +43,7 @@ export function DonationOptions() {
         },
         {
             icon: Building,
-            title: t("donations.bank"),
+            title: t("donations.bank.title"),
             description: "Virement",
             content: (
                 <div className="space-y-2 text-sm">

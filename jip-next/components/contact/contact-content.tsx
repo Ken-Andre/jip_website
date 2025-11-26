@@ -18,7 +18,7 @@ export function ContactContent() {
         { icon: Mail, label: t("contact.info.email"), value: "contact@jip.org", href: "mailto:contact@jip.org" },
         { icon: Phone, label: t("contact.info.phone"), value: "+237 6 00 00 00 00", href: "tel:+237600000000" },
         { icon: MapPin, label: t("contact.info.address"), value: "Yaoundé, Cameroun", href: null },
-        { icon: Clock, label: t("contact.info.hours"), value: t("contact.info.hours.value"), href: null },
+        { icon: Clock, label: t("contact.info.hours.label"), value: t("contact.info.hours.value"), href: null },
     ]
 
     return (

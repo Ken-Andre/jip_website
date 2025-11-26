@@ -158,8 +158,7 @@
       "languages": {
         "label": "Languages",
         "value": "French & English"
-      },
-      "languages.value": "French & English"
+      }
     },
     "form": {
       "title": "Registration Form"
@@ -187,17 +186,23 @@
       "title": "Why Give?",
       "text": "Your donations allow us to organize this exceptional event, cover logistical costs, and bless participating pastors. Every contribution, regardless of size, makes a difference."
     },
-    "mobile": "Mobile Money",
-    "mobile.name": "MTN Mobile Money",
-    "mobile.number": "+237 6 00 00 00 00",
-    "mobile.name2": "Orange Money",
-    "mobile.number2": "+237 6 00 00 00 00",
-    "paypal": "PayPal",
-    "paypal.email": "donations@ipd.org",
-    "bank": "Bank Transfer",
-    "bank.name": "Bank Name",
-    "bank.account": "XXXXXXXXXX",
-    "bank.iban": "CM XX XXXX XXXX XXXX XXXX",
+    "mobile": {
+      "title": "Mobile Money",
+      "name": "MTN Mobile Money",
+      "number": "+237 6 00 00 00 00",
+      "name2": "Orange Money",
+      "number2": "+237 6 00 00 00 00"
+    },
+    "paypal": {
+      "title": "PayPal",
+      "email": "donations@ipd.org"
+    },
+    "bank": {
+      "title": "Bank Transfer",
+      "name": "Bank Name",
+      "account": "XXXXXXXXXX",
+      "iban": "CM XX XXXX XXXX XXXX XXXX"
+    },
     "impact": {
       "title": "Your Impact",
       "text": "Thanks to your support, we can continue to honor and encourage pastors who serve faithfully in their communities. Thank you for your generosity!"
@@ -216,8 +221,10 @@
       "email": "Email",
       "phone": "Phone",
       "address": "Address",
-      "hours": "Hours",
-      "hours.value": "Mon - Fri: 9am - 5pm"
+      "hours": {
+        "label": "Hours",
+        "value": "Mon - Fri: 9am - 5pm"
+      }
     },
     "social": "Follow Us"
   },
@@ -266,7 +273,8 @@
     "required": "This field is required",
     "invalid.email": "Invalid email",
     "register.success": "Registration successful! We'll contact you soon.",
-    "contact.success": "Message sent! We'll respond as soon as possible."
+    "contact.success": "Message sent! We will get back to you as soon as possible.",
+    "send.success": "Message sent successfully!"
   },
   "common": {
     "learnmore": "Learn More",

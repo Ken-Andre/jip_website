@@ -27,7 +27,7 @@ export function ContactInfo() {
         },
         {
             icon: Clock,
-            label: t("contact.info.hours"),
+            label: t("contact.info.hours.label"),
             value: t("contact.info.hours.value"),
             href: "#",
         },
