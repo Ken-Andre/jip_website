@@ -31,6 +31,9 @@ export const metadata: Metadata = {
     locale: "fr_FR",
     alternateLocale: "en_US",
   },
+  appleWebApp: {
+    title: "JIP",
+  },
   generator: 'v0.app'
 }
 

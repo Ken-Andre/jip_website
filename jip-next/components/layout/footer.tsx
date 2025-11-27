@@ -9,6 +9,7 @@ const quickLinks = [
     { key: "nav.founder", href: "/fondateur" },
     { key: "nav.program", href: "/programme" },
     { key: "nav.participation", href: "/participation" },
+    { key: "nav.testimonials", href: "/temoignages" },
 ]
 
 const resourceLinks = [

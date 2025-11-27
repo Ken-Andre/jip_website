@@ -48,7 +48,7 @@ export function CountdownTimer() {
                         <div className="flex h-20 w-20 items-center justify-center rounded-lg bg-card shadow-lg sm:h-24 sm:w-24">
                             <span className="font-serif text-3xl font-bold text-primary sm:text-4xl">--</span>
                         </div>
-                        <span className="mt-2 text-xs font-medium uppercase tracking-wider text-muted-foreground sm:text-sm">
+                        <span className="mt-2 text-xs font-medium uppercase tracking-wider countdown-label sm:text-sm">
                             ---
                         </span>
                     </div>
@@ -75,7 +75,7 @@ export function CountdownTimer() {
                                 {unit.value.toString().padStart(2, "0")}
                             </span>
                         </div>
-                        <span className="mt-2 text-xs font-medium uppercase tracking-wider text-muted-foreground sm:text-sm">
+                        <span className="mt-2 text-xs font-medium uppercase tracking-wider countdown-label sm:text-sm">
                             {unit.label}
                         </span>
                     </div>

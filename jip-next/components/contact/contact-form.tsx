@@ -10,22 +10,19 @@ import { Send } from "lucide-react"
 
 export function ContactForm() {
     const { t } = useLanguage()
-    const [isSubmitting, setIsSubmitting] = useState(false)
-    const [isSuccess, setIsSuccess] = useState(false)
-
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault()
-        setIsSubmitting(true)
-
-        // Simulate API call
-        await new Promise((resolve) => setTimeout(resolve, 1500))
-
-        setIsSubmitting(false)
-        setIsSuccess(true)
-    }
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-6 bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700">
+        <form
+            action="https://formsubmit.co/thekyan@hi2.in" // Updated email
+            method="POST"
+            className="space-y-6 bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700"
+        >
+            {/* FormSubmit Configuration */}
+            <input type="hidden" name="_subject" value="Nouveau message de contact - JIP Website" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_next" value="http://localhost:3000/contact?success=true" /> {/* Update for production */}
+
             <div className="space-y-2">
                 <h3 className="text-2xl font-serif font-bold text-gray-900 dark:text-white">
                     {t("contact.form.title")}
@@ -39,31 +36,23 @@ export function ContactForm() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                         <Label htmlFor="name">{t("form.name")}</Label>
-                        <Input id="name" required placeholder="John Doe" />
+                        <Input id="name" name="name" required placeholder="Samuel Eto'o" />
                     </div>
                     <div className="space-y-2">
                         <Label htmlFor="email">{t("form.email")}</Label>
-                        <Input id="email" type="email" required placeholder="john@example.com" />
+                        <Input id="email" name="email" type="email" required placeholder="samuel@example.com" />
                     </div>
                 </div>
 
                 <div className="space-y-2">
                     <Label htmlFor="message">{t("form.message")}</Label>
-                    <Textarea id="message" required className="min-h-[150px]" placeholder="..." />
+                    <Textarea id="message" name="message" required className="min-h-[150px]" placeholder="..." />
                 </div>
             </div>
 
-            <Button type="submit" className="w-full" disabled={isSubmitting || isSuccess}>
-                {isSubmitting ? (
-                    t("form.sending")
-                ) : isSuccess ? (
-                    t("form.send.success")
-                ) : (
-                    <>
-                        {t("form.submit")}
-                        <Send className="ml-2 h-4 w-4" />
-                    </>
-                )}
+            <Button type="submit" className="w-full">
+                {t("form.submit")}
+                <Send className="ml-2 h-4 w-4" />
             </Button>
         </form>
     )
