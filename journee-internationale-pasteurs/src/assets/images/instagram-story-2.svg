@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
-  <rect width="1080" height="1920" fill="#6B3FB5" />
-  <circle cx="540" cy="600" r="300" fill="#D4AF37" opacity="0.3" />
-  <text x="540" y="900" font-family="serif" font-size="96" fill="white" text-anchor="middle" font-weight="bold">Rejoignez-nous</text>
-  <text x="540" y="1050" font-family="sans-serif" font-size="56" fill="white" text-anchor="middle">2e dimanche de Juillet 2025</text>
-  <rect x="340" y="1400" width="400" height="120" rx="60" fill="#D4AF37" />
-  <text x="540" y="1475" font-family="sans-serif" font-size="48" fill="#1F1F1F" text-anchor="middle" font-weight="bold">S'inscrire</text>
-</svg>

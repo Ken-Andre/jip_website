@@ -1,8 +1,0 @@
-node_modules
-/.idea/
-/.qodo/
-/dist/
-
-# Local Netlify folder
-.netlify
-/node_modules/

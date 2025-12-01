@@ -1,3 +1,0 @@
-This is a placeholder for the JIP Media Kit Brochure (PDF).
-Please generate the PDF separately or use a design tool to create 'kit-media-v1.pdf'.
-Content requirements are listed in JIP_VISUAL_PROMPTS_GEMINI.md under Prompt #7.

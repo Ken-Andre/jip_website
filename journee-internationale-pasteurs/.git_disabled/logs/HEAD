@@ -1,3 +1,0 @@
-0000000000000000000000000000000000000000 740b5e6db54959757bec784374d6a901024ba235 The Kyan <105988844+Ken-Andre@users.noreply.github.com> 1763624101 +0100	commit (initial): Initial Astro setup
-740b5e6db54959757bec784374d6a901024ba235 95218b838f95d55aa5903bcfa7bb607b32002dd2 The Kyan <105988844+Ken-Andre@users.noreply.github.com> 1763962529 +0100	commit: feat(site): add new pages and improve internationalization support
-95218b838f95d55aa5903bcfa7bb607b32002dd2 7e1c4b332abc387e3f6949f786d014556094b88f The Kyan <105988844+Ken-Andre@users.noreply.github.com> 1763975435 +0100	commit: feat: Migrate from Decap CMS to Astro Starlight

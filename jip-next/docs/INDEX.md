@@ -1,143 +1,97 @@
-# 📚 Documentation Index
+# Index de la Documentation
 
-Welcome to the JIP Website Documentation! This index helps you find the right guide for your needs.
+Bienvenue dans la documentation du site web de la Journée Internationale des Pasteurs. Cette page vous aide à trouver rapidement le guide dont vous avez besoin, du moins, je l'espère.
 
-## 🎯 I Want To...
+## Pour commencer
 
-| Task | Guide to Use |
-|------|--------------|
-| Update event date or location | [Content Guide](./CONTENT_GUIDE.md#event-information) |
-| Change contact information | [Content Guide](./CONTENT_GUIDE.md#contact-information) |
-| Update donation details | [Content Guide](./CONTENT_GUIDE.md#donation-information) |
-| Add/translate text | [Translation Guide](./TRANSLATION_GUIDE.md) |
-| Add gallery photos | [Image Guide](./IMAGE_GUIDE.md#adding-gallery-photos) |
-| Replace hero banner | [Image Guide](./IMAGE_GUIDE.md#replacing-the-hero-banner) |
-| Publish changes to live site | [Deployment Guide](./DEPLOYMENT_GUIDE.md) |
-| Fix broken images | [Troubleshooting](./TROUBLESHOOTING.md#images-not-displaying) |
-| Fix JSON errors | [Troubleshooting](./TROUBLESHOOTING.md#json-syntax-error) |
-| Get quick command reference | [Quick Reference](./QUICK_REFERENCE.md) |
-| Find answer to common question | [FAQ](./FAQ.md) |
+Si c'est la première fois que vous utilisez cette documentation, commencez par lire le **Guide Principal** (`README_FR.md`) qui vous donne une vue d'ensemble.
 
-## 📖 Complete Guide List
+## Guides principaux
 
-### For Non-Technical Teams
+### Guide Principal
+**[README_FR.md](../README_FR.md)** - Introduction générale au projet et à la documentation. À lire en premier. Puis le reste vous pouvez telecharger et utiliser un LLM(chatgpt,gemini,...) pour lui poser des questions sur comment faire avec ces fichiers à l'appui(mais c'est mieux de les lire, ils ne sont pas long).
 
-1. **[Content Update Guide](./CONTENT_GUIDE.md)**
-   - Update text, dates, and information
-   - Edit event details and schedules
-   - Modify contact and donation info
-   - **Difficulty**: ⭐ Easy
+### Guide de Mise à Jour du Contenu
+**[GUIDE_CONTENU.md](./GUIDE_CONTENU.md)** - Comment modifier les textes du site (dates, descriptions, programmes, etc.). C'est le guide le plus utilisé.
 
-2. **[Translation Guide](./TRANSLATION_GUIDE.md)**
-   - Manage French and English translations
-   - Add new translations
-   - Understand the translation system
-   - **Difficulty**: ⭐ Easy
+### Guide pour les Images
+**[GUIDE_IMAGES.md](./GUIDE_IMAGES.md)** - Comment ajouter des photos, les remplacer, et les organiser dans la galerie.
 
-3. **[Image Management Guide](./IMAGE_GUIDE.md)**
-   - Add and replace images
-   - Optimize photos for web
-   - Manage gallery photos
-   - **Difficulty**: ⭐⭐ Moderate
+### Guide de Publication
+**[GUIDE_PUBLICATION.md](./GUIDE_PUBLICATION.md)** - Comment mettre en ligne vos modifications sur le site web. À lire après avoir fait vos modifications.
 
-4. **[Deployment Guide](./DEPLOYMENT_GUIDE.md)**
-   - Publish changes to live website
-   - Use Git and GitHub
-   - Monitor deployments
-   - **Difficulty**: ⭐⭐ Moderate
+### Guide de Dépannage
+**[GUIDE_DEPANNAGE.md](./GUIDE_DEPANNAGE.md)** - Solutions aux problèmes courants. Consultez-le si quelque chose ne fonctionne pas.
 
-5. **[Troubleshooting Guide](./TROUBLESHOOTING.md)**
-   - Fix common issues
-   - Solve build errors
-   - Debug problems
-   - **Difficulty**: ⭐⭐ Moderate
+## Guides techniques (pour développeurs)
 
-6. **[Quick Reference](./QUICK_REFERENCE.md)**
-   - Essential commands at a glance
-   - File locations
-   - Quick fixes
-   - **Difficulty**: ⭐ Easy
+Ces guides sont destinés aux personnes qui développent le site. Si vous ne savez pas coder, vous n'en avez pas besoin.
 
-7. **[FAQ](./FAQ.md)**
-   - Answers to common questions
-   - Helpful explanations
-   - Learning resources
-   - **Difficulty**: ⭐ Easy
+- **[CONTENT_GUIDE.md](./CONTENT_GUIDE.md)** - Guide technique de mise à jour du contenu
+- **[TRANSLATION_GUIDE.md](./TRANSLATION_GUIDE.md)** - Guide pour gérer les traductions
+- **[IMAGE_GUIDE.md](./IMAGE_GUIDE.md)** - Guide technique pour les images
+- **[DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md)** - Guide technique de déploiement
+- **[TROUBLESHOOTING.md](./TROUBLESHOOTING.md)** - Guide technique de dépannage
 
-### For Developers
+## Tâches courantes - Guide rapide
 
-See the main [README.md](../README.md) for technical documentation, build instructions, and architecture details.
+### Je veux changer la date de l'événement
+→ Consultez **[GUIDE_CONTENU.md - Changer la date de l'événement](./GUIDE_CONTENU.md#changer-la-date-de-lévénement)**
 
-## 🚀 Getting Started
+### Je veux ajouter des photos dans la galerie
+→ Consultez **[GUIDE_IMAGES.md - Ajouter des photos à la galerie](./GUIDE_IMAGES.md#ajouter-des-photos-à-la-galerie)**
 
-### First Time?
+### Je veux modifier le programme de la journée
+→ Consultez **[GUIDE_CONTENU.md - Modifier le programme de la journée](./GUIDE_CONTENU.md#modifier-le-programme-de-la-journée)**
 
-1. **Start here**: [README.md](../README.md)
-2. **Learn the basics**: [Quick Reference](./QUICK_REFERENCE.md)
-3. **Make your first edit**: [Content Guide](./CONTENT_GUIDE.md)
-4. **Publish it**: [Deployment Guide](./DEPLOYMENT_GUIDE.md)
+### J'ai fait mes modifications, comment les publier ?
+→ Consultez **[GUIDE_PUBLICATION.md](./GUIDE_PUBLICATION.md)**
 
-### Common Workflows
+### Mes images ne s'affichent pas
+→ Consultez **[GUIDE_DEPANNAGE.md - Problèmes avec les images](./GUIDE_DEPANNAGE.md#mes-images-ne-saffichent-pas-sur-le-site)**
 
-**Updating Event Information**:
-```
-Content Guide → Edit fr.json & en.json → Deployment Guide → Done!
-```
+### Le site ne fonctionne plus après mes modifications
+→ Consultez **[GUIDE_DEPANNAGE.md - Problèmes avec les fichiers JSON](./GUIDE_DEPANNAGE.md#le-fichier-json-ne-fonctionne-plus-après-mes-modifications)**
 
-**Adding Photos**:
-```
-Image Guide → Optimize → Upload to public/images/ → Deployment Guide → Done!
-```
+## Parcours recommandé pour débutants
 
-**Fixing Errors**:
-```
-Troubleshooting Guide → Find your issue → Apply solution → Done!
-```
+Si c'est votre première fois :
 
-## 📞 Need Help?
+1. **Lisez le Guide Principal** (`README_FR.md`) - 5 minutes
+2. **Lisez le Guide de Mise à Jour du Contenu** (`GUIDE_CONTENU.md`) - 15 minutes
+3. **Faites une modification de test** (par exemple, changer une date) - 10 minutes
+4. **Lisez le Guide de Publication** (`GUIDE_PUBLICATION.md`) - 15 minutes
+5. **Publiez votre modification de test** - 10 minutes
+6. **Vérifiez sur le site que ça a marché** - 5 minutes
 
-1. **Check FAQ**: [FAQ.md](./FAQ.md)
-2. **Search documentation**: Use Ctrl+F in guides
-3. **Check specific guide**: See table above
-4. **Still stuck?**: Contact website administrator or developer
+Après cela, vous serez à l'aise pour gérer le site régulièrement.
 
-## 🔄 Documentation Updates
+## Structure des fichiers
 
-This documentation is maintained alongside the website. If you find:
-- Errors or outdated information
-- Missing important topics
-- Unclear explanations
-
-Please contact the documentation maintainer or submit an update.
-
-## 📂 File Structure
+Pour comprendre où se trouvent les fichiers du projet :
 
 ```
-docs/
-├── INDEX.md                 ← You are here
-├── CONTENT_GUIDE.md         ← Update website text
-├── TRANSLATION_GUIDE.md     ← Manage FR/EN translations
-├── IMAGE_GUIDE.md           ← Add/manage images
-├── DEPLOYMENT_GUIDE.md      ← Publish changes
-├── TROUBLESHOOTING.md       ← Fix problems
-├── QUICK_REFERENCE.md       ← Quick commands & tips
-└── FAQ.md                   ← Common questions
-
-../README.md                 ← Main project README
+jip-next/
+├── locales/              ← Les textes du site
+│   ├── fr.json          ← Français
+│   └── en.json          ← Anglais
+├── public/
+│   ├── images/          ← Toutes les images
+│   │   └── gallery/     ← Photos de la galerie
+│   └── files/           ← Documents à télécharger
+└── docs/                ← Vous êtes ici !
+    ├── GUIDE_CONTENU.md
+    ├── GUIDE_IMAGES.md
+    ├── GUIDE_PUBLICATION.md
+    └── GUIDE_DEPANNAGE.md
 ```
 
-## 🎓 Skill Level Guide
+## Besoin d'aide ?
 
-- ⭐ **Easy**: No technical knowledge needed
-- ⭐⭐ **Moderate**: Basic computer skills helpful
-- ⭐⭐⭐ **Advanced**: Some technical knowledge required
+Si vous ne trouvez pas ce que vous cherchez :
+1. Relisez le guide principal
+2. Consultez le guide de dépannage
+3. Contactez la personne qui gère le projet
 
-## 📅 Last Updated
-
-This documentation was created: November 2025
-
-For the most up-to-date information, always refer to the latest version in the repository.
-
----
-
-**Happy editing! 🎉**
+N'hésitez pas à poser des questions. Mieux vaut demander que de faire une erreur.
+God bless you ;
